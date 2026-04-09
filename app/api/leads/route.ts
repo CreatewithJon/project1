@@ -1,12 +1,15 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_ANON_KEY!
-);
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!
+  );
+}
 
 export async function POST(request: NextRequest) {
+  const supabase = getSupabase();
   const body = await request.json();
   const { name, email, service, companySlug } = body;
 
@@ -39,6 +42,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
+  const supabase = getSupabase();
   const { data, error } = await supabase
     .from("leads")
     .select("*")
