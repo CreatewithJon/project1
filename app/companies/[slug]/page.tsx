@@ -95,28 +95,13 @@ export default async function CompanyProfilePage(props: PageProps<"/companies/[s
             ))}
           </div>
 
-          {/* Contact */}
-          {(company.email || company.phone) && (
+          {/* Contact — phone only, email intentionally omitted to route inquiries through lead form */}
+          {company.phone && (
             <div className="border-t border-zinc-100 pt-4">
               <h2 className="text-sm font-semibold text-zinc-700 mb-3">Contact</h2>
-              <div className="flex flex-col gap-2">
-                {company.email && (
-                  <a
-                    href={`mailto:${company.email}`}
-                    className="text-sm text-blue-600 hover:underline"
-                  >
-                    {company.email}
-                  </a>
-                )}
-                {company.phone && (
-                  <a
-                    href={`tel:${company.phone}`}
-                    className="text-sm text-zinc-600"
-                  >
-                    {company.phone}
-                  </a>
-                )}
-              </div>
+              <a href={`tel:${company.phone}`} className="text-sm text-zinc-600">
+                {company.phone}
+              </a>
             </div>
           )}
         </div>
