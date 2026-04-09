@@ -9,44 +9,52 @@ function getSupabase() {
 }
 
 export async function POST(request: NextRequest) {
-  let body: Record<string, string>;
-
   try {
-    body = await request.json();
-  } catch {
-    return Response.json({ error: "Invalid or empty request body" }, { status: 400 });
-  }
+    let body: Record<string, string>;
 
-  const { name, email, service, companySlug } = body;
+    try {
+      body = await request.json();
+    } catch {
+      return Response.json({ error: "Invalid or empty request body" }, { status: 400 });
+    }
 
-  if (!name || !email || !companySlug) {
+    const { name, email, service, companySlug } = body;
+
+    if (!name || !email || !companySlug) {
+      return Response.json(
+        { error: "name, email, and companySlug are required" },
+        { status: 422 }
+      );
+    }
+
+    const supabase = getSupabase();
+
+    const { data, error } = await supabase
+      .from("leads")
+      .insert([
+        {
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          service: service?.trim() ?? null,
+          company_slug: companySlug,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Supabase insert error:", error);
+      return Response.json({ error: error.message }, { status: 500 });
+    }
+
+    return Response.json({ success: true, leadId: data.id }, { status: 201 });
+  } catch (err) {
+    console.error("Unhandled POST error:", err);
     return Response.json(
-      { error: "name, email, and companySlug are required" },
-      { status: 422 }
+      { error: err instanceof Error ? err.message : "Internal server error" },
+      { status: 500 }
     );
   }
-
-  const supabase = getSupabase();
-
-  const { data, error } = await supabase
-    .from("leads")
-    .insert([
-      {
-        name: name.trim(),
-        email: email.trim().toLowerCase(),
-        service: service?.trim() ?? null,
-        company_slug: companySlug,
-      },
-    ])
-    .select()
-    .single();
-
-  if (error) {
-    console.error("Supabase insert error:", error);
-    return Response.json({ error: error.message }, { status: 500 });
-  }
-
-  return Response.json({ success: true, leadId: data.id }, { status: 201 });
 }
 
 export async function GET() {
