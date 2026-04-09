@@ -18,7 +18,7 @@ export default function LandingPage() {
           <span className="text-sm font-semibold text-zinc-800">Jonathan Cardona</span>
           <div className="flex items-center gap-4">
             <a
-              href="https://linkedin.com/in/jonathancardona"
+              href="https://www.linkedin.com/in/jonathan-cardona-1089291b9"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-zinc-400 hover:text-zinc-600 transition-colors hidden sm:block"
@@ -222,7 +222,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
           <span>© 2025 Jonathan Cardona · DigitalWealthTransfer.com · Las Vegas, Nevada</span>
           <a
-            href="https://linkedin.com/in/jonathancardona"
+            href="https://www.linkedin.com/in/jonathan-cardona-1089291b9"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-zinc-600 transition-colors"
