@@ -62,12 +62,12 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
       {/* Nav */}
       <header className="border-b border-zinc-100">
-        <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="font-bold text-base tracking-tight text-zinc-900">
-            Digital<span className="text-blue-600">Wealth</span>Transfer
+        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
+          <Link href="/" className="text-sm font-semibold text-zinc-800 hover:text-zinc-600 transition-colors">
+            Jonathan Cardona
           </Link>
-          <Link href={`/${article.category}`} className="text-sm text-blue-600 hover:underline">
-            ← {categoryLabel}
+          <Link href="/blog" className="text-sm text-zinc-400 hover:text-zinc-600 transition-colors">
+            ← Blog
           </Link>
         </div>
       </header>
@@ -77,12 +77,9 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         {/* Article header */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
-            <Link
-              href={`/${article.category}`}
-              className="text-xs font-semibold uppercase tracking-widest text-blue-600 hover:underline"
-            >
+            <span className="text-xs font-semibold uppercase tracking-widest text-blue-600">
               {categoryLabel}
-            </Link>
+            </span>
             <span className="text-zinc-200">·</span>
             <span className="text-xs text-zinc-400">{article.readTime} min read</span>
             <span className="text-zinc-200">·</span>
@@ -110,35 +107,29 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         {/* CTA */}
         <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">
-            Digital Wealth Transfer
+            Jonathan Cardona
           </p>
           <h2 className="text-xl font-bold text-zinc-900 mb-3">
-            Ready to connect with qualified clients?
+            Looking for help with AI or digital asset services?
           </h2>
           <p className="text-zinc-500 text-sm mb-6 max-w-md mx-auto">
-            Browse the Las Vegas directory or claim your listing to start receiving high-intent leads.
+            I connect AI, blockchain, and fintech companies with qualified clients actively
+            looking for their services. Get connected today.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              href="/directory"
-              className="w-full sm:w-auto bg-blue-600 text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors text-center"
-            >
-              Browse Directory
-            </Link>
-            <Link
-              href="/landing#cta"
-              className="w-full sm:w-auto border border-zinc-300 text-zinc-700 px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-zinc-100 transition-colors text-center"
-            >
-              Get Qualified Leads
-            </Link>
-          </div>
+          <Link
+            href="/"
+            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Get Connected Here →
+          </Link>
         </div>
 
       </main>
 
       <footer className="border-t border-zinc-100 py-6 px-6">
-        <div className="max-w-5xl mx-auto text-xs text-zinc-400 text-center">
-          © 2025 DigitalWealthTransfer.com · Las Vegas, Nevada
+        <div className="max-w-3xl mx-auto flex items-center justify-between text-xs text-zinc-400">
+          <span>© 2025 Jonathan Cardona · DigitalWealthTransfer.com</span>
+          <Link href="/blog" className="hover:text-zinc-600 transition-colors">← All articles</Link>
         </div>
       </footer>
     </div>
