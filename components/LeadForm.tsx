@@ -73,7 +73,7 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
             type="text"
             required
             placeholder="Your full name"
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -87,7 +87,7 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
             type="email"
             required
             placeholder="you@example.com"
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -100,7 +100,7 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
             name="service"
             rows={3}
             placeholder="e.g. Digital asset custody, AI advisory, estate planning..."
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
           />
         </div>
 
