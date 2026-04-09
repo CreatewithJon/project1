@@ -9,8 +9,14 @@ function getSupabase() {
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = getSupabase();
-  const body = await request.json();
+  let body: Record<string, string>;
+
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json({ error: "Invalid or empty request body" }, { status: 400 });
+  }
+
   const { name, email, service, companySlug } = body;
 
   if (!name || !email || !companySlug) {
@@ -19,6 +25,8 @@ export async function POST(request: NextRequest) {
       { status: 422 }
     );
   }
+
+  const supabase = getSupabase();
 
   const { data, error } = await supabase
     .from("leads")
@@ -43,6 +51,7 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   const supabase = getSupabase();
+
   const { data, error } = await supabase
     .from("leads")
     .select("*")
