@@ -32,8 +32,12 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
       });
 
       if (!res.ok) {
-        const json = await res.json();
-        throw new Error(json.error ?? "Something went wrong");
+        let message = "Something went wrong";
+        try {
+          const json = await res.json();
+          if (json.error) message = json.error;
+        } catch {}
+        throw new Error(message);
       }
 
       setStatus("success");
