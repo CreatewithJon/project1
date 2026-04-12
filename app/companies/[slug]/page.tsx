@@ -57,14 +57,16 @@ export default async function CompanyProfilePage(props: PageProps<"/companies/[s
               </div>
               <p className="text-sm text-zinc-500">{company.location}, Nevada</p>
             </div>
-            <a
-              href={company.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors shrink-0"
-            >
-              Visit Website →
-            </a>
+            {company.website && !company.website.includes("example.com") && (
+              <a
+                href={company.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors shrink-0"
+              >
+                Visit Website →
+              </a>
+            )}
           </div>
 
           {/* Categories */}
@@ -98,6 +100,7 @@ export default async function CompanyProfilePage(props: PageProps<"/companies/[s
         </div>
 
         {/* Lead capture form */}
+        {/* This form submits an inquiry request routed through Jonathan Cardona — not direct company contact */}
         <LeadForm companySlug={company.slug} companyName={company.name} />
 
         {/* Claim profile CTA */}
@@ -105,11 +108,14 @@ export default async function CompanyProfilePage(props: PageProps<"/companies/[s
           <div id="claim" className="bg-zinc-50 border border-zinc-200 rounded-lg p-6 mb-6">
             <h2 className="font-semibold text-zinc-800 mb-1">Is this your business?</h2>
             <p className="text-sm text-zinc-500 mb-4">
-              Claim this profile to update your information, add contact details, and unlock premium placement.
+              Claim this profile to update your information and unlock premium placement. Apply as a provider to get started.
             </p>
-            <button className="bg-zinc-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-zinc-700 transition-colors">
-              Claim This Profile
-            </button>
+            <a
+              href="/#provider-form"
+              className="inline-block bg-zinc-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-zinc-700 transition-colors"
+            >
+              Apply as a Provider →
+            </a>
           </div>
         )}
 

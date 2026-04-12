@@ -6,7 +6,7 @@ import FilterPanel from "@/components/FilterPanel";
 import { filterCompanies } from "@/lib/data/companies";
 
 export const metadata: Metadata = {
-  title: "Directory",
+  title: "Las Vegas AI & Tech Services Directory — DigitalWealthTransfer.com",
   description:
     "Browse Las Vegas fintech, blockchain, and enterprise AI companies. Filter by category and location.",
 };
@@ -31,7 +31,7 @@ export default async function DirectoryPage({
       <main className="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-zinc-900 mb-1">
-            Las Vegas Digital Wealth Directory
+            Las Vegas AI &amp; Tech Services Directory
           </h1>
           <p className="text-sm text-zinc-500">
             {results.length} {results.length === 1 ? "company" : "companies"} found

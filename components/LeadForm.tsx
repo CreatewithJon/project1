@@ -53,7 +53,7 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
       <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
         <p className="font-semibold text-green-800 mb-1">Request sent!</p>
         <p className="text-sm text-green-700">
-          {companyName} will be in touch with you shortly.
+          Your request has been received. We'll follow up within 24 hours with next steps.
         </p>
       </div>
     );
@@ -61,9 +61,9 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
 
   return (
     <div className="bg-white border border-zinc-200 rounded-lg p-6">
-      <h2 className="font-semibold text-zinc-900 mb-1">Contact {companyName}</h2>
+      <h2 className="font-semibold text-zinc-900 mb-1">Request an Introduction to {companyName}</h2>
       <p className="text-sm text-zinc-500 mb-4">
-        Tell us what you're looking for and we'll connect you with the right provider.
+        Submit your request and Jonathan Cardona will personally facilitate an introduction within 24 hours.
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">

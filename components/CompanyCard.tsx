@@ -60,6 +60,18 @@ export default function CompanyCard({ company }: { company: Company }) {
           </Link>
         )}
       </div>
+      {company.website && !company.website.includes("example.com") && (
+        <div className="mt-2">
+          <a
+            href={company.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-zinc-400 hover:text-zinc-600 transition-colors"
+          >
+            Visit website →
+          </a>
+        </div>
+      )}
     </div>
   );
 }
