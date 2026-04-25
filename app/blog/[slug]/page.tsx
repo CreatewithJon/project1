@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getArticleBySlug, articles } from "@/lib/data/articles";
 import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
@@ -20,19 +21,19 @@ function renderBlock(block: ContentBlock, i: number) {
   switch (block.type) {
     case "h2":
       return (
-        <h2 key={i} className="text-xl font-bold text-zinc-900 mt-10 mb-4">
+        <h2 key={i} className="text-xl font-bold text-white mt-10 mb-4">
           {block.text}
         </h2>
       );
     case "h3":
       return (
-        <h3 key={i} className="text-lg font-semibold text-zinc-800 mt-8 mb-3">
+        <h3 key={i} className="text-lg font-semibold text-[#F9FAFB] mt-8 mb-3">
           {block.text}
         </h3>
       );
     case "p":
       return (
-        <p key={i} className="text-zinc-700 leading-[1.85] mb-5">
+        <p key={i} className="text-[#A1A1AA] leading-[1.85] mb-5">
           {block.text}
         </p>
       );
@@ -40,8 +41,8 @@ function renderBlock(block: ContentBlock, i: number) {
       return (
         <ul key={i} className="mb-5 flex flex-col gap-2">
           {block.items.map((item, j) => (
-            <li key={j} className="flex items-start gap-3 text-zinc-700 text-sm leading-relaxed">
-              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
+            <li key={j} className="flex items-start gap-3 text-[#A1A1AA] text-sm leading-relaxed">
+              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" />
               {item}
             </li>
           ))}
@@ -58,15 +59,15 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
   const categoryLabel = ARTICLE_CATEGORY_LABELS[article.category];
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-[#0B0F1A] font-sans text-[#F9FAFB]">
 
       {/* Nav */}
-      <header className="border-b border-zinc-100">
+      <header className="border-b border-white/[0.06] bg-[#0B0F1A]/90 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="text-sm font-semibold text-zinc-800 hover:text-zinc-600 transition-colors">
-            Jonathan Cardona
+          <Link href="/">
+            <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={160} height={33} priority unoptimized style={{ height: "auto" }} />
           </Link>
-          <Link href="/blog" className="text-sm text-zinc-400 hover:text-zinc-600 transition-colors">
+          <Link href="/blog" className="text-sm text-[#A1A1AA] hover:text-white transition-colors">
             ← Blog
           </Link>
         </div>
@@ -77,48 +78,48 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         {/* Article header */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-xs font-semibold uppercase tracking-widest text-blue-600">
+            <span className="text-xs font-semibold uppercase tracking-widest text-blue-400">
               {categoryLabel}
             </span>
-            <span className="text-zinc-200">·</span>
-            <span className="text-xs text-zinc-400">{article.readTime} min read</span>
-            <span className="text-zinc-200">·</span>
-            <span className="text-xs text-zinc-400">
+            <span className="text-white/20">·</span>
+            <span className="text-xs text-[#A1A1AA]">{article.readTime} min read</span>
+            <span className="text-white/20">·</span>
+            <span className="text-xs text-[#A1A1AA]">
               {new Date(article.date).toLocaleDateString("en-US", {
                 month: "long", day: "numeric", year: "numeric",
               })}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-zinc-900 leading-tight mb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-4">
             {article.title}
           </h1>
-          <p className="text-lg text-zinc-500 leading-relaxed">{article.excerpt}</p>
+          <p className="text-lg text-[#A1A1AA] leading-relaxed">{article.excerpt}</p>
         </div>
 
-        <hr className="border-zinc-100 mb-10" />
+        <hr className="border-white/[0.06] mb-10" />
 
         {/* Article body */}
         <article className="text-base">
           {article.content.map((block, i) => renderBlock(block, i))}
         </article>
 
-        <hr className="border-zinc-100 mt-12 mb-10" />
+        <hr className="border-white/[0.06] mt-12 mb-10" />
 
         {/* CTA */}
-        <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-600 mb-3">
+        <div className="bg-[#151B2D] border border-blue-500/20 rounded-2xl p-8 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">
             Jonathan Cardona
           </p>
-          <h2 className="text-xl font-bold text-zinc-900 mb-3">
+          <h2 className="text-xl font-bold text-white mb-3">
             Looking for help with AI or digital asset services?
           </h2>
-          <p className="text-zinc-500 text-sm mb-6 max-w-md mx-auto">
+          <p className="text-[#A1A1AA] text-sm mb-6 max-w-md mx-auto">
             I connect AI, blockchain, and fintech companies with qualified clients actively
             looking for their services. Get connected today.
           </p>
           <Link
-            href="/"
-            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-md text-sm font-semibold hover:bg-blue-700 transition-colors"
+            href="/#business-form"
+            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
           >
             Get Connected Here →
           </Link>
@@ -126,10 +127,10 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
 
       </main>
 
-      <footer className="border-t border-zinc-100 py-6 px-6">
-        <div className="max-w-3xl mx-auto flex items-center justify-between text-xs text-zinc-400">
+      <footer className="border-t border-white/[0.06] py-6 px-6">
+        <div className="max-w-3xl mx-auto flex items-center justify-between text-xs text-[#A1A1AA]/50">
           <span>© 2025 Jonathan Cardona · DigitalWealthTransfer.com</span>
-          <Link href="/blog" className="hover:text-zinc-600 transition-colors">← All articles</Link>
+          <Link href="/blog" className="hover:text-[#A1A1AA] transition-colors">← All articles</Link>
         </div>
       </footer>
     </div>
