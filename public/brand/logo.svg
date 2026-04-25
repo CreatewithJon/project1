@@ -1,0 +1,45 @@
+<svg width="820" height="170" viewBox="0 0 820 170" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Digital Wealth Transfer Logo</title>
+  <desc id="desc">Horizontal logo for Digital Wealth Transfer with a futuristic D-shaped transfer icon and wordmark.</desc>
+  <defs>
+    <linearGradient id="dwtGrad" x1="20" y1="20" x2="150" y2="145" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#12D8FF"/>
+      <stop offset="0.48" stop-color="#2F6BFF"/>
+      <stop offset="1" stop-color="#9B4DFF"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="310" y1="112" x2="745" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#19BFFF"/>
+      <stop offset="0.55" stop-color="#4E6BFF"/>
+      <stop offset="1" stop-color="#B552FF"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.06 0 0 0 0 0.45 0 0 0 0 1 0 0 0 0.45 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Icon -->
+  <g filter="url(#softGlow)" stroke="url(#dwtGrad)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M57 35 H116 C145 35 166 56 166 85 C166 114 145 135 116 135 H57"/>
+    <path d="M57 60 H105"/>
+    <path d="M57 110 H105"/>
+    <path d="M30 85 H116"/>
+    <path d="M99 68 L122 85 L99 102"/>
+  </g>
+  <g fill="url(#dwtGrad)" opacity="0.95">
+    <rect x="19" y="50" width="10" height="10" rx="2"/>
+    <rect x="0" y="78" width="9" height="9" rx="2"/>
+    <rect x="23" y="103" width="11" height="11" rx="2"/>
+    <rect x="36" y="70" width="7" height="7" rx="2"/>
+  </g>
+
+  <!-- Divider -->
+  <path d="M230 30 V140" stroke="#2A3450" stroke-width="2"/>
+
+  <!-- Wordmark -->
+  <g font-family="Inter, Space Grotesk, Montserrat, Arial, sans-serif" font-weight="700" letter-spacing="16">
+    <text x="275" y="80" font-size="54" fill="#F7FAFF">DIGITAL</text>
+    <text x="278" y="122" font-size="22" fill="url(#textGrad)" letter-spacing="13">WEALTH TRANSFER</text>
+  </g>
+</svg>

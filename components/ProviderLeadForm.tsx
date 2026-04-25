@@ -60,114 +60,77 @@ export default function ProviderLeadForm() {
 
   if (status === "success") {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
-        <p className="font-semibold text-green-800 mb-1 text-lg">Application received.</p>
-        <p className="text-sm text-green-700">
-          We review every application manually. We'll follow up within 24 hours.
+      <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-8 text-center">
+        <p className="font-semibold text-purple-400 mb-1 text-lg">Application received.</p>
+        <p className="text-sm text-purple-400/70">
+          We review every application manually. We&apos;ll follow up within 24 hours.
         </p>
       </div>
     );
   }
 
+  const inputClass = "w-full bg-[#0B0F1A] border border-white/[0.1] rounded-lg px-3 py-2.5 text-sm text-[#F9FAFB] placeholder:text-[#A1A1AA]/50 focus:outline-none focus:ring-1 focus:ring-purple-500/60 focus:border-purple-500/40 transition-colors";
+  const labelClass = "block text-xs font-semibold text-[#A1A1AA] mb-1.5";
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="pf-name" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-            Your Name *
-          </label>
-          <input
-            id="pf-name"
-            name="name"
-            type="text"
-            required
-            placeholder="Jonathan Smith"
-            className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label htmlFor="pf-name" className={labelClass}>Your Name *</label>
+          <input id="pf-name" name="name" type="text" required placeholder="Jonathan Smith" className={inputClass} />
         </div>
         <div>
-          <label htmlFor="pf-company" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-            Company Name *
-          </label>
-          <input
-            id="pf-company"
-            name="company_name"
-            type="text"
-            required
-            placeholder="Acme AI Solutions"
-            className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label htmlFor="pf-company" className={labelClass}>Company Name *</label>
+          <input id="pf-company" name="company_name" type="text" required placeholder="Acme AI Solutions" className={inputClass} />
         </div>
       </div>
 
       <div>
-        <label htmlFor="pf-email" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-          Work Email *
-        </label>
-        <input
-          id="pf-email"
-          name="email"
-          type="email"
-          required
-          placeholder="you@company.com"
-          className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <label htmlFor="pf-email" className={labelClass}>Work Email *</label>
+        <input id="pf-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
       </div>
 
       <div>
-        <label htmlFor="pf-services" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-          Services You Offer *
-        </label>
+        <label htmlFor="pf-services" className={labelClass}>Services You Offer *</label>
         <textarea
           id="pf-services"
           name="services_offered"
           rows={2}
           required
           placeholder="e.g. Enterprise AI, blockchain infrastructure, digital asset custody..."
-          className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          className={inputClass + " resize-none"}
         />
       </div>
 
       <div>
-        <label htmlFor="pf-location" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-          Location / Areas Served *
-        </label>
-        <input
-          id="pf-location"
-          name="location"
-          type="text"
-          required
-          placeholder="Las Vegas, NV · Nationwide"
-          className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+        <label htmlFor="pf-location" className={labelClass}>Location / Areas Served *</label>
+        <input id="pf-location" name="location" type="text" required placeholder="Las Vegas, NV · Nationwide" className={inputClass} />
       </div>
 
       <div>
-        <label htmlFor="pf-ideal" className="block text-xs font-semibold text-zinc-700 mb-1.5">
-          Describe Your Ideal Client *
-        </label>
+        <label htmlFor="pf-ideal" className={labelClass}>Describe Your Ideal Client *</label>
         <textarea
           id="pf-ideal"
           name="ideal_client"
           rows={3}
           required
-          placeholder="e.g. Mid-size financial firms adopting AI, crypto-native family offices, startups building on blockchain..."
-          className="w-full border border-zinc-300 rounded-md px-3 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+          placeholder="e.g. Mid-size financial firms adopting AI, crypto-native family offices..."
+          className={inputClass + " resize-none"}
         />
       </div>
 
       {status === "error" && (
-        <p className="text-sm text-red-600">{errorMsg}</p>
+        <p className="text-sm text-rose-400">{errorMsg}</p>
       )}
 
       <button
         type="submit"
         disabled={status === "loading"}
-        className="bg-zinc-900 text-white px-4 py-3 rounded-md text-sm font-semibold hover:bg-zinc-700 transition-colors disabled:opacity-60"
+        className="bg-purple-600 text-white px-4 py-3 rounded-xl text-sm font-semibold hover:bg-purple-500 transition-colors disabled:opacity-50 shadow-[0_0_20px_rgba(139,92,246,0.25)]"
       >
         {status === "loading" ? "Sending..." : "Apply as a Provider →"}
       </button>
-      <p className="text-xs text-zinc-400 text-center">Every application is reviewed manually. Response within 24 hours.</p>
+      <p className="text-xs text-[#A1A1AA]/50 text-center">Every application is reviewed manually. Response within 24 hours.</p>
     </form>
   );
 }

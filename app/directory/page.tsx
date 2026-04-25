@@ -26,14 +26,14 @@ export default async function DirectoryPage({
   ].filter(Boolean);
 
   return (
-    <>
+    <div className="min-h-screen bg-[#0B0F1A] text-[#F9FAFB]">
       <Header />
-      <main className="flex-1 max-w-6xl mx-auto px-4 py-8 w-full">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-zinc-900 mb-1">
+      <main className="max-w-6xl mx-auto px-4 py-10 w-full">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-white mb-1">
             Las Vegas AI &amp; Tech Services Directory
           </h1>
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-[#A1A1AA]">
             {results.length} {results.length === 1 ? "company" : "companies"} found
             {activeFilters.length > 0 && ` · Filtered by: ${activeFilters.join(", ")}`}
           </p>
@@ -42,9 +42,9 @@ export default async function DirectoryPage({
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar filters */}
           <aside className="lg:w-64 shrink-0">
-            <div className="bg-white border border-zinc-200 rounded-lg p-4 sticky top-4">
-              <h2 className="font-semibold text-zinc-800 text-sm mb-4">Filters</h2>
-              <Suspense fallback={<div className="h-40 animate-pulse bg-zinc-100 rounded" />}>
+            <div className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-4 sticky top-20">
+              <h2 className="font-semibold text-white text-sm mb-4">Filters</h2>
+              <Suspense fallback={<div className="h-40 animate-pulse bg-white/[0.04] rounded-xl" />}>
                 <FilterPanel />
               </Suspense>
             </div>
@@ -53,9 +53,9 @@ export default async function DirectoryPage({
           {/* Results grid */}
           <div className="flex-1">
             {results.length === 0 ? (
-              <div className="bg-white border border-zinc-200 rounded-lg p-12 text-center">
-                <p className="text-zinc-500 mb-2">No companies found matching your filters.</p>
-                <a href="/directory" className="text-blue-600 text-sm hover:underline">
+              <div className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-12 text-center">
+                <p className="text-[#A1A1AA] mb-2">No companies found matching your filters.</p>
+                <a href="/directory" className="text-blue-400 text-sm hover:text-blue-300 transition-colors">
                   Clear all filters
                 </a>
               </div>
@@ -70,11 +70,11 @@ export default async function DirectoryPage({
         </div>
       </main>
 
-      <footer className="border-t border-zinc-200 bg-white mt-12">
-        <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-zinc-400 text-center">
+      <footer className="border-t border-white/[0.06] mt-16">
+        <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-[#A1A1AA]/50 text-center">
           © 2025 DigitalWealthTransfer.com · Las Vegas, Nevada
         </div>
       </footer>
-    </>
+    </div>
   );
 }

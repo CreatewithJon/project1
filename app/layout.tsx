@@ -8,6 +8,10 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/brand/favicon.svg",
+    shortcut: "/brand/favicon.svg",
+  },
   title: {
     default: "Digital Wealth Transfer | Las Vegas Fintech & Blockchain Directory",
     template: "%s | Digital Wealth Transfer",
@@ -24,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} h-full`}>
-      <body className="min-h-full flex flex-col bg-zinc-50 font-sans antialiased">
+      <body className="min-h-full flex flex-col bg-[#0B0F1A] font-sans antialiased">
         {children}
       </body>
     </html>

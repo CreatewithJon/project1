@@ -1,0 +1,30 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Digital Wealth Transfer Icon</title>
+  <desc id="desc">Icon-only mark for Digital Wealth Transfer.</desc>
+  <defs>
+    <linearGradient id="dwtGrad" x1="40" y1="35" x2="185" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#12D8FF"/>
+      <stop offset="0.48" stop-color="#2F6BFF"/>
+      <stop offset="1" stop-color="#9B4DFF"/>
+    </linearGradient>
+    <filter id="softGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.06 0 0 0 0 0.45 0 0 0 0 1 0 0 0 0.45 0"/>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="220" height="220" rx="48" fill="#050816"/>
+  <g filter="url(#softGlow)" stroke="url(#dwtGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 52 H135 C170 52 195 76 195 110 C195 144 170 168 135 168 H70"/>
+    <path d="M70 82 H123"/>
+    <path d="M70 138 H123"/>
+    <path d="M38 110 H134"/>
+    <path d="M115 88 L143 110 L115 132"/>
+  </g>
+  <g fill="url(#dwtGrad)">
+    <rect x="40" y="74" width="12" height="12" rx="3"/>
+    <rect x="19" y="103" width="11" height="11" rx="3"/>
+    <rect x="43" y="135" width="13" height="13" rx="3"/>
+    <rect x="58" y="94" width="8" height="8" rx="2"/>
+  </g>
+</svg>
