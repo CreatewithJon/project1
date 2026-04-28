@@ -5,13 +5,8 @@ export default function CompanyCard({ company }: { company: Company }) {
   return (
     <div className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-5 hover:border-blue-500/25 hover:shadow-[0_0_25px_rgba(59,130,246,0.07)] transition-all relative">
       {company.isFeatured && (
-        <span className="absolute top-3 right-3 text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 font-medium px-2 py-0.5 rounded-full">
-          Featured
-        </span>
-      )}
-      {!company.isFeatured && company.isPremium && (
         <span className="absolute top-3 right-3 text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium px-2 py-0.5 rounded-full">
-          Premium
+          Curated Partner
         </span>
       )}
 
