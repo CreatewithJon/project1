@@ -17,7 +17,21 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: "Invalid or empty request body" }, { status: 400 });
     }
 
-    const { name, email, service, companySlug, lead_type } = body;
+    const {
+      name,
+      email,
+      service,
+      companySlug,
+      lead_type,
+      // Extended fields — optional, packed into service text
+      businessName,
+      website,
+      budgetRange,
+      platform,
+      idealClient,
+      sourcePage,
+      message,
+    } = body;
 
     if (!name || !email || !companySlug) {
       return Response.json(
@@ -26,13 +40,25 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Build enriched service string from any extra fields passed
+    const extras: string[] = [];
+    if (service) extras.push(service);
+    if (businessName) extras.push(`Business: ${businessName}`);
+    if (website) extras.push(`Website: ${website}`);
+    if (budgetRange) extras.push(`Budget: ${budgetRange}`);
+    if (platform) extras.push(`Platform(s): ${platform}`);
+    if (idealClient) extras.push(`Ideal Client: ${idealClient}`);
+    if (sourcePage) extras.push(`Source: ${sourcePage}`);
+    if (message) extras.push(`Notes: ${message}`);
+    const enrichedService = extras.join(" | ") || null;
+
     // Log every submission so you can monitor without checking the DB manually
     console.log("[leads] New submission:", {
       lead_type: lead_type ?? "unknown",
       name: name.trim(),
       email: email.trim().toLowerCase(),
       companySlug,
-      service: service?.slice(0, 120),
+      service: enrichedService?.slice(0, 200),
       timestamp: new Date().toISOString(),
     });
 
@@ -44,10 +70,8 @@ export async function POST(request: NextRequest) {
         {
           name: name.trim(),
           email: email.trim().toLowerCase(),
-          service: service?.trim() ?? null,
+          service: enrichedService,
           company_slug: companySlug,
-          // TODO: add `lead_type text` column to your Supabase leads table to store this field.
-          // Run in Supabase SQL editor: ALTER TABLE leads ADD COLUMN lead_type text;
           lead_type: lead_type ?? null,
         },
       ])
@@ -64,7 +88,7 @@ export async function POST(request: NextRequest) {
             {
               name: name.trim(),
               email: email.trim().toLowerCase(),
-              service: service?.trim() ?? null,
+              service: enrichedService,
               company_slug: companySlug,
             },
           ])

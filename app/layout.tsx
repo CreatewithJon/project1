@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     shortcut: "/brand/favicon.svg",
   },
   title: {
-    default: "Digital Wealth Transfer | Las Vegas Fintech & Blockchain Directory",
+    default: "Digital Wealth Transfer — AI & Tech Solutions for Growing Businesses",
     template: "%s | Digital Wealth Transfer",
   },
   description:
-    "Discover top fintech, blockchain, and enterprise AI companies in Las Vegas. Find AI wealth advisors, digital asset custody providers, and estate tech firms.",
-  keywords: ["Las Vegas fintech", "blockchain Las Vegas", "enterprise AI Nevada", "digital asset custody", "estate tech"],
+    "We connect businesses with vetted AI, blockchain, and emerging tech partners — and help tech providers get more qualified clients. Las Vegas & nationwide.",
+  keywords: ["AI strategy", "AI for business", "blockchain Las Vegas", "AI automation", "tech partner", "lead generation AI", "digital transformation"],
 };
 
 export default function RootLayout({

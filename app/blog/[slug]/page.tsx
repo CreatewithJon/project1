@@ -108,20 +108,19 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
         {/* CTA */}
         <div className="bg-[#151B2D] border border-blue-500/20 rounded-2xl p-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">
-            Jonathan Cardona
+            Free AI Strategy Session
           </p>
           <h2 className="text-xl font-bold text-white mb-3">
-            Looking for help with AI or digital asset services?
+            Want to apply AI to your business?
           </h2>
           <p className="text-[#A1A1AA] text-sm mb-6 max-w-md mx-auto">
-            I connect AI, blockchain, and fintech companies with qualified clients actively
-            looking for their services. Get connected today.
+            I help businesses find and implement the right AI and tech solutions — and connect tech providers with qualified clients. Get your free strategy today.
           </p>
           <Link
-            href="/#business-form"
-            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
+            href="/ai-strategy"
+            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
           >
-            Get Connected Here →
+            Get My Free AI Strategy →
           </Link>
         </div>
 

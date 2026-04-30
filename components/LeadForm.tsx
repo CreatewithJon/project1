@@ -50,75 +50,55 @@ export default function LeadForm({ companySlug, companyName }: LeadFormProps) {
 
   if (status === "success") {
     return (
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-        <p className="font-semibold text-green-800 mb-1">Request sent!</p>
-        <p className="text-sm text-green-700">
-          Your request has been received. We'll follow up within 24 hours with next steps.
+      <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-8 text-center">
+        <p className="font-bold text-green-400 text-lg mb-1">Request sent!</p>
+        <p className="text-sm text-green-400/70">
+          Your request has been received. Jonathan will follow up within 24 hours with next steps.
         </p>
       </div>
     );
   }
 
+  const inputClass = "w-full bg-[#0B0F1A] border border-white/[0.1] rounded-lg px-3 py-2.5 text-sm text-[#F9FAFB] placeholder:text-[#A1A1AA]/50 focus:outline-none focus:ring-1 focus:ring-blue-500/60 focus:border-blue-500/40 transition-colors";
+  const labelClass = "block text-xs font-semibold text-[#A1A1AA] mb-1.5";
+
   return (
-    <div className="bg-white border border-zinc-200 rounded-lg p-6">
-      <h2 className="font-semibold text-zinc-900 mb-1">Request an Introduction to {companyName}</h2>
-      <p className="text-sm text-zinc-500 mb-4">
+    <div className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-6">
+      <h2 className="font-bold text-white text-lg mb-1">Request an Introduction to {companyName}</h2>
+      <p className="text-sm text-[#A1A1AA] mb-5">
         Submit your request and Jonathan Cardona will personally facilitate an introduction within 24 hours.
       </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
-          <label htmlFor="name" className="block text-xs font-semibold text-zinc-700 mb-1">
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            placeholder="Your full name"
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label htmlFor="lf-name" className={labelClass}>Name *</label>
+          <input id="lf-name" name="name" type="text" required placeholder="Your full name" className={inputClass} />
         </div>
-
         <div>
-          <label htmlFor="email" className="block text-xs font-semibold text-zinc-700 mb-1">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="you@example.com"
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <label htmlFor="lf-email" className={labelClass}>Email *</label>
+          <input id="lf-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
         </div>
-
         <div>
-          <label htmlFor="service" className="block text-xs font-semibold text-zinc-700 mb-1">
-            What service are you looking for?
-          </label>
+          <label htmlFor="lf-service" className={labelClass}>What are you looking for?</label>
           <textarea
-            id="service"
+            id="lf-service"
             name="service"
             rows={3}
-            placeholder="e.g. Digital asset custody, AI advisory, estate planning..."
-            className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            placeholder="Describe what you need or the problem you're trying to solve..."
+            className={inputClass + " resize-none"}
           />
         </div>
 
-        {status === "error" && (
-          <p className="text-sm text-red-600">{errorMsg}</p>
-        )}
+        {status === "error" && <p className="text-sm text-rose-400">{errorMsg}</p>}
 
         <button
           type="submit"
           disabled={status === "loading"}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-60"
+          className="bg-blue-600 text-white px-4 py-3 rounded-xl text-sm font-bold hover:bg-blue-500 transition-colors disabled:opacity-50 shadow-[0_0_20px_rgba(59,130,246,0.25)]"
         >
-          {status === "loading" ? "Sending..." : "Get Connected"}
+          {status === "loading" ? "Sending..." : "Get Connected →"}
         </button>
+        <p className="text-xs text-[#A1A1AA]/50 text-center">Free. Personal response within 24 hours.</p>
       </form>
     </div>
   );

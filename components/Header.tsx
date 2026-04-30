@@ -8,15 +8,18 @@ export default function Header() {
         <Link href="/">
           <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={180} height={37} priority unoptimized style={{ height: "auto" }} />
         </Link>
-        <nav className="flex items-center gap-6 text-sm text-[#A1A1AA]">
+        <nav className="flex items-center gap-4 text-sm text-[#A1A1AA]">
+          <Link href="/ai-strategy" className="hidden sm:block hover:text-white transition-colors">
+            AI Strategy
+          </Link>
           <Link href="/directory" className="hover:text-white transition-colors">
             Directory
           </Link>
           <Link
-            href="/#business-form"
+            href="/ai-strategy"
             className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-500 transition-colors font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)]"
           >
-            Get Matched
+            Get Free Strategy
           </Link>
         </nav>
       </div>

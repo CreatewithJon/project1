@@ -9,7 +9,7 @@ import { filterCompanies } from "@/lib/data/companies";
 export const metadata: Metadata = {
   title: "Las Vegas AI & Tech Services Directory — DigitalWealthTransfer.com",
   description:
-    "Browse Las Vegas fintech, blockchain, and enterprise AI companies. Filter by category and location.",
+    "Browse vetted AI, blockchain, and fintech partners. Find the right tech company for your business — or get listed as a provider.",
 };
 
 export default async function DirectoryPage({

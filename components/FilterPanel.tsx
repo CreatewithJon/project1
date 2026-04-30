@@ -25,12 +25,13 @@ export default function FilterPanel() {
     [router, searchParams]
   );
 
+  const inputClass = "w-full bg-[#0B0F1A] border border-white/[0.1] rounded-lg px-3 py-2 text-sm text-[#F9FAFB] placeholder:text-[#A1A1AA]/50 focus:outline-none focus:ring-1 focus:ring-blue-500/60 focus:border-blue-500/40 transition-colors";
+  const labelClass = "block text-xs font-semibold text-[#A1A1AA] uppercase tracking-wide mb-1.5";
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-5">
       <div>
-        <label className="block text-xs font-medium text-zinc-500 uppercase tracking-wide mb-1.5">
-          Search
-        </label>
+        <label className={labelClass}>Search</label>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -44,49 +45,41 @@ export default function FilterPanel() {
             type="text"
             defaultValue={currentSearch}
             placeholder="Company, service, tag..."
-            className="flex-1 border border-zinc-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={inputClass}
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition-colors shrink-0"
           >
-            Search
+            Go
           </button>
         </form>
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-zinc-500 uppercase tracking-wide mb-1.5">
-          Category
-        </label>
+        <label className={labelClass}>Category</label>
         <select
           value={currentCategory}
           onChange={(e) => updateParam("category", e.target.value)}
-          className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClass}
         >
           <option value="">All Categories</option>
           {ALL_CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
+            <option key={cat} value={cat}>{cat}</option>
           ))}
         </select>
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-zinc-500 uppercase tracking-wide mb-1.5">
-          Location
-        </label>
+        <label className={labelClass}>Location</label>
         <select
           value={currentLocation}
           onChange={(e) => updateParam("location", e.target.value)}
-          className="w-full border border-zinc-200 rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClass}
         >
           <option value="">All Areas</option>
           {ALL_LOCATIONS.map((loc) => (
-            <option key={loc} value={loc}>
-              {loc}
-            </option>
+            <option key={loc} value={loc}>{loc}</option>
           ))}
         </select>
       </div>
@@ -94,7 +87,7 @@ export default function FilterPanel() {
       {(currentSearch || currentCategory || currentLocation) && (
         <button
           onClick={() => router.push("/directory")}
-          className="text-sm text-zinc-400 hover:text-zinc-600 text-left"
+          className="text-sm text-[#A1A1AA]/60 hover:text-[#A1A1AA] text-left transition-colors"
         >
           Clear filters
         </button>
