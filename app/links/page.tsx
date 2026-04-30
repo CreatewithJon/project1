@@ -3,152 +3,173 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Links — Digital Wealth Transfer",
-  description: "Everything from Digital Wealth Transfer in one place. AI systems, lead generation, content, partnerships, and more.",
+  title: "Jonathan Cardona — Digital Wealth Transfer",
+  description:
+    "I help businesses generate leads, create content, and connect with the right tech partners using AI systems.",
 };
-
-const links = [
-  {
-    group: "Start Here",
-    items: [
-      {
-        label: "Get a Free AI Strategy",
-        sub: "Tell me your goal — I'll map out the system",
-        href: "/ai-strategy",
-        style: "bg-blue-600 hover:bg-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.3)] text-white",
-        arrow: true,
-        featured: true,
-      },
-    ],
-  },
-  {
-    group: "AI Systems",
-    items: [
-      {
-        label: "AI Lead System",
-        sub: "Capture and follow up with leads automatically",
-        href: "/ai-leads",
-        style: "bg-[#151B2D] border border-purple-500/20 hover:border-purple-500/40 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-      {
-        label: "AI Content Engine",
-        sub: "Create a week of content from one idea",
-        href: "/ai-content",
-        style: "bg-[#151B2D] border border-blue-500/20 hover:border-blue-500/40 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-      {
-        label: "View All Solutions",
-        sub: "AI Content, AI Leads, and AI Growth System",
-        href: "/solutions",
-        style: "bg-[#151B2D] border border-white/[0.08] hover:border-white/20 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-    ],
-  },
-  {
-    group: "Work With Me",
-    items: [
-      {
-        label: "Partner With Us",
-        sub: "Agencies & consultants — expand your offer stack",
-        href: "/partners",
-        style: "bg-[#151B2D] border border-green-500/20 hover:border-green-500/40 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-      {
-        label: "Explore the Marketplace",
-        sub: "Find vetted AI & tech partners in Las Vegas",
-        href: "/directory",
-        style: "bg-[#151B2D] border border-white/[0.08] hover:border-white/20 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-    ],
-  },
-  {
-    group: "Learn",
-    items: [
-      {
-        label: "Read the Blog",
-        sub: "Insights on AI, wealth, and modern business",
-        href: "/blog",
-        style: "bg-[#151B2D] border border-white/[0.08] hover:border-white/20 text-white hover:bg-[#1a2236]",
-        arrow: true,
-        featured: false,
-      },
-    ],
-  },
-];
 
 export default function LinksPage() {
   return (
     <div className="min-h-screen bg-[#0B0F1A] font-sans text-[#F9FAFB]">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/6 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-20 left-1/3 w-[300px] h-[200px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
+      {/* Ambient glow */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-blue-600/8 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative max-w-md mx-auto px-5 py-16">
+      <div className="relative max-w-sm mx-auto px-4 pt-12 pb-16">
 
-        {/* Profile */}
-        <div className="text-center mb-12">
-          <div className="w-20 h-20 mx-auto mb-5 rounded-2xl overflow-hidden bg-[#151B2D] border border-white/[0.08] flex items-center justify-center p-3">
+        {/* Hero */}
+        <div className="text-center mb-10">
+          <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-[#151B2D] border border-white/[0.08] flex items-center justify-center p-3">
             <Image
               src="/brand/logo.svg"
               alt="Digital Wealth Transfer"
-              width={56}
-              height={56}
+              width={44}
+              height={44}
               unoptimized
               style={{ width: "100%", height: "auto" }}
             />
           </div>
-          <h1 className="text-xl font-bold text-white mb-1">Digital Wealth Transfer</h1>
-          <p className="text-sm text-[#A1A1AA] mb-1">Jonathan Cardona · Las Vegas, NV</p>
-          <p className="text-sm text-[#A1A1AA]/70 max-w-xs mx-auto leading-relaxed">
-            AI systems that help modern businesses attract customers, capture leads, and grow revenue.
+          <h1 className="text-2xl font-bold text-white leading-tight mb-2">
+            Get More Customers<br />Using AI
+          </h1>
+          <p className="text-sm text-[#A1A1AA] leading-relaxed mb-3">
+            I help businesses generate leads, create content, and connect with the right tech partners.
+          </p>
+          <p className="text-[11px] font-semibold tracking-widest uppercase text-[#A1A1AA]/40">
+            Las Vegas · AI + Automation + Growth Systems
           </p>
         </div>
 
-        {/* Link Groups */}
-        <div className="flex flex-col gap-8">
-          {links.map((group) => (
-            <div key={group.group}>
-              <p className="text-[11px] font-bold uppercase tracking-widest text-[#A1A1AA]/40 mb-3 px-1">{group.group}</p>
-              <div className="flex flex-col gap-3">
-                {group.items.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`block rounded-2xl px-5 py-4 transition-all ${link.style}`}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className={`font-bold text-sm leading-tight ${link.featured ? "text-white" : "text-white"}`}>{link.label}</p>
-                        {link.sub && (
-                          <p className={`text-xs mt-0.5 leading-relaxed ${link.featured ? "text-white/70" : "text-[#A1A1AA]"}`}>{link.sub}</p>
-                        )}
-                      </div>
-                      {link.arrow && (
-                        <svg viewBox="0 0 16 16" fill="none" className={`w-4 h-4 shrink-0 ${link.featured ? "text-white/70" : "text-white/30"}`}>
-                          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </div>
-                  </Link>
-                ))}
+        {/* Primary CTAs */}
+        <div className="flex flex-col gap-3 mb-8">
+          <Link
+            href="/ai-leads"
+            className="block w-full bg-blue-600 hover:bg-blue-500 rounded-2xl px-5 py-4 transition-all shadow-[0_0_30px_rgba(59,130,246,0.35)] active:scale-[0.98]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-white font-bold text-base leading-tight">🚀 I Need More Customers</p>
+                <p className="text-white/60 text-xs mt-0.5">Get qualified leads using AI systems</p>
               </div>
+              <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/50">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
-          ))}
+          </Link>
+
+          <Link
+            href="/ai-content"
+            className="block w-full bg-purple-600 hover:bg-purple-500 rounded-2xl px-5 py-4 transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] active:scale-[0.98]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-white font-bold text-base leading-tight">📉 I Struggle With Content</p>
+                <p className="text-white/60 text-xs mt-0.5">Turn ideas into posts, reels, and content automatically</p>
+              </div>
+              <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/50">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Link>
+
+          <Link
+            href="/solutions"
+            className="block w-full bg-[#151B2D] border border-white/[0.15] hover:border-white/30 rounded-2xl px-5 py-4 transition-all active:scale-[0.98]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-white font-bold text-base leading-tight">🤔 Not Sure What I Need?</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">We&apos;ll help you figure it out quickly</p>
+              </div>
+              <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/30">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Link>
+        </div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="flex-1 h-px bg-white/[0.06]" />
+          <span className="text-[11px] text-[#A1A1AA]/30 uppercase tracking-widest">More</span>
+          <div className="flex-1 h-px bg-white/[0.06]" />
+        </div>
+
+        {/* Secondary */}
+        <div className="flex flex-col gap-2.5 mb-8">
+          <Link
+            href="/partners"
+            className="block w-full bg-[#151B2D] border border-green-500/20 hover:border-green-500/40 rounded-xl px-5 py-3.5 transition-all active:scale-[0.98]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-white font-semibold text-sm">🤝 Get Clients for Your Agency</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">White-label, referral, and co-delivery options</p>
+              </div>
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0 text-white/20">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Link>
+
+          <Link
+            href="/directory"
+            className="block w-full bg-[#151B2D] border border-white/[0.08] hover:border-white/20 rounded-xl px-5 py-3.5 transition-all active:scale-[0.98]"
+          >
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="text-white font-semibold text-sm">📊 Browse AI & Tech Companies</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">Find vetted partners in Las Vegas</p>
+              </div>
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0 text-white/20">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          </Link>
+        </div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="flex-1 h-px bg-white/[0.04]" />
+          <span className="text-[11px] text-[#A1A1AA]/20 uppercase tracking-widest">Connect</span>
+          <div className="flex-1 h-px bg-white/[0.04]" />
+        </div>
+
+        {/* Authority / Tertiary */}
+        <div className="flex flex-col gap-2">
+          <Link
+            href="/blog"
+            className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
+          >
+            <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
+              🧠 Learn AI, Bitcoin & Business
+            </p>
+          </Link>
+
+          <a
+            href="https://www.instagram.com/crypto.papi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
+          >
+            <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
+              🎥 Follow Me (@crypto.papi)
+            </p>
+          </a>
+
+          <Link
+            href="/solutions#get-started"
+            className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
+          >
+            <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
+              📩 Contact / Work With Me
+            </p>
+          </Link>
         </div>
 
         {/* Footer */}
-        <div className="mt-14 text-center">
-          <p className="text-[11px] text-[#A1A1AA]/30">© 2025 Digital Wealth Transfer · Jonathan Cardona</p>
-        </div>
+        <p className="text-[11px] text-[#A1A1AA]/20 text-center mt-12">
+          © 2025 Digital Wealth Transfer · Jonathan Cardona
+        </p>
       </div>
     </div>
   );
