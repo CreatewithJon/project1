@@ -53,7 +53,7 @@ This is Next.js **16.2.2**. These patterns differ from older versions and will c
 ### Data Layer
 
 All directory and blog content is **static mock data** — no database reads:
-- `lib/data/companies.ts` — 15 mock companies; `filterCompanies()`, `getCompanyBySlug()`
+- `lib/data/companies.ts` — 6 real curated companies; `filterCompanies()`, `getCompanyBySlug()`
 - `lib/data/articles.ts` — 8 mock articles; `getArticleBySlug()`, `getFeaturedArticles()`
 - `lib/types.ts` — shared types: `Company`, `Article`, `ContentBlock`, `Category`, `LasVegasArea`
 
@@ -81,17 +81,9 @@ function getSupabase() {
 }
 ```
 
-### Fake Company Data Guard
+### Company Website Guard
 
-All 15 companies in `lib/data/companies.ts` use `example.com` URLs. Any UI rendering external company links must guard:
-
-```ts
-{company.website && !company.website.includes("example.com") && (
-  <a href={company.website}>Visit Website</a>
-)}
-```
-
-This guard is already applied in `CompanyCard.tsx` and `app/companies/[slug]/page.tsx`.
+The `example.com` guard is still present in `CompanyCard.tsx` and `app/companies/[slug]/page.tsx` as a safety net. All 6 current companies have real URLs so the guard passes for all of them.
 
 ---
 
@@ -151,3 +143,101 @@ For each UI milestone: implement → run locally → check for errors → captur
 Clear, sharp, modern, confident. Not hypey, not overly corporate. Slightly premium, slightly visionary.
 
 Example messages: "Own your tools. Own your workflow." / "Built for clarity, sovereignty, and momentum." / "No subscription. No clutter. Just signal."
+
+---
+
+## Digital Wealth Transfer — Final Strategy
+
+### Core Positioning
+
+Digital Wealth Transfer is evolving into an AI systems and revenue infrastructure business for local businesses, service providers, and tech-forward companies.
+
+**Main positioning:** "I build AI-powered systems that help businesses capture, qualify, and convert more leads."
+
+Digital Wealth Transfer is a hybrid of:
+- AI service provider
+- Local business automation consultant
+- Lead generation partner
+- Marketplace/directory for AI, blockchain, fintech, and tech service providers
+- Content-driven authority brand around AI, Bitcoin, automation, and digital business
+
+### Primary Offer Page
+
+The main offer page lives at `/ai-systems`. It markets all core offers as one unified solution:
+
+**AI Revenue Systems for Local Businesses**
+
+- **Headline:** "Turn Your Business Into a Lead-Generating Machine With AI"
+- **Subheadline:** "I build AI-powered systems that help you capture, qualify, and convert more customers — using automation, chatbots, funnels, websites, CRM workflows, and content systems."
+- **CTAs:** Get My System / Book Free Audit / DM "AI"
+
+### Core Offer Stack
+
+| Offer | Price | Purpose |
+|---|---|---|
+| AI Lead Capture System | $500–$1,000 | Landing page, lead form, CRM setup, email follow-up, lead notifications, analytics |
+| AI Appointment Setter System | $750–$1,000 | AI chatbot/SMS bot, lead qualification, calendar booking, CRM handoff |
+| AI Website + Funnel | $1,000+ | Website/landing page, conversion copy, lead form, CTA sections, basic SEO |
+| AI Content + Growth System | $500/month | Content ideas, video scripts, social captions, blog repurposing, monthly optimization |
+
+**Outcome focus:** More leads. Faster response. Better follow-up. More booked calls. Better systems.
+
+### /ai-systems Page Structure
+
+1. **Hero** — Headline, subheadline, CTA buttons
+2. **Problem** — Businesses miss leads, slow response times, weak websites, no follow-up, leads not tracked
+3. **Solution** — AI Revenue Systems. Flow: Capture → Engage → Qualify → Convert → Track
+4. **Offer Stack** — Four cards with pricing, bullets, and outcome
+5. **How It Works** — Audit → Build → Launch → Optimize
+6. **Final CTA** — "Want more leads without hiring more staff? Let's build your AI system."
+
+### /ai-systems Lead Form
+
+Form posts to `/api/ai-leads` → Supabase `ai_leads` table.
+
+Captures: name, email, business name, website, industry, service need (Landing Page / AI Chatbot / CRM Setup / Automated Follow-Up / Content System / Not Sure Yet), budget ($500 / $1,000 / $1,500+ / Not sure), message.
+
+**Supabase table:**
+```sql
+create table ai_leads (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text not null,
+  business_name text,
+  website text,
+  industry text,
+  service_need text,
+  budget text,
+  message text,
+  created_at timestamptz default now()
+);
+```
+
+Use lazy Supabase initialization inside the route handler (never at module level). Use `SUPABASE_URL` / `SUPABASE_ANON_KEY` — do not expose to the browser.
+
+### Marketing Strategy
+
+**Core message:** "Most businesses don't need more traffic first. They need a better system to capture, qualify, and follow up with the leads they already get."
+
+**Primary CTA:** "DM me 'AI' and I'll show you what I'd build for your business."
+
+**Target customers:** Med spas, real estate agents, home service businesses, roofers, solar companies, insurance agents, law firms, fitness coaches, business consultants, Web3/AI service providers, local service businesses.
+
+### Business Strategy — Three Layers
+
+- **Layer 1 — Cash Flow:** Sell AI systems and automation services for $500–$1,000+
+- **Layer 2 — Authority:** Content around AI, Bitcoin, automation, websites, funnels, local business growth
+- **Layer 3 — Scale:** DWT directory and marketplace refers clients to vetted AI, blockchain, fintech, and tech providers
+
+### Development Priorities
+
+1. Build `/ai-systems` landing page
+2. Build `/api/ai-leads` route
+3. Create Supabase `ai_leads` table
+4. Add lead form with success/error handling
+5. Link `/ai-systems` from homepage nav and footer
+6. Add CTA from blog posts pointing to `/ai-systems`
+7. Ensure mobile responsiveness
+8. Run `npm run build` and fix all errors
+9. Deploy to Vercel
+10. Test live form submission

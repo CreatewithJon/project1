@@ -97,6 +97,9 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={200} height={41} priority unoptimized style={{ height: "auto" }} />
           <div className="hidden sm:flex items-center gap-1">
+            <Link href="/ai-systems" className="text-sm text-[#A1A1AA] hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
+              AI Systems
+            </Link>
             <Link href="#how" className="text-sm text-[#A1A1AA] hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
               How It Works
             </Link>
@@ -464,6 +467,7 @@ export default function HomePage() {
             <p className="text-xs text-[#A1A1AA]/60">© 2025 Jonathan Cardona · Las Vegas, Nevada</p>
           </div>
           <div className="flex items-center gap-5 text-sm text-[#A1A1AA]">
+            <Link href="/ai-systems" className="hover:text-white transition-colors">AI Systems</Link>
             <Link href="#business-form" className="hover:text-white transition-colors">For Businesses</Link>
             <Link href="#provider-form" className="hover:text-white transition-colors">For Providers</Link>
             <Link href="/directory" className="hover:text-white transition-colors">Directory</Link>
