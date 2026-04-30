@@ -65,6 +65,43 @@ function parseCSV(text: string): Partial<Prospect>[] {
     .filter((r) => r.business_name);
 }
 
+// ─── Lead (inbound form submission) ────────────────────────────────────────────
+interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  service?: string | null;
+  company_slug?: string | null;
+  lead_type?: string | null;
+  created_at: string;
+}
+
+function parseServiceField(service: string | null | undefined) {
+  if (!service) return { offer: "", businessName: "", notes: "" };
+  const parts = service.split(" | ");
+  let offer = "", businessName = "", notes = "";
+  for (const part of parts) {
+    if (part.startsWith("Business: ")) businessName = part.replace("Business: ", "");
+    else if (part.startsWith("Notes: ")) notes = part.replace("Notes: ", "");
+    else if (!offer) offer = part;
+  }
+  return { offer, businessName, notes };
+}
+
+function slugToSource(slug: string | null | undefined): string {
+  if (!slug) return "Website form";
+  const map: Record<string, string> = {
+    "ai-leads": "/ai-leads form",
+    "ai-content": "/ai-content form",
+    "solutions": "/solutions form",
+    "ai-systems": "/ai-systems form",
+    "partners": "/partners form",
+    "business-request": "Homepage (business)",
+    "provider-application": "Homepage (provider)",
+  };
+  return map[slug] ?? slug;
+}
+
 // ─── Toast ─────────────────────────────────────────────────────────────────────
 interface Toast { type: "success" | "error"; msg: string }
 
@@ -101,6 +138,11 @@ export default function LeadEngine() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [importLoading, setImportLoading] = useState(false);
   const csvRef = useRef<HTMLInputElement>(null);
+
+  const [activeTab, setActiveTab] = useState<"pipeline" | "inbox">("pipeline");
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [inboxLoading, setInboxLoading] = useState(false);
+  const [movingId, setMovingId] = useState<string | null>(null);
 
   function showToast(type: "success" | "error", msg: string) {
     setToast({ type, msg });
@@ -147,9 +189,26 @@ export default function LeadEngine() {
     }
   }, []);
 
+  const fetchLeads = useCallback(async () => {
+    setInboxLoading(true);
+    try {
+      const res = await fetch("/api/leads");
+      const json = await res.json();
+      if (res.ok) setLeads(json.leads ?? []);
+      else showToast("error", json.error ?? "Failed to load leads");
+    } catch {
+      showToast("error", "Failed to load leads");
+    } finally {
+      setInboxLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    if (auth === "open") fetchProspects();
-  }, [auth, fetchProspects]);
+    if (auth === "open") {
+      fetchProspects();
+      fetchLeads();
+    }
+  }, [auth, fetchProspects, fetchLeads]);
 
   // CRUD
   async function handleSave(data: Partial<Prospect>) {
@@ -162,6 +221,7 @@ export default function LeadEngine() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error);
       setProspects((prev) => [json.prospects[0], ...prev]);
+      setMovingId(null);
       showToast("success", "Lead added");
     } else {
       const id = modal?.prospect?.id;
@@ -258,6 +318,22 @@ export default function LeadEngine() {
       setImportLoading(false);
       if (csvRef.current) csvRef.current.value = "";
     }
+  }
+
+  // Move inbound lead → prospects pipeline
+  function handleMoveToPipeline(lead: Lead) {
+    const { offer, businessName, notes } = parseServiceField(lead.service);
+    const prefill: Partial<Prospect> = {
+      contact_name: lead.name,
+      email: lead.email,
+      business_name: businessName || "",
+      source: slugToSource(lead.company_slug),
+      notes: [offer && `Interested in: ${offer}`, notes].filter(Boolean).join(" | ") || "",
+      status: "New",
+    };
+    setMovingId(lead.id);
+    setModal({ mode: "add", prospect: prefill as Prospect });
+    setActiveTab("pipeline");
   }
 
   // Filter
@@ -376,12 +452,39 @@ export default function LeadEngine() {
             <span className="hidden sm:block text-white/20 text-sm">·</span>
             <span className="hidden sm:block text-white/50 text-sm font-semibold">Lead Engine</span>
           </div>
-          <button
-            onClick={() => { sessionStorage.removeItem("le_auth"); setAuth("locked"); }}
-            className="text-white/25 hover:text-white/60 text-xs transition-colors"
-          >
-            Lock
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-1 bg-[#151B2D] border border-white/[0.06] rounded-lg p-1">
+              <button
+                onClick={() => setActiveTab("pipeline")}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+                  activeTab === "pipeline" ? "bg-blue-600 text-white" : "text-white/40 hover:text-white"
+                }`}
+              >
+                Pipeline
+              </button>
+              <button
+                onClick={() => { setActiveTab("inbox"); fetchLeads(); }}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                  activeTab === "inbox" ? "bg-purple-600 text-white" : "text-white/40 hover:text-white"
+                }`}
+              >
+                Leads Inbox
+                {leads.length > 0 && (
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                    activeTab === "inbox" ? "bg-white/20 text-white" : "bg-purple-500/20 text-purple-400"
+                  }`}>
+                    {leads.length}
+                  </span>
+                )}
+              </button>
+            </div>
+            <button
+              onClick={() => { sessionStorage.removeItem("le_auth"); setAuth("locked"); }}
+              className="text-white/25 hover:text-white/60 text-xs transition-colors"
+            >
+              Lock
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -738,6 +841,93 @@ export default function LeadEngine() {
               </p>
               <p className="text-xs text-white/15">Click any row to expand</p>
             </div>
+          </div>
+        )}
+
+        {/* ── Leads Inbox ───────────────────────────────────────────────────── */}
+        {activeTab === "inbox" && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <h2 className="text-white font-bold text-base">Leads Inbox</h2>
+                <p className="text-white/30 text-xs mt-0.5">Form submissions from your website. Review and move the good ones into your pipeline.</p>
+              </div>
+              <button
+                onClick={fetchLeads}
+                className="text-xs text-white/30 hover:text-white transition-colors"
+              >
+                Refresh
+              </button>
+            </div>
+
+            {inboxLoading ? (
+              <div className="flex items-center justify-center h-40 text-white/20">
+                <div className="w-5 h-5 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin mr-3" />
+                Loading submissions...
+              </div>
+            ) : leads.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-40 text-white/20 gap-2">
+                <p>No form submissions yet</p>
+                <p className="text-xs">They&apos;ll appear here when someone fills out a form on your site</p>
+              </div>
+            ) : (
+              <div className="bg-[#111827] border border-white/[0.06] rounded-xl overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-white/[0.06]">
+                        {["Date", "Name", "Email", "Interested In", "Source", "Action"].map((h) => (
+                          <th key={h} className="text-left text-[11px] font-bold text-white/30 uppercase tracking-wider px-4 py-3 whitespace-nowrap">
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {leads.map((lead) => {
+                        const { offer, businessName } = parseServiceField(lead.service);
+                        return (
+                          <tr key={lead.id} className="border-b border-white/[0.04] hover:bg-[#151B2D]/50 transition-colors">
+                            <td className="px-4 py-3 text-white/30 text-xs whitespace-nowrap">
+                              {new Date(lead.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                            </td>
+                            <td className="px-4 py-3">
+                              <p className="text-white font-semibold">{lead.name}</p>
+                              {businessName && <p className="text-white/30 text-xs">{businessName}</p>}
+                            </td>
+                            <td className="px-4 py-3 text-white/60 text-sm">{lead.email}</td>
+                            <td className="px-4 py-3">
+                              {offer ? (
+                                <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400">
+                                  {offer}
+                                </span>
+                              ) : (
+                                <span className="text-white/20 text-xs">—</span>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 text-white/30 text-xs">
+                              {slugToSource(lead.company_slug)}
+                            </td>
+                            <td className="px-4 py-3">
+                              <button
+                                onClick={() => handleMoveToPipeline(lead)}
+                                disabled={movingId === lead.id}
+                                className="px-3 py-1.5 rounded-lg text-[11px] font-bold bg-blue-600/10 border border-blue-500/20 text-blue-400 hover:bg-blue-600 hover:text-white transition-colors whitespace-nowrap disabled:opacity-50"
+                              >
+                                → Add to Pipeline
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="px-4 py-3 border-t border-white/[0.04]">
+                  <p className="text-xs text-white/25">{leads.length} submission{leads.length !== 1 ? "s" : ""} total</p>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

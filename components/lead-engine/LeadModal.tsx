@@ -35,7 +35,7 @@ const EMPTY: Partial<Prospect> = {
 
 export default function LeadModal({ mode, prospect, onClose, onSave }: Props) {
   const [form, setForm] = useState<Partial<Prospect>>(
-    mode === "edit" && prospect ? { ...prospect } : { ...EMPTY }
+    prospect ? { ...EMPTY, ...prospect } : { ...EMPTY }
   );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
