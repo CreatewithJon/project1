@@ -18,14 +18,16 @@ export default function LinksPage() {
 
         {/* Hero */}
         <div className="text-center mb-10">
-          <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-[#151B2D] border border-white/[0.08] flex items-center justify-center p-3">
+          <div className="mx-auto mb-5" style={{ filter: "drop-shadow(0 0 18px rgba(59,130,246,0.25)) drop-shadow(0 0 40px rgba(139,92,246,0.12))" }}>
             <Image
               src="/brand/logo.svg"
               alt="Digital Wealth Transfer"
-              width={44}
-              height={44}
+              width={200}
+              height={42}
+              priority
               unoptimized
-              style={{ width: "100%", height: "auto" }}
+              className="mx-auto w-[160px] sm:w-[200px]"
+              style={{ height: "auto" }}
             />
           </div>
           <h1 className="text-2xl font-bold text-white leading-tight mb-2">
