@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     shortcut: "/brand/favicon.svg",
   },
   title: {
-    default: "Digital Wealth Transfer — AI & Tech Solutions for Growing Businesses",
+    default: "Digital Wealth Transfer — AI, Automation & Emerging Technology",
     template: "%s | Digital Wealth Transfer",
   },
   description:
-    "We connect businesses with vetted AI, blockchain, and emerging tech partners — and help tech providers get more qualified clients. Las Vegas & nationwide.",
-  keywords: ["AI strategy", "AI for business", "blockchain Las Vegas", "AI automation", "tech partner", "lead generation AI", "digital transformation"],
+    "Helping businesses and entrepreneurs leverage AI, automation, and emerging technology to create more freedom, ownership, and opportunity.",
+  keywords: ["AI systems", "AI automation", "AI for business", "digital wealth", "automation tools", "lead generation AI", "digital transformation", "Bitcoin", "emerging technology"],
 };
 
 export default function RootLayout({

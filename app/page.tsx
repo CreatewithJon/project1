@@ -7,29 +7,29 @@ import ProviderLeadForm from "@/components/ProviderLeadForm";
 import { companies } from "@/lib/data/companies";
 
 export const metadata: Metadata = {
-  title: "Digital Wealth Transfer — AI & Tech Solutions for Growing Businesses",
+  title: "Digital Wealth Transfer — AI, Automation & Emerging Technology",
   description:
-    "We connect businesses with vetted AI, blockchain, and fintech partners — and help tech providers get more qualified clients. Las Vegas & nationwide.",
+    "Helping businesses and entrepreneurs leverage AI, automation, and emerging technology to create more freedom, opportunity, and growth.",
 };
 
 const featured = companies.filter((c) => c.isFeatured).slice(0, 3);
 
 const features = [
   {
-    title: "AI & Blockchain Specialists",
-    desc: "We only work in AI, blockchain, fintech, and emerging tech. No generalist noise — just the right partners.",
+    title: "AI & Automation First",
+    desc: "Every solution is built around real AI implementation — not generic advice. We help you apply tools that actually move the needle.",
     iconBg: "bg-blue-500/10",
     iconColor: "text-blue-400",
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <rect x="3" y="3" width="14" height="14" rx="2" />
-        <path d="M7 10h6M10 7v6" strokeLinecap="round" />
+        <path d="M10 2l1.5 4.5L16 8l-4.5 1.5L10 14l-1.5-4.5L4 8l4.5-1.5L10 2z" strokeLinejoin="round" />
+        <path d="M16 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7.7-2z" strokeLinejoin="round" />
       </svg>
     ),
   },
   {
-    title: "Human-Reviewed Matches",
-    desc: "Every match is personally reviewed by Jonathan Cardona — not sorted by an algorithm.",
+    title: "Human-Reviewed Introductions",
+    desc: "Every match is personally reviewed by Jonathan Cardona — not sorted by an algorithm. Real judgment, not automation theater.",
     iconBg: "bg-green-500/10",
     iconColor: "text-green-400",
     icon: (
@@ -40,8 +40,8 @@ const features = [
     ),
   },
   {
-    title: "Pre-Qualified Leads",
-    desc: "Businesses are vetted for budget and intent before any introduction is made. No wasted meetings.",
+    title: "Pre-Qualified Opportunities",
+    desc: "Businesses are vetted for budget and intent before any introduction. Providers only receive prospects who are ready to move.",
     iconBg: "bg-amber-500/10",
     iconColor: "text-amber-400",
     icon: (
@@ -52,20 +52,20 @@ const features = [
     ),
   },
   {
-    title: "Las Vegas Focused",
-    desc: "Deep knowledge of the local AI, blockchain, and fintech market. Not a generic national directory.",
+    title: "Las Vegas & Nationwide",
+    desc: "Rooted in Las Vegas with a growing national network. Deep local knowledge, broad ecosystem reach.",
     iconBg: "bg-purple-500/10",
     iconColor: "text-purple-400",
     icon: (
       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M10 2C7.24 2 5 4.24 5 7c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5z" strokeLinejoin="round" />
-        <circle cx="10" cy="7" r="1.5" />
+        <circle cx="10" cy="10" r="8" />
+        <path d="M2 10h16M10 2c-2.5 2.5-4 5-4 8s1.5 5.5 4 8M10 2c2.5 2.5 4 5 4 8s-1.5 5.5-4 8" strokeLinecap="round" />
       </svg>
     ),
   },
   {
     title: "24-Hour Response",
-    desc: "Every submission receives a personal reply within 24 hours — no automated acknowledgements.",
+    desc: "Every submission receives a personal reply within 24 hours. No automated acknowledgements. No black holes.",
     iconBg: "bg-rose-500/10",
     iconColor: "text-rose-400",
     icon: (
@@ -76,8 +76,8 @@ const features = [
     ),
   },
   {
-    title: "Two-Sided Marketplace",
-    desc: "Built for both buyers and providers. One platform, two clear paths, one trusted matchmaker.",
+    title: "Built for the Future",
+    desc: "The ecosystem is growing — from matchmaking to AI systems, education, dashboards, and infrastructure for the digital economy.",
     iconBg: "bg-blue-500/10",
     iconColor: "text-blue-400",
     icon: (
@@ -97,9 +97,6 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={180} height={37} priority unoptimized style={{ height: "auto" }} />
           <div className="hidden sm:flex items-center gap-1">
-            <Link href="/solutions" className="text-sm text-[#A1A1AA] hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
-              Solutions
-            </Link>
             <Link href="/ai-systems" className="text-sm text-[#A1A1AA] hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
               AI Systems
             </Link>
@@ -110,10 +107,10 @@ export default function HomePage() {
               Blog
             </Link>
             <Link
-              href="/ai-strategy"
+              href="/ai-systems#get-started"
               className="ml-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]"
             >
-              Get Free AI Strategy
+              Get Started
             </Link>
           </div>
         </div>
@@ -125,50 +122,52 @@ export default function HomePage() {
         <div className="absolute top-20 left-1/3 w-[300px] h-[300px] bg-purple-600/8 rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="inline-block text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full mb-7 tracking-wide">
-            Las Vegas · AI, Blockchain & Emerging Tech
+            AI · Automation · Emerging Technology
           </span>
           <h1 className="text-5xl sm:text-6xl font-bold text-white leading-[1.08] tracking-tight mb-5">
-            We Connect Businesses<br />
-            <span className="text-blue-400">With AI & Tech Solutions</span>
+            Technology That Creates<br />
+            <span className="text-blue-400">Freedom and Opportunity</span>
           </h1>
           <p className="text-xl text-[#A1A1AA] leading-relaxed max-w-2xl mx-auto mb-4">
-            Digital Wealth Transfer helps businesses find and apply the right AI, blockchain, and automation tools — and connects tech providers with qualified clients ready to buy.
+            Digital Wealth Transfer helps businesses and entrepreneurs leverage AI, automation, and emerging technology — turning complexity into leverage, and tools into real outcomes.
           </p>
-          <p className="text-sm text-[#A1A1AA]/60 mb-10">Which path is right for you?</p>
+          <p className="text-sm text-[#A1A1AA]/60 mb-10">How can we help you?</p>
 
           {/* Two clear paths */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Link
-              href="/ai-strategy"
+              href="/ai-systems"
               className="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-xl font-bold text-base hover:bg-blue-500 transition-colors text-center shadow-[0_0_30px_rgba(59,130,246,0.35)]"
             >
-              I Need AI / Tech Solutions →
+              Build My AI System →
             </Link>
             <Link
               href="#provider-form"
               className="w-full sm:w-auto border border-purple-500/30 bg-purple-500/[0.06] text-[#F9FAFB] px-8 py-4 rounded-xl font-bold text-base hover:bg-purple-500/[0.12] transition-colors text-center"
             >
-              I Want More Clients →
+              Get More Clients →
             </Link>
           </div>
           <p className="text-xs text-[#A1A1AA]/50">Free consultation · Personal response within 24 hours · No pressure</p>
         </div>
       </section>
 
-      {/* ── What We Do ── */}
+      {/* ── Mission Strip ── */}
       <section className="border-y border-white/[0.06] bg-[#111827] py-14 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[11px] font-semibold text-[#A1A1AA]/50 uppercase tracking-[0.15em] mb-8">
-            What Digital Wealth Transfer does
+          <p className="text-[11px] font-semibold text-[#A1A1AA]/50 uppercase tracking-[0.15em] mb-5">
+            The mission
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <p className="text-2xl sm:text-3xl font-bold text-white leading-snug mb-6 max-w-3xl mx-auto">
+            &ldquo;Helping everyday people and businesses leverage AI, automation, and emerging technology to create more freedom, ownership, and opportunity.&rdquo;
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
             {[
-              { icon: "🔍", title: "Identify the right tools", desc: "We match your business with vetted AI and tech solutions that solve real problems." },
-              { icon: "🤝", title: "Make warm introductions", desc: "Jonathan personally connects you with the right provider — not an algorithm." },
-              { icon: "📈", title: "Drive business outcomes", desc: "More leads, faster operations, and better systems that create measurable growth." },
-            ].map(({ icon, title, desc }) => (
-              <div key={title} className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-6">
-                <div className="text-2xl mb-3">{icon}</div>
+              { icon: "→", title: "Identify the right tools", desc: "We match your business with the AI and automation systems that solve real problems — no guesswork." },
+              { icon: "→", title: "Build and implement", desc: "Jonathan builds the systems personally. Not a reseller. Not a middleman. Hands-on execution." },
+              { icon: "→", title: "Create measurable outcomes", desc: "More leads, faster operations, better follow-up. Systems that generate real business growth." },
+            ].map(({ title, desc }) => (
+              <div key={title} className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-6 text-left">
                 <h3 className="text-white font-semibold text-sm mb-2">{title}</h3>
                 <p className="text-[#A1A1AA] text-sm leading-relaxed">{desc}</p>
               </div>
@@ -185,17 +184,17 @@ export default function HomePage() {
               The Problem
             </span>
             <h2 className="text-4xl font-bold text-white tracking-tight mb-5">
-              Finding the right fit is harder than it should be
+              Technology is moving fast.<br />Most businesses are getting left behind.
             </h2>
             <p className="text-lg text-[#A1A1AA] max-w-2xl mx-auto leading-relaxed">
-              The AI and tech market is growing fast — but connecting businesses with the right providers still relies on cold outreach, guesswork, and wasted time.
+              AI and automation create enormous leverage — but only for people who know how to implement them. The gap between knowing and doing is where most businesses lose.
             </p>
           </div>
           <div className="grid sm:grid-cols-3 gap-5">
             {[
-              { title: "Wasted Time on Bad Fits", desc: "Businesses spend weeks evaluating vendors who were never the right fit. Every bad meeting costs real time and momentum.", label: "01" },
-              { title: "Leads That Never Convert", desc: "Service providers chase prospects who aren't qualified. Cold outreach burns budget on people who were never going to buy.", label: "02" },
-              { title: "No Trusted Resource", desc: "There's no dedicated matchmaking layer for AI and tech businesses. The market is fragmented and hard to navigate alone.", label: "03" },
+              { title: "Overwhelmed by the options", desc: "Hundreds of AI tools, no clear path. Most businesses try one thing, get confused, and give up before they see results.", label: "01" },
+              { title: "No system, just scattered tools", desc: "Buying software is not the same as building a system. Without the right architecture, tools become expensive noise.", label: "02" },
+              { title: "Falling further behind every month", desc: "Competitors who implement AI well move faster, respond better, and convert more. The gap widens every quarter you wait.", label: "03" },
             ].map(({ title, desc, label }) => (
               <div key={label} className="bg-[#151B2D] rounded-2xl border border-white/[0.08] p-7 hover:border-rose-500/20 transition-all">
                 <span className="text-[11px] font-bold text-rose-500/40 uppercase tracking-widest mb-4 block">{label}</span>
@@ -215,16 +214,16 @@ export default function HomePage() {
               How It Works
             </span>
             <h2 className="text-4xl font-bold text-white tracking-tight mb-5 leading-tight">
-              A personal introduction,<br />not just a directory
+              A personal guide,<br />not just a platform
             </h2>
             <p className="text-lg text-[#A1A1AA] leading-relaxed mb-8">
-              Jonathan Cardona personally reviews every request — qualifying businesses for budget and intent, vetting providers for fit — then makes a warm introduction.
+              Jonathan Cardona personally reviews every request — understanding your goals, identifying the right solution, and staying involved through implementation.
             </p>
             <ul className="space-y-4">
               {[
-                "Both sides are vetted before any introduction",
-                "You only connect with people ready to move forward",
-                "No cold emails, no RFPs, no wasted calls",
+                "Vetted partners and tools — no generic recommendations",
+                "Custom-built systems, not off-the-shelf templates",
+                "Real follow-up and accountability — not a lead dump",
                 "Personal response guaranteed within 24 hours",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
@@ -240,9 +239,9 @@ export default function HomePage() {
           </div>
           <div className="space-y-4">
             {[
-              { step: "01", title: "Submit Your Request", desc: "Takes under 2 minutes. Tell us what you need or who you serve." },
-              { step: "02", title: "We Manually Review", desc: "Every submission is personally reviewed. Businesses qualified for budget. Providers vetted for fit." },
-              { step: "03", title: "You Get a Warm Intro", desc: "A personal introduction from Jonathan — not a lead export or automated email blast." },
+              { step: "01", title: "Tell Me What You Need", desc: "Takes under 2 minutes. Describe your business, your goal, or the problem you're trying to solve." },
+              { step: "02", title: "I Build the Right Solution", desc: "Jonathan designs and builds your system personally — no resellers, no outsourcing, no templates." },
+              { step: "03", title: "You Get Real Results", desc: "More leads captured. Faster response times. Better follow-up. Systems that work while you focus on your business." },
             ].map(({ step, title, desc }) => (
               <div key={step} className="bg-[#151B2D] rounded-2xl border border-white/[0.08] p-6 flex gap-5 hover:border-blue-500/20 transition-all">
                 <span className="text-2xl font-black text-white/10 leading-none shrink-0 select-none">{step}</span>
@@ -262,7 +261,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Why Digital Wealth Transfer</h2>
             <p className="text-lg text-[#A1A1AA] max-w-xl mx-auto">
-              Built specifically for the AI, blockchain, and emerging tech market.
+              Built for the AI era. Focused on real implementation. Committed to your outcomes.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -283,7 +282,8 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
               <span className="inline-block text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full mb-4">Partner Network</span>
-              <h2 className="text-4xl font-bold text-white tracking-tight">Browse vetted tech partners</h2>
+              <h2 className="text-4xl font-bold text-white tracking-tight">Vetted tech partners</h2>
+              <p className="text-[#A1A1AA] text-sm mt-2 max-w-md">AI, blockchain, fintech, and automation companies — reviewed and ready for warm introductions.</p>
             </div>
             <Link href="/directory" className="shrink-0 text-sm font-semibold text-blue-400 hover:text-blue-300 transition-colors">
               View all partners →
@@ -306,7 +306,7 @@ export default function HomePage() {
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Two paths. One platform.</h2>
+            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Two paths. One ecosystem.</h2>
             <p className="text-lg text-[#A1A1AA] max-w-xl mx-auto">
               Whether you need a tech partner or want more qualified clients, there&apos;s a clear path for you.
             </p>
@@ -314,29 +314,29 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 gap-6">
             <div className="rounded-2xl border border-blue-500/20 bg-blue-500/[0.06] p-8">
               <span className="inline-block text-[11px] font-bold text-blue-400 uppercase tracking-widest mb-5">For Businesses</span>
-              <h3 className="text-xl font-bold text-white mb-3">I Need AI / Tech Solutions</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Build an AI System</h3>
               <p className="text-sm text-[#A1A1AA] leading-relaxed mb-6">
-                Tell me what you need. I&apos;ll find the right AI or tech partner and make a personal introduction — no browsing required.
+                Tell me what you need. I&apos;ll build the right AI system for your business — lead capture, automation, websites, chatbots, or content.
               </p>
               <ul className="space-y-2 mb-7">
-                {["AI automation & custom development", "Blockchain infrastructure", "Lead generation systems", "Digital transformation consulting"].map((item) => (
+                {["AI lead capture and follow-up", "Automated appointment setting", "AI-powered websites and funnels", "Content and growth systems"].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-[#A1A1AA]">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />{item}
                   </li>
                 ))}
               </ul>
-              <Link href="/ai-strategy" className="inline-block bg-blue-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                Get My Free AI Strategy →
+              <Link href="/ai-systems" className="inline-block bg-blue-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                Get My AI System →
               </Link>
             </div>
             <div className="rounded-2xl border border-purple-500/20 bg-purple-500/[0.06] p-8">
               <span className="inline-block text-[11px] font-bold text-purple-400 uppercase tracking-widest mb-5">For Providers</span>
-              <h3 className="text-xl font-bold text-white mb-3">I Want More Clients</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Get More Clients</h3>
               <p className="text-sm text-[#A1A1AA] leading-relaxed mb-6">
-                Tell me who you serve. I&apos;ll send you pre-vetted introductions — no cold outreach, no unqualified prospects.
+                Tell me who you serve. I&apos;ll send you pre-vetted introductions — businesses ready to buy, no cold outreach required.
               </p>
               <ul className="space-y-2 mb-7">
-                {["Enterprise AI solution companies", "Blockchain infrastructure providers", "Digital asset & custody firms", "Fintech platforms & AI advisors"].map((item) => (
+                {["AI solution and development companies", "Blockchain infrastructure providers", "Digital asset and custody firms", "Fintech platforms and AI advisors"].map((item) => (
                   <li key={item} className="flex items-center gap-2.5 text-sm text-[#A1A1AA]">
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />{item}
                   </li>
@@ -354,7 +354,7 @@ export default function HomePage() {
       <section className="bg-[#111827] border-t border-white/[0.06] py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Start connecting today</h2>
+            <h2 className="text-4xl font-bold text-white tracking-tight mb-4">Let&apos;s start building</h2>
             <p className="text-lg text-[#A1A1AA] max-w-lg mx-auto">
               Submit your info below. Jonathan will follow up personally within 24 hours.
             </p>
@@ -363,8 +363,8 @@ export default function HomePage() {
             <div id="business-form" className="scroll-mt-24">
               <div className="mb-6">
                 <span className="inline-block text-[11px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full mb-3 uppercase tracking-widest">For Businesses</span>
-                <h3 className="text-xl font-bold text-white">Find a Tech Partner</h3>
-                <p className="text-sm text-[#A1A1AA] mt-1">Tell me what you need. I&apos;ll find the right match.</p>
+                <h3 className="text-xl font-bold text-white">Build an AI System</h3>
+                <p className="text-sm text-[#A1A1AA] mt-1">Tell me what you need. I&apos;ll build the right solution.</p>
               </div>
               <BusinessLeadForm />
             </div>
@@ -385,16 +385,14 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
           <div>
             <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={160} height={33} unoptimized style={{ height: "auto" }} />
-            <p className="text-xs text-[#A1A1AA]/60 mt-1">© 2025 Jonathan Cardona · Las Vegas, Nevada</p>
+            <p className="text-xs text-[#A1A1AA]/60 mt-1">© 2026 Jonathan Cardona · Las Vegas, Nevada</p>
           </div>
           <div className="flex flex-wrap items-center gap-5 text-sm text-[#A1A1AA]">
-            <Link href="/solutions" className="hover:text-white transition-colors">Solutions</Link>
-            <Link href="/ai-content" className="hover:text-white transition-colors">AI Content</Link>
-            <Link href="/ai-leads" className="hover:text-white transition-colors">AI Leads</Link>
-            <Link href="#business-form" className="hover:text-white transition-colors">For Businesses</Link>
-            <Link href="#provider-form" className="hover:text-white transition-colors">For Providers</Link>
+            <Link href="/ai-systems" className="hover:text-white transition-colors">AI Systems</Link>
             <Link href="/directory" className="hover:text-white transition-colors">Directory</Link>
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
+            <Link href="#business-form" className="hover:text-white transition-colors">For Businesses</Link>
+            <Link href="#provider-form" className="hover:text-white transition-colors">For Providers</Link>
             <a href="https://www.linkedin.com/in/jonathan-cardona-1089291b9" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn →</a>
           </div>
         </div>

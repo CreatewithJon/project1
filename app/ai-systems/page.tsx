@@ -124,7 +124,7 @@ export default function AISystemsPage() {
         <div className="absolute top-10 right-1/4 w-[300px] h-[300px] bg-purple-600/8 rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="inline-block text-xs font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full mb-7 tracking-wide">
-            AI Revenue Systems · Las Vegas & Nationwide
+            AI Revenue Systems · Built for Real Businesses
           </span>
           <h1 className="text-5xl sm:text-6xl font-bold text-white leading-[1.06] tracking-tight mb-6">
             Turn Your Business Into a<br />
@@ -346,7 +346,7 @@ export default function AISystemsPage() {
             <Link href="/">
               <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={160} height={33} unoptimized style={{ height: "auto" }} />
             </Link>
-            <p className="text-xs text-[#A1A1AA]/60 mt-1">© 2025 Jonathan Cardona · Las Vegas, Nevada</p>
+            <p className="text-xs text-[#A1A1AA]/60 mt-1">© 2026 Jonathan Cardona · Las Vegas, Nevada</p>
           </div>
           <div className="flex items-center gap-5 text-sm text-[#A1A1AA]">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>

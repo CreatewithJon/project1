@@ -1,27 +1,220 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 @AGENTS.md
 
-## Commands
+---
 
-```bash
-npm run dev       # Start dev server (Turbopack) — http://localhost:3000
-npm run build     # Production build
-npm run lint      # ESLint
-npx tsc --noEmit  # Type-check without emitting — run this before committing
+# Digital Wealth Transfer — Master Operating Document
+
+> This is the internal operating system for the Digital Wealth Transfer ecosystem.
+> Every product, design decision, engineering choice, and word of copy produced in this codebase should align with the mission, brand, and standards defined below.
+> Claude Code should treat this document as the authoritative source of truth for all work across this project.
+
+---
+
+## 01 — MISSION
+
+**Core Mission:**
+> "Helping everyday people and businesses leverage AI, automation, and emerging technology to create more freedom, ownership, and opportunity."
+
+Everything built under this ecosystem exists to bridge the gap between advanced technology and real-world implementation — for regular people, small businesses, entrepreneurs, and communities that have historically been left behind by technological change.
+
+**The ecosystem should always feel:**
+- Futuristic but grounded
+- Empowering, not overwhelming
+- Intelligent, not exclusive
+- Accessible, not dumbed-down
+- Premium, not corporate
+- Optimistic about what technology makes possible
+
+---
+
+## 02 — FOUNDER
+
+**Jonathan Cardona** — Las Vegas, Nevada
+
+Background: sales, banking, customer support, crypto education, entrepreneurial business development. Growing expertise in software, AI, cybersecurity, and digital assets.
+
+**What drives this work:** Building income-generating digital businesses, products around Bitcoin/AI/automation/wealth, and making advanced technology accessible to people who aren't engineers.
+
+**Builder constraints Claude must respect:**
+- Jonathan is an emerging builder — favor clarity and momentum over architectural elegance
+- Optimize for rapid visual feedback and low-friction iteration
+- Prefer simple, working solutions over complex, theoretically better ones
+- Never overengineer. Never add features that weren't asked for.
+- Favor deployment speed and real-world usability over perfection
+- Every session should produce something real, visible, and testable
+
+---
+
+## 03 — ECOSYSTEM OVERVIEW
+
+Digital Wealth Transfer is evolving from a single marketplace into a **technology opportunity platform** — a connected ecosystem of products, services, content, and infrastructure built around one mission.
+
+**What it is not:**
+- A generic AI agency
+- A corporate consulting firm
+- A crypto hype brand
+- A subscription SaaS with hidden fees
+
+**What it is becoming:**
+- An AI implementation and automation services business
+- A directory and marketplace connecting businesses with vetted tech providers
+- A content-driven authority brand educating people on AI, Bitcoin, and digital systems
+- A software ecosystem of personal tools, dashboards, and infrastructure
+- A trusted guide for people navigating the AI-powered digital era
+
+**Three-Layer Business Model:**
+
+| Layer | Focus | Purpose |
+|---|---|---|
+| Layer 1 — Cash Flow | AI systems & automation services ($500–$1,500+) | Revenue now |
+| Layer 2 — Authority | Content: AI, Bitcoin, automation, digital business | Trust + audience |
+| Layer 3 — Scale | DWT directory, marketplace, SaaS products | Long-term leverage |
+
+---
+
+## 04 — BRAND & POSITIONING
+
+### Personal Brand
+
+Jonathan's positioning is: **a relatable technology guide and builder helping people navigate the AI-powered digital era.**
+
+**This brand is NOT:**
+- A generic AI influencer
+- A corporate consultant
+- A crypto scam or hype brand
+- A fake luxury entrepreneur
+
+**Core themes:**
+AI implementation · automation · digital freedom · Bitcoin · decentralized systems · education · accessibility · future technology · ownership · sovereignty · practical implementation · empowering regular people through technology
+
+### Communication Style
+
+- Approachable and intelligent — never condescending
+- Practical and grounded — not theoretical or abstract
+- Optimistic — genuinely believes in what technology makes possible
+- Curious — openly exploring alongside the audience
+- Visionary without sounding delusional
+- Educational without overwhelming people
+- Non-corporate — real voice, not polished PR
+
+### Copy Tone Examples
+
+```
+"Own your tools. Own your workflow."
+"Built for clarity, sovereignty, and momentum."
+"No subscription. No clutter. Just signal."
+"Turn complexity into leverage."
+"You don't need to be an engineer to build with AI."
+"Most businesses don't need more traffic. They need a better system."
 ```
 
-No test suite exists. `npx tsc --noEmit` is the primary correctness check.
+---
 
-## Deployment
+## 05 — TARGET AUDIENCE
 
-Push to `main` on GitHub → Vercel auto-deploys to `digitalwealthtransfer.com`. Environment variables (`SUPABASE_URL`, `SUPABASE_ANON_KEY`) must be set in Vercel via CLI (`npx vercel env add`), not the dashboard UI, to ensure they propagate correctly.
+**Primary:**
+- Entrepreneurs and small business owners
+- Creators and independent workers
+- People intimidated by or curious about AI
+- Forward-thinking individuals ready to adapt
+- Minorities and underrepresented communities entering tech
 
-## Next.js 16 Patterns (Critical)
+**Secondary:**
+- Local service businesses (med spas, real estate, home services, insurance, legal, fitness, solar, roofing)
+- Web3/AI service providers
+- People building digital income streams
+- Anyone who wants more freedom through better tools and systems
 
-This is Next.js **16.2.2**. These patterns differ from older versions and will cause bugs if ignored:
+**UX Principle:** Every product and interface must reduce overwhelm, simplify complexity, and make the user feel capable. The path through every product is: **Confusion → Understanding → Implementation → Opportunity.**
+
+---
+
+## 06 — DESIGN SYSTEM
+
+### Visual Identity
+
+**Aesthetic direction:** Cinematic dark mode. Premium. Minimal. Intentional.
+
+Inspirations: Stripe, Linear, OpenAI, Palantir, modern crypto infrastructure companies, cinematic sci-fi interfaces.
+
+**Core principles:**
+- Premium dark backgrounds (near-black, not pure black)
+- Soft contrast — text opacity hierarchy (`/90`, `/60`, `/35`, `/20`)
+- Restrained ambient glow — subtle, not garish
+- Glassmorphism influences where structurally appropriate
+- Rounded cards, intelligent spacing, clear type hierarchy
+- Cinematic section pacing — sections breathe, nothing is cramped
+- Motion is subtle and purposeful, never decorative
+
+**Accent colors by product context:**
+- Gold/amber (`#f59e0b`, `#fbbf24`) — Bitcoin, wealth, signal
+- Rose/red (`#ef4444`, `#dc2626`) — Content engine, AI systems, energy
+- Violet (`#8b5cf6`) — AI planner, intelligence, cognition
+- Blue (`#3b82f6`) — Trust, LinkedIn, professional systems
+- Emerald (`#10b981`) — Positive performance, streaks, success states
+
+**Typography hierarchy:**
+- Label/eyebrow: `text-[10px] font-semibold uppercase tracking-[0.2em+]` — subdued accent color
+- Headline: large, bold, tight tracking (`tracking-[-0.02em]`), gradient fill on hero text
+- Body: `text-sm` or `text-xs`, `text-white/60`, relaxed line height
+- Metadata: `text-[10px]`, `text-white/25–35`
+
+**Avoid at all times:**
+- Clutter or visual noise
+- Cheap gradients or neon glow
+- Spammy marketing aesthetics
+- Generic agency or bootstrap templates
+- Overly corporate design
+- Low-quality stock imagery
+- Decorative elements that don't carry meaning
+
+### UI Quality Bar
+
+A screen is only acceptable when it:
+1. Looks intentional — every element has a reason to exist
+2. Feels premium — could plausibly be a funded startup's product
+3. Has clear visual hierarchy — eye knows exactly where to go
+4. Is not cluttered — white space is used as a design tool
+5. Is screenshot-worthy — founder would want to share it
+6. Reflects the brand themes above
+
+**Do not declare UI complete just because it works. If it feels merely functional, keep improving.**
+
+### Operating Loop for Frontend Work
+
+`implement → run locally → check for errors → critique (hierarchy, rhythm, aesthetic, brand alignment, usability) → improve → repeat`
+
+Never do one-shot implementations and move on.
+
+---
+
+## 07 — ENGINEERING STANDARDS
+
+### Tech Stack
+
+| Layer | Tool |
+|---|---|
+| Framework | Next.js (see version-specific rules below) |
+| Language | TypeScript — strict, no `any` |
+| Styling | Tailwind CSS v4 |
+| Database | Supabase (Postgres) |
+| Deployment | Vercel (auto-deploy from `main`) |
+| AI | Anthropic Claude API (Haiku for speed/cost, Sonnet/Opus for quality) |
+| External APIs | YouTube Data API v3, CoinGecko, OpenAI (Whisper) |
+
+### Engineering Philosophy
+
+- **Scalable and modular** — components should be reusable across products
+- **Production-grade** — write code that could ship to real users
+- **Mobile-first** — design and test for mobile before desktop
+- **Performance-conscious** — avoid unnecessary re-renders, heavy dependencies
+- **Clean folder structures** — group by feature, not by file type where it matters
+- **No overengineering** — the right abstraction is the simplest one that works
+- **No speculative architecture** — build for what's needed now, not hypothetical future requirements
+
+### Critical: Next.js 16 Patterns (this repo — `my-sample-proj`)
+
+This project runs **Next.js 16.2.2**. These patterns differ from older versions:
 
 - `params` and `searchParams` are **Promises** — always `await` them:
   ```ts
@@ -29,51 +222,13 @@ This is Next.js **16.2.2**. These patterns differ from older versions and will c
     const { slug } = await props.params;
   }
   ```
-- `PageProps<'/path/[param]'>` and `RouteContext` are **globally available** — no import needed.
+- `PageProps<'/path/[param]'>` and `RouteContext` are **globally available** — no import needed
 - Route Handlers: `export async function GET/POST(request: NextRequest) {}`
-- Tailwind v4 uses `@import "tailwindcss"` in CSS, not `@tailwind` directives.
+- Tailwind v4: use `@import "tailwindcss"` in CSS — not `@tailwind` directives
 
-## Architecture
+### Supabase Pattern (Critical)
 
-**DigitalWealthTransfer.com** is a two-sided marketplace connecting Las Vegas businesses with AI/blockchain/fintech service providers. The homepage is the primary conversion surface; the directory is a secondary discovery layer.
-
-### Route Map
-
-| Route | Purpose |
-|---|---|
-| `/` | Homepage — hero with two CTAs, two-path cards, How It Works, trust section, two lead forms |
-| `/directory` | Filterable company directory (server-rendered, `searchParams`-driven) |
-| `/companies/[slug]` | Company profile with intro request form |
-| `/blog` | Blog index |
-| `/blog/[slug]` | Individual blog post |
-| `/landing` | Redirects to `/` |
-| `/api/leads` | POST: store lead in Supabase. GET: return all leads |
-| `/api/debug` | Returns SET/MISSING status for env vars |
-
-### Data Layer
-
-All directory and blog content is **static mock data** — no database reads:
-- `lib/data/companies.ts` — 6 real curated companies; `filterCompanies()`, `getCompanyBySlug()`
-- `lib/data/articles.ts` — 8 mock articles; `getArticleBySlug()`, `getFeaturedArticles()`
-- `lib/types.ts` — shared types: `Company`, `Article`, `ContentBlock`, `Category`, `LasVegasArea`
-
-The only live database is the **Supabase `leads` table**, written to by `/api/leads`.
-
-### Lead Forms
-
-Three client components post to `/api/leads`:
-
-| Component | Anchor | `lead_type` | `companySlug` |
-|---|---|---|---|
-| `BusinessLeadForm` | `#business-form` on `/` | `"business_request"` | `"business-request"` |
-| `ProviderLeadForm` | `#provider-form` on `/` | `"provider_application"` | `"provider-application"` |
-| `LeadForm` | `/companies/[slug]` | _(none)_ | company's slug |
-
-`BusinessLeadForm` and `ProviderLeadForm` serialize all their fields into the `service` text column. The `lead_type` column may need to be added to Supabase: `ALTER TABLE leads ADD COLUMN lead_type text;` — the API falls back gracefully if it's missing.
-
-### Supabase Client Pattern
-
-Always initialize inside the handler function — **never at module level** — or the build crashes when env vars are absent:
+Always initialize the client **inside** the handler function — never at module level — or the build crashes when env vars are absent:
 
 ```ts
 function getSupabase() {
@@ -81,125 +236,77 @@ function getSupabase() {
 }
 ```
 
-### Company Website Guard
+Never expose `SUPABASE_URL` or `SUPABASE_ANON_KEY` to the browser. Always use server-side route handlers.
 
-The `example.com` guard is still present in `CompanyCard.tsx` and `app/companies/[slug]/page.tsx` as a safety net. All 6 current companies have real URLs so the guard passes for all of them.
+### Commands
 
----
+```bash
+npm run dev       # Start dev server (Turbopack) — http://localhost:3000
+npm run build     # Production build
+npm run lint      # ESLint
+npx tsc --noEmit  # Type-check — run this before committing
+```
 
-## Founder Context
+No test suite exists. `npx tsc --noEmit` is the primary correctness check.
 
-**Jonathan Cardona**, Las Vegas, Nevada. Background in sales, banking, customer support, crypto education, and entrepreneurial business development. Growing expertise in software, AI, cybersecurity, and digital assets.
+### Deployment
 
-Motivated by: building income-generating digital businesses, products around Bitcoin/crypto/AI/wealth, making technology easier to adopt.
+Push to `main` → Vercel auto-deploys to `digitalwealthtransfer.com`.
 
-**Builder constraints to respect:** Jonathan is still developing as a builder. Optimize for rapid visual feedback, low-friction iteration, clear architecture, simple deployment, and minimal unnecessary complexity. Favor momentum and clarity over overengineering.
-
----
-
-## Product Vision: Digital Wealth Transfer Ecosystem
-
-Digital Wealth Transfer is the umbrella brand. The marketplace at `digitalwealthtransfer.com` is the first product. Future products should reinforce the same themes: wealth, technology, leverage, ownership, intelligence, trust, next-generation tools.
-
-**Positioning:** We connect AI and digital asset companies with high-intent clients.
-
-A planned second product is a **software-first personal dashboard** — a digital command center covering:
-- Bitcoin / digital wealth visibility (BTC price, chart, DCA placeholder)
-- Productivity (focus sessions, tasks, habit tracking, notes)
-- AI assistant panel (prompt + response, starter prompts, local AI placeholder)
-- Identity and atmosphere (premium feel, screenshot-worthy, ownership-oriented)
-
-This dashboard should feel like: part trading terminal, part focus dashboard, part AI sidekick, part identity object.
-
-**Core promise:** Pay once. Use it. Own it. (No subscription model.)
-
-**Aesthetic direction:** Dark UI, soft contrast, restrained glow, rounded cards, clean typography hierarchy, elegant spacing. Avoid cheap crypto widget feel, cluttered SaaS admin dashboards, or generic bootstrap templates.
-
-### Dashboard Build Sequence (when building the second product)
-
-1. Foundation — shell layout, theme, reusable card/typography system
-2. Hero dashboard — identity, key metrics, summary cards
-3. Bitcoin panel — price, chart, DCA placeholder
-4. Productivity panel — focus session, priorities, notes
-5. AI panel — prompt interface, starter prompts, local AI framing
-6. Refinement — microcopy, spacing, responsiveness, ambient background
-7. Integration readiness — hooks for Digital Wealth Transfer tie-ins
-
-### What can be real vs placeholder in dashboard MVP
-
-**Real:** live BTC price, chart from lightweight API, local notes persistence, focus timer, basic AI via API.
-**Placeholder:** full portfolio logic, local AI inference, deep analytics, provider marketplace panel.
-
-### UI Quality Bar
-
-Do not declare UI complete just because it works. A screen is acceptable only when it: looks intentional, feels premium, has clear visual hierarchy, is not cluttered, is screenshot-worthy, and reflects the founder's themes. If it feels merely functional, keep improving.
-
-### Operating Loop for Frontend Work
-
-For each UI milestone: implement → run locally → check for errors → capture screenshots → critique (hierarchy, rhythm, aesthetic, founder alignment, usability) → improve → repeat. Do not do one-shot implementations and move on.
-
-### Tone for UI Copy
-
-Clear, sharp, modern, confident. Not hypey, not overly corporate. Slightly premium, slightly visionary.
-
-Example messages: "Own your tools. Own your workflow." / "Built for clarity, sovereignty, and momentum." / "No subscription. No clutter. Just signal."
+Environment variables must be set via CLI — not dashboard UI:
+```bash
+npx vercel env add SUPABASE_URL
+npx vercel env add SUPABASE_ANON_KEY
+```
 
 ---
 
-## Digital Wealth Transfer — Final Strategy
+## 08 — PRODUCT MAP
 
-### Core Positioning
+### Product 1: digitalwealthtransfer.com (`my-sample-proj`)
 
-Digital Wealth Transfer is evolving into an AI systems and revenue infrastructure business for local businesses, service providers, and tech-forward companies.
+A marketplace and service platform connecting Las Vegas businesses with AI/blockchain/fintech providers, and marketing Jonathan's AI systems services.
 
-**Main positioning:** "I build AI-powered systems that help businesses capture, qualify, and convert more leads."
+**Route Map:**
 
-Digital Wealth Transfer is a hybrid of:
-- AI service provider
-- Local business automation consultant
-- Lead generation partner
-- Marketplace/directory for AI, blockchain, fintech, and tech service providers
-- Content-driven authority brand around AI, Bitcoin, automation, and digital business
+| Route | Purpose |
+|---|---|
+| `/` | Homepage — hero, two-path CTAs, How It Works, trust section, two lead forms |
+| `/ai-systems` | Primary offer page — AI Revenue Systems for local businesses |
+| `/directory` | Filterable company directory (server-rendered, `searchParams`-driven) |
+| `/companies/[slug]` | Company profile with intro request form |
+| `/blog` | Blog index |
+| `/blog/[slug]` | Individual blog post |
+| `/api/leads` | POST: store lead in Supabase. GET: return all leads |
+| `/api/ai-leads` | POST: store AI systems inquiry in Supabase |
+| `/api/debug` | Returns SET/MISSING status for env vars |
 
-### Primary Offer Page
+**Data Layer:**
 
-The main offer page lives at `/ai-systems`. It markets all core offers as one unified solution:
+All directory and blog content is static mock data — no database reads:
+- `lib/data/companies.ts` — 6 curated companies; `filterCompanies()`, `getCompanyBySlug()`
+- `lib/data/articles.ts` — 8 mock articles; `getArticleBySlug()`, `getFeaturedArticles()`
+- `lib/types.ts` — shared types: `Company`, `Article`, `ContentBlock`, `Category`, `LasVegasArea`
 
-**AI Revenue Systems for Local Businesses**
+Live database: **Supabase `leads` table** (written to by `/api/leads`) and **`ai_leads` table** (written to by `/api/ai-leads`).
 
-- **Headline:** "Turn Your Business Into a Lead-Generating Machine With AI"
-- **Subheadline:** "I build AI-powered systems that help you capture, qualify, and convert more customers — using automation, chatbots, funnels, websites, CRM workflows, and content systems."
-- **CTAs:** Get My System / Book Free Audit / DM "AI"
+**Lead Forms:**
 
-### Core Offer Stack
-
-| Offer | Price | Purpose |
+| Component | Location | `lead_type` |
 |---|---|---|
-| AI Lead Capture System | $500–$1,000 | Landing page, lead form, CRM setup, email follow-up, lead notifications, analytics |
-| AI Appointment Setter System | $750–$1,000 | AI chatbot/SMS bot, lead qualification, calendar booking, CRM handoff |
-| AI Website + Funnel | $1,000+ | Website/landing page, conversion copy, lead form, CTA sections, basic SEO |
-| AI Content + Growth System | $500/month | Content ideas, video scripts, social captions, blog repurposing, monthly optimization |
+| `BusinessLeadForm` | `#business-form` on `/` | `"business_request"` |
+| `ProviderLeadForm` | `#provider-form` on `/` | `"provider_application"` |
+| `LeadForm` | `/companies/[slug]` | _(none)_ |
+| AI Systems form | `/ai-systems` | `"ai_systems"` |
 
-**Outcome focus:** More leads. Faster response. Better follow-up. More booked calls. Better systems.
+**Supabase Tables:**
 
-### /ai-systems Page Structure
-
-1. **Hero** — Headline, subheadline, CTA buttons
-2. **Problem** — Businesses miss leads, slow response times, weak websites, no follow-up, leads not tracked
-3. **Solution** — AI Revenue Systems. Flow: Capture → Engage → Qualify → Convert → Track
-4. **Offer Stack** — Four cards with pricing, bullets, and outcome
-5. **How It Works** — Audit → Build → Launch → Optimize
-6. **Final CTA** — "Want more leads without hiring more staff? Let's build your AI system."
-
-### /ai-systems Lead Form
-
-Form posts to `/api/ai-leads` → Supabase `ai_leads` table.
-
-Captures: name, email, business name, website, industry, service need (Landing Page / AI Chatbot / CRM Setup / Automated Follow-Up / Content System / Not Sure Yet), budget ($500 / $1,000 / $1,500+ / Not sure), message.
-
-**Supabase table:**
 ```sql
-create table ai_leads (
+-- General leads
+leads (id, name, email, service, lead_type, created_at)
+
+-- AI Systems inquiries
+ai_leads (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   email text not null,
@@ -213,31 +320,93 @@ create table ai_leads (
 );
 ```
 
-Use lazy Supabase initialization inside the route handler (never at module level). Use `SUPABASE_URL` / `SUPABASE_ANON_KEY` — do not expose to the browser.
+**`lead_type` column note:** May need to be added manually: `ALTER TABLE leads ADD COLUMN lead_type text;` — API falls back gracefully if missing.
 
-### Marketing Strategy
+**Company Website Guard:** The `example.com` guard exists in `CompanyCard.tsx` and `app/companies/[slug]/page.tsx`. All 6 current companies have real URLs — guard passes for all.
 
-**Core message:** "Most businesses don't need more traffic first. They need a better system to capture, qualify, and follow up with the leads they already get."
+---
+
+### Product 2: Signal Dashboard (`signal-dashboard`)
+
+A personal operating system / digital command center. Part trading terminal, part focus dashboard, part AI sidekick, part identity object.
+
+**Core promise:** Own your tools. Own your data. No subscription.
+
+**Stack:** Next.js 15.2.6, TypeScript, Tailwind v4, Anthropic API, CoinGecko API, YouTube Data API v3, localStorage for persistence.
+
+**Current feature set:**
+
+| Route | Feature |
+|---|---|
+| `/` | Overview — BTC panel, Productivity/Pomodoro, Habits, AI assistant |
+| `/planner` | Life Planner — Daily/Weekly/Monthly plans, 1yr/3yr/5yr vision, AI planning assistant, review questions, projected outcomes |
+| `/content` | Content Engine — YouTube channel search, outlier video ranking, Claude analysis (Hook/Framework/Keywords/Why/Script), LinkedIn post generator, Teleprompter |
+| `/teleprompter` | Full-screen teleprompter — auto-scroll, speed/size controls |
+
+**Planned next features:**
+- B-roll pipeline (requires Higgsfield account, FFmpeg, OpenAI Whisper)
+- Deeper Bitcoin portfolio tracking
+- Automation workflow builder
+
+---
+
+### /ai-systems — Primary Offer Page
+
+**Headline:** "Turn Your Business Into a Lead-Generating Machine With AI"
+**Subheadline:** "I build AI-powered systems that help you capture, qualify, and convert more customers — using automation, chatbots, funnels, websites, CRM workflows, and content systems."
+
+**Core Offer Stack:**
+
+| Offer | Price | Outcome |
+|---|---|---|
+| AI Lead Capture System | $500–$1,000 | Landing page, lead form, CRM, email follow-up, analytics |
+| AI Appointment Setter | $750–$1,000 | AI chatbot/SMS bot, lead qualification, calendar booking |
+| AI Website + Funnel | $1,000+ | Website, conversion copy, lead form, SEO basics |
+| AI Content + Growth System | $500/month | Scripts, captions, blog repurposing, monthly optimization |
+
+**Page structure:** Hero → Problem → Solution (Capture → Engage → Qualify → Convert → Track) → Offer Stack → How It Works (Audit → Build → Launch → Optimize) → Final CTA
 
 **Primary CTA:** "DM me 'AI' and I'll show you what I'd build for your business."
 
-**Target customers:** Med spas, real estate agents, home service businesses, roofers, solar companies, insurance agents, law firms, fitness coaches, business consultants, Web3/AI service providers, local service businesses.
+**Target customers:** Med spas, real estate agents, home service businesses, roofers, solar companies, insurance agents, law firms, fitness coaches, consultants, Web3/AI service providers.
 
-### Business Strategy — Three Layers
+---
 
-- **Layer 1 — Cash Flow:** Sell AI systems and automation services for $500–$1,000+
-- **Layer 2 — Authority:** Content around AI, Bitcoin, automation, websites, funnels, local business growth
-- **Layer 3 — Scale:** DWT directory and marketplace refers clients to vetted AI, blockchain, fintech, and tech providers
+## 09 — CONTENT STRATEGY
 
-### Development Priorities
+**Content pillars:**
+1. AI practical use cases — show, don't just tell
+2. AI automation for businesses — specific, tactical, implementable
+3. Bitcoin and digital ownership — education-first, non-hype
+4. Future technology trends — curated, grounded takes
+5. Digital freedom and entrepreneurship — personal, inspiring
+6. Faith-driven optimism — grounded hope for the future
+7. Building in public — documenting the journey honestly
+8. Educational breakdowns — complex topics made simple
 
-1. Build `/ai-systems` landing page
-2. Build `/api/ai-leads` route
-3. Create Supabase `ai_leads` table
-4. Add lead form with success/error handling
-5. Link `/ai-systems` from homepage nav and footer
-6. Add CTA from blog posts pointing to `/ai-systems`
-7. Ensure mobile responsiveness
-8. Run `npm run build` and fix all errors
-9. Deploy to Vercel
-10. Test live form submission
+**Guiding principle:** Make advanced technology feel understandable and attainable for people who aren't engineers. The goal is always to move someone from confusion to understanding to action.
+
+**Content-to-product funnel:**
+Blog posts and social content → `/ai-systems` CTA → Lead form → Service engagement → Long-term relationship → Future product adoption
+
+---
+
+## 10 — LONG-TERM VISION
+
+The long-term goal is a **trusted, connected future-technology ecosystem** that includes:
+
+- AI implementation services and automation systems
+- Educational content platform (YouTube, blog, social)
+- Personal productivity and intelligence dashboard (Signal)
+- Business directory and marketplace (DWT)
+- Community for people building with AI and digital assets
+- Future SaaS products built on proven demand
+- Decentralized opportunity systems as the infrastructure matures
+
+**The north star:** Every product and piece of content should help someone move from where they are today — confused, overwhelmed, or left out of the technology revolution — to a place where they have the tools, knowledge, and systems to build real freedom.
+
+The ecosystem is not built to impress other developers. It is built to empower regular people.
+
+---
+
+*Last updated: 2026-05-07*
