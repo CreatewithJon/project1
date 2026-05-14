@@ -7,7 +7,7 @@ import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Blog — Digital Wealth Transfer",
   description:
-    "Insights on AI, blockchain, fintech, and digital assets in the Las Vegas market.",
+    "Practical insights on AI, automation, Bitcoin, and building digital businesses — for entrepreneurs and local business owners.",
 };
 
 export default function BlogIndexPage() {
@@ -37,8 +37,7 @@ export default function BlogIndexPage() {
           </p>
           <h1 className="text-3xl font-bold text-white mb-3">Blog</h1>
           <p className="text-[#A1A1AA] text-sm leading-relaxed max-w-xl">
-            Insights on AI, blockchain, fintech, and the shifting financial landscape
-            in the Las Vegas market and beyond.
+            Practical insights on AI, automation, Bitcoin, and building digital businesses — for entrepreneurs and local business owners ready to leverage technology.
           </p>
         </div>
 
@@ -81,20 +80,20 @@ export default function BlogIndexPage() {
       <div className="border-t border-white/[0.06] bg-[#111827] py-12 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm text-[#A1A1AA] mb-3">
-            Looking for help with AI or digital asset services?
+            Want an AI system built for your business?
           </p>
           <Link
-            href="/#business-form"
+            href="/ai-systems"
             className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
           >
-            Get Connected
+            Get a Free System Audit →
           </Link>
         </div>
       </div>
 
       <footer className="border-t border-white/[0.06] py-6 px-6">
         <div className="max-w-3xl mx-auto text-xs text-[#A1A1AA]/50 text-center">
-          © 2025 Jonathan Cardona · DigitalWealthTransfer.com
+          © 2026 Jonathan Cardona · DigitalWealthTransfer.com
         </div>
       </footer>
     </div>
