@@ -38,7 +38,7 @@ export default function PartnersPage() {
             <span className="text-green-400">With AI-Powered Systems</span>
           </h1>
           <p className="text-xl text-[#A1A1AA] leading-relaxed max-w-2xl mx-auto mb-10">
-            Are you an agency, consultant, or freelancer who wants to offer AI systems to your clients — without building everything from scratch? Let&apos;s work together.
+            Are you an agency, consultant, or freelancer who wants to offer AI systems to your clients — without building everything from scratch? I build it. You deliver it.
           </p>
           <Link
             href="#apply"
@@ -61,7 +61,7 @@ export default function PartnersPage() {
             {[
               { n: "01", t: "Add AI services without the overhead", d: "Offer AI content systems and lead automation under your own brand — without hiring developers or learning new tech stacks." },
               { n: "02", t: "Increase revenue per client", d: "Add high-value AI deliverables to your existing packages and charge more for the same clients you already have." },
-              { n: "03", t: "Deliver results faster", d: "We do the build. You manage the relationship. Your clients get faster outcomes and you look like a hero." },
+              { n: "03", t: "Deliver results faster", d: "I do the build. You manage the relationship. Your clients get faster outcomes and you look like a hero." },
             ].map(({ n, t, d }) => (
               <div key={n} className="bg-[#151B2D] border border-white/[0.08] rounded-2xl px-6 py-5 flex gap-4">
                 <span className="text-[11px] font-bold text-green-500/50 uppercase tracking-widest shrink-0 mt-0.5">{n}</span>
@@ -100,7 +100,7 @@ export default function PartnersPage() {
               },
               {
                 title: "White-Label",
-                desc: "We build under your brand. Your clients see your name. You set the price and keep the margin.",
+                desc: "I build under your brand. Your clients see your name. You set the price and keep the margin.",
                 icon: "◆",
                 color: "border-purple-500/15",
                 dot: "bg-purple-400",
@@ -166,7 +166,7 @@ export default function PartnersPage() {
       {/* Footer */}
       <footer className="border-t border-white/[0.06] py-8 px-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#A1A1AA]/40">© 2025 Digital Wealth Transfer · Jonathan Cardona</p>
+          <p className="text-xs text-[#A1A1AA]/40">© 2026 Digital Wealth Transfer · Jonathan Cardona</p>
           <div className="flex items-center gap-5 text-sm text-[#A1A1AA]/60">
             <Link href="/solutions" className="hover:text-white transition-colors">All Solutions</Link>
             <Link href="/ai-content" className="hover:text-white transition-colors">AI Content</Link>

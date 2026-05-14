@@ -38,7 +38,7 @@ export default function AILeadsPage() {
             <span className="text-purple-400">Lead Generation Machine</span>
           </h1>
           <p className="text-xl text-[#A1A1AA] leading-relaxed max-w-2xl mx-auto mb-10">
-            We help you capture, follow up, and convert leads automatically using AI-powered systems — so you stop missing opportunities and start closing more deals.
+            I build AI-powered lead capture, follow-up automation, and appointment-setting systems for local businesses — so you stop missing opportunities and start closing more deals.
           </p>
           <Link
             href="#get-started"
@@ -55,7 +55,7 @@ export default function AILeadsPage() {
           <div className="text-center mb-12">
             <span className="inline-block text-xs font-semibold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3.5 py-1.5 rounded-full mb-5">The Problem</span>
             <h2 className="text-3xl font-bold text-white tracking-tight mb-4">Most businesses are leaking leads every single day</h2>
-            <p className="text-[#A1A1AA] leading-relaxed">If you don&apos;t have a system, you&apos;re losing leads to businesses that do.</p>
+            <p className="text-[#A1A1AA] leading-relaxed">If you don&apos;t have a system, you&apos;re losing leads to whoever responds first.</p>
           </div>
           <div className="flex flex-col gap-4">
             {[
@@ -81,7 +81,7 @@ export default function AILeadsPage() {
           <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3.5 py-1.5 rounded-full mb-5">The Solution</span>
           <h2 className="text-3xl font-bold text-white tracking-tight mb-5">A simple system that captures and follows up automatically</h2>
           <p className="text-[#A1A1AA] leading-relaxed max-w-2xl mx-auto">
-            We set up a lightweight AI-powered lead system that captures every inquiry, sends instant follow-ups, and keeps your pipeline organized — so no lead falls through the cracks.
+            I build a lightweight AI-powered lead system that captures every inquiry, sends instant follow-ups, and keeps your pipeline organized — so no lead falls through the cracks. Done for you. Live in 7 days.
           </p>
         </div>
       </section>
@@ -123,9 +123,9 @@ export default function AILeadsPage() {
           </div>
           <div className="flex flex-col gap-4">
             {[
-              { step: "01", title: "Audit your current lead flow", desc: "We review how leads currently come in and where they're being lost in your process." },
-              { step: "02", title: "Build your lead system", desc: "We set up your capture form, follow-up automation, and CRM connection." },
-              { step: "03", title: "Launch and start capturing", desc: "Your system goes live. Every lead gets captured and followed up with automatically." },
+              { step: "01", title: "Audit your current lead flow", desc: "I review how leads currently come in and where they're being lost in your process." },
+              { step: "02", title: "I build your lead system", desc: "I set up your capture form, follow-up automation, and CRM connection — personally." },
+              { step: "03", title: "You launch and start capturing", desc: "Your system goes live. Every lead gets captured and followed up with automatically." },
             ].map(({ step, title, desc }) => (
               <div key={step} className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-6 flex gap-5 hover:border-purple-500/20 transition-all">
                 <span className="text-3xl font-black text-white/10 leading-none shrink-0 select-none">{step}</span>
@@ -145,7 +145,7 @@ export default function AILeadsPage() {
           <div className="text-center mb-10">
             <span className="inline-block text-xs font-semibold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-3.5 py-1.5 rounded-full mb-5">Get Started</span>
             <h2 className="text-3xl font-bold text-white tracking-tight mb-4">Stop losing leads. Start closing more.</h2>
-            <p className="text-[#A1A1AA]">Fill out the form and I&apos;ll follow up within 24 hours to build your lead system.</p>
+            <p className="text-[#A1A1AA]">Tell me about your business. I&apos;ll respond within 24 hours with exactly what I&apos;d build — free, no pressure.</p>
           </div>
           <div className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-8">
             <OfferLeadForm service="AI Lead System" companySlug="ai-leads" ctaLabel="Get My AI Lead System →" accentColor="purple" variant="ai-leads" sourcePage="/ai-leads" />
@@ -156,7 +156,7 @@ export default function AILeadsPage() {
       {/* Footer */}
       <footer className="border-t border-white/[0.06] py-8 px-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#A1A1AA]/40">© 2025 Digital Wealth Transfer · Jonathan Cardona</p>
+          <p className="text-xs text-[#A1A1AA]/40">© 2026 Digital Wealth Transfer · Jonathan Cardona</p>
           <div className="flex items-center gap-5 text-sm text-[#A1A1AA]/60">
             <Link href="/ai-content" className="hover:text-white transition-colors">AI Content Engine →</Link>
             <Link href="/solutions" className="hover:text-white transition-colors">All Solutions →</Link>

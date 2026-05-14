@@ -5,7 +5,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Jonathan Cardona — Digital Wealth Transfer",
   description:
-    "I help businesses generate leads, create content, and connect with the right tech partners using AI systems.",
+    "I build AI systems that help local businesses capture leads, follow up automatically, and grow revenue. Based in Las Vegas.",
 };
 
 export default function LinksPage() {
@@ -31,26 +31,26 @@ export default function LinksPage() {
             />
           </div>
           <h1 className="text-2xl font-bold text-white leading-tight mb-2">
-            Get More Customers<br />Using AI
+            Jonathan Cardona
           </h1>
           <p className="text-sm text-[#A1A1AA] leading-relaxed mb-3">
-            I help businesses generate leads, create content, and connect with the right tech partners.
+            I build AI systems that help local businesses capture leads, follow up automatically, and close more customers.
           </p>
           <p className="text-[11px] font-semibold tracking-widest uppercase text-[#A1A1AA]/40">
-            Las Vegas · AI + Automation + Growth Systems
+            Las Vegas · AI Systems · Automation · Growth
           </p>
         </div>
 
-        {/* Primary CTAs */}
+        {/* Primary CTA */}
         <div className="flex flex-col gap-3 mb-8">
           <Link
-            href="/ai-leads"
+            href="/ai-systems"
             className="block w-full bg-blue-600 hover:bg-blue-500 rounded-2xl px-5 py-4 transition-all shadow-[0_0_30px_rgba(59,130,246,0.35)] active:scale-[0.98]"
           >
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-white font-bold text-base leading-tight">🚀 I Need More Customers</p>
-                <p className="text-white/60 text-xs mt-0.5">Get qualified leads using AI systems</p>
+                <p className="text-white font-bold text-base leading-tight">Get a Free System Audit</p>
+                <p className="text-white/60 text-xs mt-0.5">I&apos;ll show you exactly what I&apos;d build for your business</p>
               </div>
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/50">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -59,28 +59,13 @@ export default function LinksPage() {
           </Link>
 
           <Link
-            href="/ai-content"
-            className="block w-full bg-purple-600 hover:bg-purple-500 rounded-2xl px-5 py-4 transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] active:scale-[0.98]"
+            href="/ai-systems#offer"
+            className="block w-full bg-[#151B2D] border border-white/[0.12] hover:border-white/25 rounded-2xl px-5 py-4 transition-all active:scale-[0.98]"
           >
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-white font-bold text-base leading-tight">📉 I Struggle With Content</p>
-                <p className="text-white/60 text-xs mt-0.5">Turn ideas into posts, reels, and content automatically</p>
-              </div>
-              <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/50">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-          </Link>
-
-          <Link
-            href="/solutions"
-            className="block w-full bg-[#151B2D] border border-white/[0.15] hover:border-white/30 rounded-2xl px-5 py-4 transition-all active:scale-[0.98]"
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <p className="text-white font-bold text-base leading-tight">🤔 Not Sure What I Need?</p>
-                <p className="text-[#A1A1AA] text-xs mt-0.5">We&apos;ll help you figure it out quickly</p>
+                <p className="text-white font-bold text-base leading-tight">See What&apos;s Included</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">AI Lead Machine · Appointment Setter · Full System</p>
               </div>
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 shrink-0 text-white/30">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -104,8 +89,8 @@ export default function LinksPage() {
           >
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-white font-semibold text-sm">🤝 Get Clients for Your Agency</p>
-                <p className="text-[#A1A1AA] text-xs mt-0.5">White-label, referral, and co-delivery options</p>
+                <p className="text-white font-semibold text-sm">Partner With Me</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">Referral, white-label, and co-delivery options</p>
               </div>
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0 text-white/20">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -119,8 +104,8 @@ export default function LinksPage() {
           >
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-white font-semibold text-sm">📊 Browse AI & Tech Companies</p>
-                <p className="text-[#A1A1AA] text-xs mt-0.5">Find vetted partners in Las Vegas</p>
+                <p className="text-white font-semibold text-sm">Browse AI & Tech Companies</p>
+                <p className="text-[#A1A1AA] text-xs mt-0.5">Find vetted providers in Las Vegas</p>
               </div>
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 shrink-0 text-white/20">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -143,7 +128,7 @@ export default function LinksPage() {
             className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
           >
             <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
-              🧠 Learn AI, Bitcoin & Business
+              Learn AI, Bitcoin & Business
             </p>
           </Link>
 
@@ -154,18 +139,9 @@ export default function LinksPage() {
             className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
           >
             <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
-              💼 Connect on LinkedIn
+              Connect on LinkedIn
             </p>
           </a>
-
-          <Link
-            href="/solutions#get-started"
-            className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
-          >
-            <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
-              📩 Contact / Work With Me
-            </p>
-          </Link>
         </div>
 
         {/* Footer */}
