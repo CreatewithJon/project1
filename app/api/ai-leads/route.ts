@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabase();
 
+    // Write to ai_leads (full detail record)
     const { data, error } = await supabase
       .from("ai_leads")
       .insert([
@@ -53,6 +54,33 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error("[ai-leads] Supabase insert error:", error);
       return Response.json({ error: error.message }, { status: 500 });
+    }
+
+    // Also write to leads table so it shows up in the Lead Engine CRM
+    const serviceSummary = [
+      service_need,
+      industry ? `Industry: ${industry}` : null,
+      budget ? `Budget: ${budget}` : null,
+      business_name ? `Business: ${business_name}` : null,
+      website ? `Website: ${website}` : null,
+      message ? `Notes: ${message}` : null,
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
+    const { error: leadsError } = await supabase.from("leads").insert([
+      {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        service: serviceSummary || "AI Systems Inquiry",
+        company_slug: "ai-systems",
+        lead_type: "ai_systems",
+      },
+    ]);
+
+    if (leadsError) {
+      // Non-fatal — ai_leads already saved, just log the sync failure
+      console.error("[ai-leads] Failed to mirror to leads table:", leadsError);
     }
 
     return Response.json({ success: true, leadId: data.id }, { status: 201 });
