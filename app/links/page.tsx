@@ -148,13 +148,13 @@ export default function LinksPage() {
           </Link>
 
           <a
-            href="https://www.instagram.com/crypto.papi"
+            href="https://www.linkedin.com/in/jonathan-cardona-1089291b9"
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full bg-transparent border border-white/[0.06] hover:border-white/[0.12] rounded-xl px-5 py-3 transition-all active:scale-[0.98]"
           >
             <p className="text-[#A1A1AA] hover:text-white text-sm font-medium transition-colors">
-              🎥 Follow Me (@crypto.papi)
+              💼 Connect on LinkedIn
             </p>
           </a>
 
@@ -170,7 +170,7 @@ export default function LinksPage() {
 
         {/* Footer */}
         <p className="text-[11px] text-[#A1A1AA]/20 text-center mt-12">
-          © 2025 Digital Wealth Transfer · Jonathan Cardona
+          © 2026 Digital Wealth Transfer · Jonathan Cardona
         </p>
       </div>
     </div>
