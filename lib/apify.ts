@@ -17,7 +17,7 @@ function getToken(): string {
 }
 
 function getActorId(): string {
-  return process.env.APIFY_ACTOR_ID ?? "apify~google-maps-scraper";
+  return process.env.APIFY_ACTOR_ID ?? "compass~crawler-google-places";
 }
 
 // ── Types ────────────────────────────────────────────────────────────────────
@@ -81,14 +81,16 @@ export async function triggerScrape(params: ScrapeParams): Promise<{ runId: stri
 
   const body = {
     searchStringsArray: params.queries,
-    maxCrawledPlaces: params.maxPerQuery ?? 20,
-    maxImages: 0,
-    includeOpeningHours: false,
-    includePeopleAlsoSearch: false,
-    includeHistogram: false,
+    maxCrawledPlacesPerSearch: params.maxPerQuery ?? 20,
     language: "en",
+    maxImages: 0,
     maxReviews: 0,
     exportPlaceUrls: false,
+    includeHistogram: false,
+    includeOpeningHours: false,
+    includePeopleAlsoSearch: false,
+    scrapeDirectories: false,
+    deeperCityScrape: false,
   };
 
   const res = await fetch(`${APIFY_BASE}/acts/${encodeURIComponent(actorId)}/runs?token=${token}`, {
