@@ -295,22 +295,35 @@ export default function ScrapePanel({ onPromoteToPipeline }: ScrapePanelProps) {
         const res = await fetch(
           `/api/scrape?runId=${runId}&niche=${encodeURIComponent(niche)}&store=true`
         );
-        const json: ScrapeResult = await res.json();
+        const json: ScrapeResult & { dbWarning?: string } = await res.json();
+
+        if (!res.ok) {
+          clearInterval(pollRef.current!);
+          setRunStatus("FAILED");
+          setError(json.error ?? `Server error (${res.status})`);
+          return;
+        }
+
         setRunStatus(json.status);
 
         if (json.status === "SUCCEEDED") {
           clearInterval(pollRef.current!);
           setResults(json.results ?? []);
           setStoredCount(json.stored ?? 0);
-          showToast(
-            "success",
-            `Done — ${json.total} scraped · ${json.stored} new · ${json.skipped} already in DB`
-          );
+          const stored = json.stored ?? 0;
+          const skipped = json.skipped ?? 0;
+          const msg = json.dbWarning
+            ? `Done — ${json.total} results (DB not set up yet — run the migration to save)`
+            : `Done — ${json.total} scraped · ${stored} new · ${skipped} already in DB`;
+          showToast("success", msg);
         } else if (json.status === "FAILED") {
           clearInterval(pollRef.current!);
           setError(json.error ?? "Scrape run failed on Apify.");
         }
-      } catch { /* keep polling silently */ }
+      } catch (err) {
+        // network error — keep polling, don't crash
+        console.error("Poll error:", err);
+      }
     }, 4000);
 
     return () => { if (pollRef.current) clearInterval(pollRef.current); };

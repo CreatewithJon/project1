@@ -117,44 +117,49 @@ export async function GET(request: NextRequest) {
 
   const normalized = places.map((p) => normalizePlaceToLead(p, niche));
 
-  // Optionally store in Supabase
+  // Optionally store in Supabase — always return results even if DB fails
+  let stored = 0;
+  let skipped = 0;
+  let dbWarning: string | undefined;
+
   if (store && normalized.length > 0) {
-    const supabase = getSupabase();
+    try {
+      const supabase = getSupabase();
 
-    // Deduplicate: skip leads whose company_name + phone already exist
-    const { data: existing } = await supabase
-      .from("real_estate_leads")
-      .select("company_name, phone");
+      const { data: existing } = await supabase
+        .from("real_estate_leads")
+        .select("company_name, phone");
 
-    const existingSet = new Set(
-      (existing ?? []).map((e) => `${e.company_name}|${e.phone ?? ""}`)
-    );
+      const existingSet = new Set(
+        (existing ?? []).map((e: { company_name: string; phone: string | null }) => `${e.company_name}|${e.phone ?? ""}`)
+      );
 
-    const toInsert = normalized.filter(
-      (l) => !existingSet.has(`${l.company_name}|${l.phone ?? ""}`)
-    );
+      const toInsert = normalized.filter(
+        (l) => !existingSet.has(`${l.company_name}|${l.phone ?? ""}`)
+      );
 
-    if (toInsert.length > 0) {
-      const { error } = await supabase.from("real_estate_leads").insert(toInsert);
-      if (error) {
-        return Response.json({ error: `DB insert failed: ${error.message}` }, { status: 500 });
+      skipped = normalized.length - toInsert.length;
+
+      if (toInsert.length > 0) {
+        const { error } = await supabase.from("real_estate_leads").insert(toInsert);
+        if (error) {
+          dbWarning = error.message;
+        } else {
+          stored = toInsert.length;
+        }
       }
+    } catch (err) {
+      dbWarning = err instanceof Error ? err.message : "DB error";
     }
-
-    return Response.json({
-      runId,
-      status: "SUCCEEDED",
-      total: places.length,
-      stored: toInsert.length,
-      skipped: normalized.length - toInsert.length,
-      results: normalized,
-    });
   }
 
   return Response.json({
     runId,
     status: "SUCCEEDED",
     total: places.length,
+    stored,
+    skipped,
     results: normalized,
+    ...(dbWarning ? { dbWarning } : {}),
   });
 }
