@@ -15,6 +15,7 @@ import {
 } from "./types";
 import LeadModal from "./LeadModal";
 import OutreachModal from "./OutreachModal";
+import ScrapePanel from "./ScrapePanel";
 
 // ─── CSV Parser ────────────────────────────────────────────────────────────────
 function parseCSVLine(line: string): string[] {
@@ -122,6 +123,7 @@ const DEFAULT_FILTERS: Filters = {
 export default function LeadEngine() {
   const [auth, setAuth] = useState<"loading" | "locked" | "open">("loading");
   const [pw, setPw] = useState("");
+  const [showPw, setShowPw] = useState(false);
   const [pwLoading, setPwLoading] = useState(false);
   const [pwError, setPwError] = useState("");
 
@@ -139,7 +141,7 @@ export default function LeadEngine() {
   const [importLoading, setImportLoading] = useState(false);
   const csvRef = useRef<HTMLInputElement>(null);
 
-  const [activeTab, setActiveTab] = useState<"pipeline" | "inbox">("pipeline");
+  const [activeTab, setActiveTab] = useState<"pipeline" | "inbox" | "scrape">("pipeline");
   const [leads, setLeads] = useState<Lead[]>([]);
   const [inboxLoading, setInboxLoading] = useState(false);
   const [movingId, setMovingId] = useState<string | null>(null);
@@ -386,14 +388,23 @@ export default function LeadEngine() {
           </div>
           <form onSubmit={handleLogin} className="bg-[#151B2D] border border-white/[0.08] rounded-2xl p-6">
             <label className="block text-xs font-semibold text-white/40 uppercase tracking-wider mb-2">Password</label>
-            <input
-              type="password"
-              autoFocus
-              value={pw}
-              onChange={(e) => setPw(e.target.value)}
-              placeholder="Enter password"
-              className="w-full bg-[#0B0F1A] border border-white/[0.1] rounded-lg px-4 py-3 text-sm text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-blue-500/50 mb-4"
-            />
+            <div className="relative mb-4">
+              <input
+                type={showPw ? "text" : "password"}
+                autoFocus
+                value={pw}
+                onChange={(e) => setPw(e.target.value)}
+                placeholder="Enter password"
+                className="w-full bg-[#0B0F1A] border border-white/[0.1] rounded-lg px-4 py-3 pr-11 text-sm text-white placeholder:text-white/20 focus:outline-none focus:ring-1 focus:ring-blue-500/50"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPw((v) => !v)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/70 transition-colors text-xs font-semibold"
+              >
+                {showPw ? "Hide" : "Show"}
+              </button>
+            </div>
             {pwError && <p className="text-rose-400 text-sm mb-3">{pwError}</p>}
             <button
               type="submit"
@@ -476,6 +487,14 @@ export default function LeadEngine() {
                     {leads.length}
                   </span>
                 )}
+              </button>
+              <button
+                onClick={() => setActiveTab("scrape")}
+                className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-colors flex items-center gap-1.5 ${
+                  activeTab === "scrape" ? "bg-emerald-600 text-white" : "text-white/40 hover:text-white"
+                }`}
+              >
+                <span>🔍</span> Scraper
               </button>
             </div>
             <button
@@ -928,6 +947,41 @@ export default function LeadEngine() {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* ── Scraper Tab ───────────────────────────────────────────────── */}
+        {activeTab === "scrape" && (
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <h2 className="text-white font-bold text-base">Lead Scraper</h2>
+                <p className="text-white/30 text-xs mt-0.5">
+                  Auto-scrape real estate market businesses from Google Maps. Score with AI. Promote the best ones to your pipeline.
+                </p>
+              </div>
+            </div>
+            <ScrapePanel
+              onPromoteToPipeline={(lead) => {
+                // Pre-fill the Add Lead modal with scraped data
+                const prefill = {
+                  business_name: lead.company_name,
+                  website: lead.website ?? undefined,
+                  phone: lead.phone ?? undefined,
+                  industry: lead.niche ?? undefined,
+                  location: [lead.city, lead.state].filter(Boolean).join(", ") || undefined,
+                  source: "apify_google_maps",
+                  problem_signal: lead.outreach_angle ?? undefined,
+                  notes: lead.ai_summary ?? undefined,
+                  ai_score: lead.lead_score ? Math.round(lead.lead_score / 10) : undefined,
+                  ai_score_reason: lead.ai_summary ?? undefined,
+                  recommended_offer: lead.recommended_offer ?? undefined,
+                  status: "New" as const,
+                };
+                setModal({ mode: "add", prospect: prefill as Prospect });
+                setActiveTab("pipeline");
+              }}
+            />
           </div>
         )}
 

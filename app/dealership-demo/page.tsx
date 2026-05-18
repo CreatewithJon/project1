@@ -6,11 +6,13 @@ import SectionHeader from "@/components/dealership/SectionHeader";
 import StatCard from "@/components/dealership/StatCard";
 import CTASection from "@/components/dealership/CTASection";
 import LeadForm from "@/components/dealership/LeadForm";
+import AIChatWidget from "@/components/dealership/AIChatWidget";
+import ScrollVideoHero from "@/components/dealership/ScrollVideoHero";
 
 export const metadata: Metadata = {
-  title: "Elite Auto Collection — Luxury Cars. Custom Builds. Serious Buyers Only.",
+  title: "Shafik N Sons — Family Owned. Premium Vehicles. Oxnard, CA.",
   description:
-    "A premium digital showroom for lowriders, exotics, and high-end vehicles. Lamborghini, McLaren, Range Rover, G-Wagon, and custom builds.",
+    "Family-owned dealership based in Oxnard, California. Lowriders, exotics, luxury SUVs, and custom builds. Lamborghini, McLaren, Range Rover, G-Wagon, and more.",
 };
 
 const featured = getFeaturedVehicles();
@@ -21,8 +23,8 @@ const reasons = [
     desc: "From Lamborghinis to hand-built lowriders — we source, build, and sell vehicles that mainstream dealers won't touch.",
   },
   {
-    title: "Family Owned. Dealer Trusted.",
-    desc: "No commission pressure. No bait-and-switch pricing. We've been doing this for 15 years because we actually love cars.",
+    title: "Family Owned. Oxnard Built.",
+    desc: "Based in Oxnard, California — no commission pressure, no bait-and-switch pricing. We've been doing this for 15 years because we actually love cars.",
   },
   {
     title: "In-House Financing",
@@ -38,12 +40,38 @@ export default function DealershipDemoPage() {
   return (
     <div className="bg-[#080808] text-white font-sans min-h-screen">
 
+      {/* ── Demo Banner ──────────────────────────────────────────────────── */}
+      <div
+        className="fixed top-0 left-0 right-0 z-[60] py-2 px-4 text-center text-[11px] font-semibold"
+        style={{
+          background: "linear-gradient(90deg, rgba(201,168,76,0.12), rgba(201,168,76,0.06), rgba(201,168,76,0.12))",
+          borderBottom: "1px solid rgba(201,168,76,0.2)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <span className="text-white/40">Demo Site · </span>
+        <span className="text-[#C9A84C]/90">Built by </span>
+        <Link
+          href="/"
+          className="text-[#C9A84C] font-bold hover:text-[#FDBA74] transition-colors"
+        >
+          Digital Wealth Transfer
+        </Link>
+        <span className="text-white/30"> · </span>
+        <Link
+          href="/ai-systems"
+          className="text-white/45 hover:text-white/70 transition-colors"
+        >
+          Get one for your business →
+        </Link>
+      </div>
+
       {/* ── Nav ──────────────────────────────────────────────────────────── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#080808]/95 backdrop-blur-md border-b border-white/[0.05]">
+      <nav className="fixed top-8 left-0 right-0 z-50 bg-[#080808]/95 backdrop-blur-md border-b border-white/[0.05]">
         <div className="max-w-7xl mx-auto px-5 sm:px-10 h-16 flex items-center justify-between">
           <div>
             <p className="text-white font-black text-lg tracking-tight leading-none">
-              ELITE AUTO
+              SHAFIK N SONS
             </p>
             <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">
               Collection
@@ -63,55 +91,10 @@ export default function DealershipDemoPage() {
         </div>
       </nav>
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center pt-16">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0F0F0F] via-[#080808] to-[#000000]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_60%_50%,rgba(201,168,76,0.06)_0%,transparent_60%)]" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/20 to-transparent" />
-
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-10 py-24 w-full">
-          <div className="max-w-4xl">
-            <div className="mb-6">
-              <span className="inline-block text-[11px] font-semibold tracking-[0.25em] uppercase text-[#C9A84C] bg-[#C9A84C]/10 border border-[#C9A84C]/20 px-4 py-2 rounded-full">
-                Las Vegas, NV · Est. 2009
-              </span>
-            </div>
-            <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] text-white mb-8">
-              LUXURY CARS.<br />
-              CUSTOM BUILDS.<br />
-              <span className="text-[#C9A84C]">SERIOUS BUYERS</span><br />
-              ONLY.
-            </h1>
-            <p className="text-white/50 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
-              A premium digital showroom for lowriders, exotics, and high-end vehicles — built to turn Instagram traffic into qualified buyers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/dealership-demo/inventory"
-                className="group inline-flex items-center gap-3 bg-[#C9A84C] hover:bg-[#FDBA74] text-black font-bold text-sm tracking-wide px-9 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_40px_rgba(201,168,76,0.45)]"
-              >
-                View Inventory
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-              </Link>
-              <Link
-                href="/dealership-demo/financing"
-                className="inline-flex items-center gap-3 border border-white/[0.15] text-white hover:bg-white/[0.06] font-semibold text-sm tracking-wide px-9 py-4 rounded-full transition-all duration-300"
-              >
-                Get Pre-Approved
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mt-20 pt-12 border-t border-white/[0.06]">
-              <StatCard value="500+" label="Vehicles Sold" accent />
-              <StatCard value="15+" label="Years in Business" />
-              <StatCard value="$50M+" label="In Sales" accent />
-              <StatCard value="98%" label="Buyer Satisfaction" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ── Scroll Video Hero ────────────────────────────────────────────── */}
+      <div className="mt-8">
+        <ScrollVideoHero />
+      </div>
 
       {/* ── Featured Inventory ───────────────────────────────────────────── */}
       <section className="bg-[#080808] py-24 px-5 sm:px-10 border-t border-white/[0.05]">
@@ -143,9 +126,9 @@ export default function DealershipDemoPage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-14">
             <SectionHeader
-              eyebrow="Why Elite Auto"
+              eyebrow="Why Shafik N Sons"
               heading="Not your average dealership."
-              sub="We exist for buyers who know what they want and don't need a sales pitch."
+              sub="Family owned and operated in Oxnard, California. We exist for buyers who know what they want and don't need a sales pitch."
             />
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -360,9 +343,8 @@ export default function DealershipDemoPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 mb-8">
             <div>
-              <p className="text-white font-black text-xl tracking-tight">ELITE AUTO</p>
-              <p className="text-[#C9A84C] text-xs font-semibold tracking-[0.25em] uppercase mt-0.5">Collection</p>
-              <p className="text-white/25 text-xs mt-2">Las Vegas, Nevada</p>
+              <p className="text-white font-black text-xl tracking-tight">SHAFIK N SONS</p>
+              <p className="text-[#C9A84C] text-xs font-semibold tracking-[0.15em] uppercase mt-0.5">Family Owned · Oxnard, CA</p>
             </div>
             <div className="flex flex-wrap gap-6 text-sm text-white/30">
               <Link href="/dealership-demo/inventory" className="hover:text-white transition-colors">Inventory</Link>
@@ -373,13 +355,16 @@ export default function DealershipDemoPage() {
           </div>
           <div className="h-px bg-white/[0.04] mb-6" />
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-white/20 text-xs">© 2025 Elite Auto Collection · All rights reserved</p>
+            <p className="text-white/20 text-xs">© 2026 Shafik N Sons · Oxnard, CA · All rights reserved</p>
             <p className="text-white/15 text-xs italic text-center">
               Demo concept — customized with your real inventory, photos, branding, and Instagram content.
             </p>
           </div>
         </div>
       </footer>
+
+      {/* AI Chat Widget */}
+      <AIChatWidget />
 
       {/* Mobile sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#080808]/95 backdrop-blur border-t border-white/[0.08] p-4">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVehicleBySlug, vehicles, formatPrice, formatMileage } from "@/lib/data/vehicles";
 import LeadForm from "@/components/dealership/LeadForm";
+import AIChatWidget from "@/components/dealership/AIChatWidget";
 
 export async function generateStaticParams() {
   return vehicles.map((v) => ({ slug: v.slug }));
@@ -15,7 +16,7 @@ export async function generateMetadata(
   const vehicle = getVehicleBySlug(slug);
   if (!vehicle) return { title: "Vehicle Not Found" };
   return {
-    title: `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.trim} — Elite Auto Collection`,
+    title: `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.trim} — Shafik N Sons`,
     description: vehicle.description,
   };
 }
@@ -35,8 +36,8 @@ export default async function VehicleDetailPage(
         <div className="max-w-7xl mx-auto px-5 sm:px-10 h-16 flex items-center justify-between">
           <Link href="/dealership-demo">
             <div>
-              <p className="text-white font-black text-lg tracking-tight leading-none">ELITE AUTO</p>
-              <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Collection</p>
+              <p className="text-white font-black text-lg tracking-tight leading-none">SHAFIK N SONS</p>
+              <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Oxnard, California</p>
             </div>
           </Link>
           <div className="hidden sm:flex items-center gap-8 text-sm">
@@ -55,6 +56,14 @@ export default async function VehicleDetailPage(
 
       {/* Hero / Gallery */}
       <div className={`pt-16 w-full bg-gradient-to-br ${vehicle.gradient} aspect-[16/7] sm:aspect-[21/7] relative overflow-hidden`}>
+        {vehicle.imageUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={vehicle.imageUrl}
+            alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-transparent" />
         {/* Category + Year */}
         <div className="absolute top-8 left-8 flex items-center gap-3">
@@ -180,12 +189,14 @@ export default async function VehicleDetailPage(
         </div>
       </div>
 
+      <AIChatWidget />
+
       {/* Footer */}
       <footer className="bg-[#080808] border-t border-white/[0.05] px-5 sm:px-10 py-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-white font-black text-base tracking-tight">ELITE AUTO</p>
-            <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Collection</p>
+            <p className="text-white font-black text-base tracking-tight">SHAFIK N SONS</p>
+            <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Oxnard, California</p>
           </div>
           <p className="text-white/20 text-xs text-center">
             Demo concept. Not a real dealership. Built by{" "}

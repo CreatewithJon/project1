@@ -27,7 +27,9 @@ export default function SectionHeader({
       <h2
         className={`text-4xl sm:text-5xl font-black tracking-tight leading-[1.04] ${textBase} mb-4`}
       >
-        {heading}
+        {heading.split("\n").map((line, i, arr) => (
+          <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+        ))}
       </h2>
       {sub && (
         <p className={`text-base sm:text-lg leading-relaxed ${textMuted} max-w-2xl ${center ? "mx-auto" : ""}`}>

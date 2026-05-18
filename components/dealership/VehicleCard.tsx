@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Vehicle, formatPrice, formatMileage } from "@/lib/data/vehicles";
 
@@ -12,9 +14,18 @@ export default function VehicleCard({ vehicle, compact = false }: Props) {
       {/* Image */}
       <div className="relative overflow-hidden">
         <div
-          className={`w-full bg-gradient-to-br ${vehicle.gradient} ${compact ? "aspect-video" : "aspect-[16/9]"} transition-transform duration-500 group-hover:scale-[1.03]`}
+          className={`w-full bg-gradient-to-br ${vehicle.gradient} ${compact ? "aspect-video" : "aspect-[16/9]"} relative transition-transform duration-500 group-hover:scale-[1.03]`}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent opacity-60" />
+          {vehicle.imageUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={vehicle.imageUrl}
+              alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0F] via-transparent to-transparent opacity-70" />
           {/* Category badge */}
           <div className="absolute top-4 left-4">
             <span

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { vehicles, formatPrice } from "@/lib/data/vehicles";
 import VehicleCard from "@/components/dealership/VehicleCard";
+import AIChatWidget from "@/components/dealership/AIChatWidget";
 
 type Filter = "all" | "lowrider" | "exotic" | "luxury-suv" | "mercedes" | "under100" | "over100";
 
@@ -35,8 +36,8 @@ export default function InventoryPage() {
         <div className="max-w-7xl mx-auto px-5 sm:px-10 h-16 flex items-center justify-between">
           <Link href="/dealership-demo">
             <div>
-              <p className="text-white font-black text-lg tracking-tight leading-none">ELITE AUTO</p>
-              <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Collection</p>
+              <p className="text-white font-black text-lg tracking-tight leading-none">SHAFIK N SONS</p>
+              <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Oxnard, California</p>
             </div>
           </Link>
           <div className="hidden sm:flex items-center gap-8 text-sm">
@@ -124,8 +125,8 @@ export default function InventoryPage() {
       <footer className="bg-[#080808] border-t border-white/[0.05] px-5 sm:px-10 py-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-white font-black text-base tracking-tight">ELITE AUTO</p>
-            <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Collection</p>
+            <p className="text-white font-black text-base tracking-tight">SHAFIK N SONS</p>
+            <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Oxnard, California</p>
           </div>
           <p className="text-white/20 text-xs text-center">
             Demo concept. Not a real dealership. Built by{" "}
@@ -140,6 +141,8 @@ export default function InventoryPage() {
           </div>
         </div>
       </footer>
+
+      <AIChatWidget />
     </div>
   );
 }
