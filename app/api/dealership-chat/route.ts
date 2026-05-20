@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { callClaude } from "@/lib/ai";
 
 const INVENTORY_CONTEXT = `You are the AI sales assistant for Shafik N Sons, a family-owned premium pre-owned dealership based in Oxnard, California specializing in exotic cars, luxury SUVs, and custom builds.
 
@@ -44,8 +45,7 @@ interface HistoryMessage {
 }
 
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
+  if (!process.env.ANTHROPIC_API_KEY) {
     return NextResponse.json({ error: "Service temporarily unavailable." }, { status: 503 });
   }
 
@@ -68,29 +68,12 @@ export async function POST(request: NextRequest) {
   const messages = [...history, { role: "user" as const, content: message }];
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-      },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 300,
-        system: INVENTORY_CONTEXT,
-        messages,
-      }),
+    const reply = await callClaude({
+      messages,
+      system: INVENTORY_CONTEXT,
+      maxTokens: 300,
+      tag: "dealership-chat",
     });
-
-    if (!response.ok) {
-      const err = await response.text();
-      console.error("Anthropic API error:", err);
-      return NextResponse.json({ error: "AI service unavailable. Try again shortly." }, { status: 502 });
-    }
-
-    const data = await response.json();
-    const reply: string = data?.content?.[0]?.text ?? "No response received.";
     return NextResponse.json({ reply });
   } catch (err) {
     console.error("Dealership chat error:", err);

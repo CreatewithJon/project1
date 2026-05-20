@@ -1,30 +1,11 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { callClaude } from "@/lib/ai";
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   return createClient(url!, key!);
-}
-
-async function callClaude(prompt: string): Promise<string> {
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": process.env.ANTHROPIC_API_KEY!,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 2048,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-
-  if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${await res.text()}`);
-  const json = await res.json();
-  return json.content[0].text as string;
 }
 
 export async function POST(
@@ -85,7 +66,7 @@ Writing rules:
 Example IG DM style: "Came across [Business] — [specific observation]. Building AI lead systems for [industry] businesses right now. Would it be worth a 10-min chat?"`;
 
   try {
-    const raw = await callClaude(prompt);
+    const raw = await callClaude({ messages: [{ role: "user", content: prompt }], maxTokens: 2048, tag: "lead-outreach" });
     const drafts = JSON.parse(raw.replace(/```json\n?|\n?```/g, "").trim());
 
     const { data, error } = await supabase
