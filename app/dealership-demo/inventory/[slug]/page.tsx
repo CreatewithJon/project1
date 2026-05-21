@@ -1,19 +1,33 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getVehicleBySlug, vehicles, formatPrice, formatMileage } from "@/lib/data/vehicles";
+import { formatPrice, formatMileage } from "@/lib/data/vehicles";
+import { getSupabase, dbToVehicle } from "@/lib/db/vehicles";
 import LeadForm from "@/components/dealership/LeadForm";
 import AIChatWidget from "@/components/dealership/AIChatWidget";
 
-export async function generateStaticParams() {
-  return vehicles.map((v) => ({ slug: v.slug }));
+// Dynamic — vehicles come from Supabase, not static build
+export const dynamic = "force-dynamic";
+
+async function getVehicle(slug: string) {
+  try {
+    const supabase = getSupabase();
+    const { data } = await supabase
+      .from("vehicles")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+    return data ? dbToVehicle(data) : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function generateMetadata(
   props: PageProps<"/dealership-demo/inventory/[slug]">
 ): Promise<Metadata> {
   const { slug } = await props.params;
-  const vehicle = getVehicleBySlug(slug);
+  const vehicle = await getVehicle(slug);
   if (!vehicle) return { title: "Vehicle Not Found" };
   return {
     title: `${vehicle.year} ${vehicle.make} ${vehicle.model} ${vehicle.trim} — Shafik N Sons`,
@@ -25,7 +39,7 @@ export default async function VehicleDetailPage(
   props: PageProps<"/dealership-demo/inventory/[slug]">
 ) {
   const { slug } = await props.params;
-  const vehicle = getVehicleBySlug(slug);
+  const vehicle = await getVehicle(slug);
   if (!vehicle) notFound();
 
   return (

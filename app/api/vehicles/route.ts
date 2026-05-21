@@ -1,12 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
-
-function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-}
+import { getSupabase } from "@/lib/db/vehicles";
 
 function slugify(year: number, make: string, model: string): string {
   const base = `${year}-${make}-${model}`
@@ -17,12 +10,14 @@ function slugify(year: number, make: string, model: string): string {
   return `${base}-${suffix}`;
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from("vehicles")
-    .select("*")
-    .order("created_at", { ascending: false });
+  const available = req.nextUrl.searchParams.get("available");
+
+  let query = supabase.from("vehicles").select("*").order("created_at", { ascending: false });
+  if (available === "1") query = query.eq("sold", false);
+
+  const { data, error } = await query;
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

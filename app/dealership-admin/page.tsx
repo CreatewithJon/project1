@@ -2,24 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback, DragEvent, ChangeEvent } from "react";
 import Image from "next/image";
-
-interface DbVehicle {
-  id: string;
-  slug: string;
-  year: number;
-  make: string;
-  model: string;
-  trim: string | null;
-  category: string;
-  mileage: number | null;
-  price: number;
-  monthly_payment: number | null;
-  color: string | null;
-  description: string | null;
-  image_url: string | null;
-  sold: boolean;
-  created_at: string;
-}
+import type { DbVehicle } from "@/lib/db/vehicles";
 
 const CATEGORIES = ["lowrider", "exotic", "luxury-suv", "mercedes", "truck", "sedan", "other"];
 
@@ -70,6 +53,10 @@ export default function DealershipAdminPage() {
   // Delete confirm
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
+  // Seed
+  const [seeding, setSeeding] = useState(false);
+  const [seedMsg, setSeedMsg] = useState<string | null>(null);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const editFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -89,6 +76,22 @@ export default function DealershipAdminPage() {
   }, []);
 
   useEffect(() => { fetchVehicles(); }, [fetchVehicles]);
+
+  async function handleSeed() {
+    setSeeding(true);
+    setSeedMsg(null);
+    try {
+      const res = await fetch("/api/vehicles/seed", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Seed failed");
+      setSeedMsg(data.message);
+      if (data.seeded > 0) fetchVehicles();
+    } catch (err) {
+      setSeedMsg(err instanceof Error ? err.message : "Seed failed");
+    } finally {
+      setSeeding(false);
+    }
+  }
 
   // ── Upload helpers ──────────────────────────────────────────────────────────
 
@@ -307,6 +310,31 @@ export default function DealershipAdminPage() {
           ))}
         </div>
 
+        {/* Import existing inventory */}
+        {vehicles.length === 0 && !loading && !fetchError && (
+          <div className="rounded-2xl p-5 flex items-center justify-between gap-4"
+            style={{ background: "rgba(201,168,76,0.05)", border: "1px solid rgba(201,168,76,0.15)" }}>
+            <div>
+              <p className="text-sm font-bold" style={{ color: "#C9A84C" }}>Import Existing Inventory</p>
+              <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                One-time import of the 6 vehicles currently shown on the dealership website.
+              </p>
+            </div>
+            <button onClick={handleSeed} disabled={seeding}
+              className="shrink-0 text-sm font-bold px-5 py-2.5 rounded-xl transition-all disabled:opacity-40"
+              style={{ background: "#C9A84C", color: "black" }}>
+              {seeding ? "Importing..." : "Import Now"}
+            </button>
+          </div>
+        )}
+
+        {seedMsg && (
+          <div className="rounded-xl px-4 py-3 text-xs font-semibold"
+            style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.2)", color: "#6ee7b7" }}>
+            {seedMsg}
+          </div>
+        )}
+
         {/* Upload Zone */}
         <div>
           <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>
@@ -480,7 +508,12 @@ export default function DealershipAdminPage() {
   monthly_payment integer,
   color text,
   description text,
+  features text[],
+  specs jsonb,
   image_url text,
+  gradient text,
+  accent_color text,
+  featured boolean not null default false,
   sold boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

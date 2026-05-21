@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { vehicles, formatPrice } from "@/lib/data/vehicles";
+import type { Vehicle } from "@/lib/data/vehicles";
+import type { DbVehicle } from "@/lib/db/vehicles";
+import { dbToVehicle } from "@/lib/db/vehicles";
 import VehicleCard from "@/components/dealership/VehicleCard";
 import AIChatWidget from "@/components/dealership/AIChatWidget";
 
@@ -20,6 +22,16 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 export default function InventoryPage() {
   const [active, setActive] = useState<Filter>("all");
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/vehicles?available=1")
+      .then((r) => r.json())
+      .then((d) => setVehicles((d.vehicles ?? []).map((v: DbVehicle) => dbToVehicle(v))))
+      .catch(() => setVehicles([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = vehicles.filter((v) => {
     if (active === "all") return true;
@@ -63,7 +75,7 @@ export default function InventoryPage() {
           Current Inventory
         </h1>
         <p className="text-white/40 text-base max-w-xl">
-          {vehicles.length} vehicles available. Updated daily. All prices include certification inspection.
+          {loading ? "Loading inventory..." : `${vehicles.length} vehicle${vehicles.length !== 1 ? "s" : ""} available. Updated daily. All prices include certification inspection.`}
         </p>
       </div>
 
@@ -84,14 +96,18 @@ export default function InventoryPage() {
             </button>
           ))}
           <span className="ml-auto whitespace-nowrap text-white/30 text-xs shrink-0">
-            {filtered.length} result{filtered.length !== 1 ? "s" : ""}
+            {loading ? "..." : `${filtered.length} result${filtered.length !== 1 ? "s" : ""}`}
           </span>
         </div>
       </div>
 
       {/* Vehicle Grid */}
       <div className="max-w-7xl mx-auto px-5 sm:px-10 py-12">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-24">
+            <p className="text-white/30 text-lg">Loading inventory...</p>
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="text-center py-24">
             <p className="text-white/30 text-lg">No vehicles match this filter.</p>
           </div>

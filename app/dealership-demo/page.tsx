@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getFeaturedVehicles, vehicles, formatPrice } from "@/lib/data/vehicles";
+import { formatPrice } from "@/lib/data/vehicles";
+import type { Vehicle } from "@/lib/data/vehicles";
+import { getSupabase, dbToVehicle } from "@/lib/db/vehicles";
 import VehicleCard from "@/components/dealership/VehicleCard";
 import SectionHeader from "@/components/dealership/SectionHeader";
 import StatCard from "@/components/dealership/StatCard";
@@ -15,7 +17,19 @@ export const metadata: Metadata = {
     "Family-owned dealership based in Oxnard, California. Lowriders, exotics, luxury SUVs, and custom builds. Lamborghini, McLaren, Range Rover, G-Wagon, and more.",
 };
 
-const featured = getFeaturedVehicles();
+async function getInventory(): Promise<Vehicle[]> {
+  try {
+    const supabase = getSupabase();
+    const { data } = await supabase
+      .from("vehicles")
+      .select("*")
+      .eq("sold", false)
+      .order("created_at", { ascending: false });
+    return (data ?? []).map(dbToVehicle);
+  } catch {
+    return [];
+  }
+}
 
 const reasons = [
   {
@@ -36,7 +50,10 @@ const reasons = [
   },
 ];
 
-export default function DealershipDemoPage() {
+export default async function DealershipDemoPage() {
+  const allVehicles = await getInventory();
+  const featured = allVehicles.filter((v) => v.featured).slice(0, 3);
+
   return (
     <div className="bg-[#080808] text-white font-sans min-h-screen">
 
@@ -102,14 +119,14 @@ export default function DealershipDemoPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
             <SectionHeader
               eyebrow="Featured Inventory"
-              heading={`${vehicles.length} Vehicles Available`}
+              heading={`${allVehicles.length} Vehicle${allVehicles.length !== 1 ? "s" : ""} Available`}
               sub="A curated selection of exotics, customs, and luxury vehicles — ready for serious buyers."
             />
             <Link
               href="/dealership-demo/inventory"
               className="text-sm text-[#C9A84C] hover:text-[#FDBA74] font-semibold tracking-wide transition-colors shrink-0"
             >
-              View all {vehicles.length} vehicles →
+              View all {allVehicles.length} vehicle{allVehicles.length !== 1 ? "s" : ""} →
             </Link>
           </div>
 
@@ -249,9 +266,9 @@ export default function DealershipDemoPage() {
           </div>
           <div className="grid sm:grid-cols-3 gap-5">
             {[
-              { range: "Under $100K", label: "Custom Builds & Pre-Owned Luxury", count: vehicles.filter(v => v.price < 100000).length },
-              { range: "$100K – $200K", label: "Luxury SUVs & Premium Sedans", count: vehicles.filter(v => v.price >= 100000 && v.price < 200000).length },
-              { range: "$200K+", label: "Exotic Supercars", count: vehicles.filter(v => v.price >= 200000).length },
+              { range: "Under $100K", label: "Custom Builds & Pre-Owned Luxury", count: allVehicles.filter(v => v.price < 100000).length },
+              { range: "$100K – $200K", label: "Luxury SUVs & Premium Sedans", count: allVehicles.filter(v => v.price >= 100000 && v.price < 200000).length },
+              { range: "$200K+", label: "Exotic Supercars", count: allVehicles.filter(v => v.price >= 200000).length },
             ].map((tier) => (
               <Link
                 key={tier.range}
