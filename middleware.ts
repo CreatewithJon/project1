@@ -37,5 +37,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/gh600/:path*", "/api/gh600-auth", "/docs/:path*", "/api/docs-auth"],
+  matcher: ["/gh600/:path*", "/api/gh600-auth", "/docs", "/docs/:path*", "/api/docs-auth"],
 };
