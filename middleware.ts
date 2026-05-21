@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Only protect /gh600 routes (not the login page or auth API)
+  // Protect /gh600
   if (
     pathname.startsWith("/gh600") &&
     !pathname.startsWith("/gh600/login") &&
@@ -11,10 +11,25 @@ export function middleware(req: NextRequest) {
   ) {
     const auth = req.cookies.get("gh600-auth")?.value;
     if (auth !== process.env.GH600_PASSWORD) {
-      const loginUrl = req.nextUrl.clone();
-      loginUrl.pathname = "/gh600/login";
-      loginUrl.searchParams.set("from", pathname);
-      return NextResponse.redirect(loginUrl);
+      const url = req.nextUrl.clone();
+      url.pathname = "/gh600/login";
+      url.searchParams.set("from", pathname);
+      return NextResponse.redirect(url);
+    }
+  }
+
+  // Protect /docs
+  if (
+    pathname.startsWith("/docs") &&
+    !pathname.startsWith("/docs/login") &&
+    pathname !== "/api/docs-auth"
+  ) {
+    const auth = req.cookies.get("docs-auth")?.value;
+    if (auth !== process.env.DOCS_PASSWORD) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/docs/login";
+      url.searchParams.set("from", pathname);
+      return NextResponse.redirect(url);
     }
   }
 
@@ -22,5 +37,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/gh600/:path*", "/api/gh600-auth"],
+  matcher: ["/gh600/:path*", "/api/gh600-auth", "/docs/:path*", "/api/docs-auth"],
 };
