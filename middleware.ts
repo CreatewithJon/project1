@@ -33,9 +33,28 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // Protect /dealership-admin
+  if (
+    pathname.startsWith("/dealership-admin") &&
+    !pathname.startsWith("/dealership-admin/login") &&
+    pathname !== "/api/dealership-admin-auth"
+  ) {
+    const auth = req.cookies.get("dealership-admin-auth")?.value;
+    if (auth !== process.env.DEALERSHIP_ADMIN_PASSWORD) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/dealership-admin/login";
+      url.searchParams.set("from", pathname);
+      return NextResponse.redirect(url);
+    }
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/gh600/:path*", "/api/gh600-auth", "/docs", "/docs/:path*", "/api/docs-auth"],
+  matcher: [
+    "/gh600/:path*", "/api/gh600-auth",
+    "/docs", "/docs/:path*", "/api/docs-auth",
+    "/dealership-admin", "/dealership-admin/:path*", "/api/dealership-admin-auth",
+  ],
 };
