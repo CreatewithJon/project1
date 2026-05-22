@@ -16,6 +16,7 @@ const emptyForm = {
   price: "",
   color: "",
   description: "",
+  featured: false,
 };
 
 function formatPrice(n: number) {
@@ -170,6 +171,7 @@ export default function DealershipAdminPage() {
           mileage: newForm.mileage ? Number(newForm.mileage) : null,
           price: Number(newForm.price),
           image_url: pendingImageUrl,
+          featured: newForm.featured,
         }),
       });
       const data = await res.json();
@@ -201,6 +203,7 @@ export default function DealershipAdminPage() {
       price: String(v.price),
       color: v.color ?? "",
       description: v.description ?? "",
+      featured: v.featured ?? false,
     });
   }
 
@@ -543,7 +546,8 @@ function VehicleFormFields({
   form: typeof emptyForm;
   onChange: (f: typeof emptyForm) => void;
 }) {
-  const field = (key: keyof typeof emptyForm, label: string, placeholder: string, type = "text") => (
+  type StringKey = { [K in keyof typeof emptyForm]: (typeof emptyForm)[K] extends string ? K : never }[keyof typeof emptyForm];
+  const field = (key: StringKey, label: string, placeholder: string, type = "text") => (
     <div>
       <label className="block text-[10px] font-semibold uppercase tracking-[0.12em] mb-1.5"
         style={{ color: "rgba(255,255,255,0.3)" }}>
@@ -598,6 +602,24 @@ function VehicleFormFields({
           className="w-full rounded-xl px-3 py-2.5 text-sm text-white placeholder:text-white/20 focus:outline-none resize-none"
           style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
         />
+      </div>
+      <div className="col-span-2">
+        <button
+          type="button"
+          onClick={() => onChange({ ...form, featured: !form.featured })}
+          className="flex items-center gap-3 text-sm font-semibold transition-all"
+          style={{ color: form.featured ? "#C9A84C" : "rgba(255,255,255,0.35)" }}
+        >
+          <span className="w-10 h-5 rounded-full relative transition-all"
+            style={{ background: form.featured ? "rgba(201,168,76,0.4)" : "rgba(255,255,255,0.08)", border: `1px solid ${form.featured ? "rgba(201,168,76,0.6)" : "rgba(255,255,255,0.12)"}` }}>
+            <span className="absolute top-0.5 w-4 h-4 rounded-full transition-all"
+              style={{ background: form.featured ? "#C9A84C" : "rgba(255,255,255,0.3)", left: form.featured ? "calc(100% - 1.1rem)" : "2px" }} />
+          </span>
+          Show on homepage (Featured)
+        </button>
+        <p className="text-[10px] mt-1" style={{ color: "rgba(255,255,255,0.2)" }}>
+          Featured vehicles appear in the homepage highlights section
+        </p>
       </div>
     </div>
   );

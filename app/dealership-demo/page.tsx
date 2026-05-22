@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatPrice } from "@/lib/data/vehicles";
+import { formatPrice, vehicles as staticVehicles, getFeaturedVehicles } from "@/lib/data/vehicles";
 import type { Vehicle } from "@/lib/data/vehicles";
 import { getSupabase, dbToVehicle } from "@/lib/db/vehicles";
 import VehicleCard from "@/components/dealership/VehicleCard";
@@ -20,14 +20,15 @@ export const metadata: Metadata = {
 async function getInventory(): Promise<Vehicle[]> {
   try {
     const supabase = getSupabase();
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("vehicles")
       .select("*")
       .eq("sold", false)
       .order("created_at", { ascending: false });
-    return (data ?? []).map(dbToVehicle);
+    if (error || !data || data.length === 0) return staticVehicles;
+    return data.map(dbToVehicle);
   } catch {
-    return [];
+    return staticVehicles;
   }
 }
 

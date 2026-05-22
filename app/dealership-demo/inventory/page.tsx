@@ -28,7 +28,14 @@ export default function InventoryPage() {
   useEffect(() => {
     fetch("/api/vehicles?available=1")
       .then((r) => r.json())
-      .then((d) => setVehicles((d.vehicles ?? []).map((v: DbVehicle) => dbToVehicle(v))))
+      .then((d) => {
+        const list = d.vehicles ?? [];
+        // Static fallback returns Vehicle shape directly; DB returns DbVehicle shape
+        const mapped: Vehicle[] = d.source === "static"
+          ? list
+          : list.map((v: DbVehicle) => dbToVehicle(v));
+        setVehicles(mapped);
+      })
       .catch(() => setVehicles([]))
       .finally(() => setLoading(false));
   }, []);
