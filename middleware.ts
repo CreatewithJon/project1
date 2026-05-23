@@ -1,9 +1,38 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const DEALERSHIP_HOSTS = ["shafiknsons.com", "www.shafiknsons.com"];
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const host = req.headers.get("host") ?? "";
 
-  // Protect /gh600
+  // ── shafiknsons.com domain routing ─────────────────────────────────────────
+  // Rewrite all paths so shafiknsons.com/* serves the dealership pages
+  if (DEALERSHIP_HOSTS.includes(host)) {
+    const url = req.nextUrl.clone();
+
+    // /admin → dealership admin (password protected below)
+    if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+      url.pathname = pathname.replace(/^\/admin/, "/dealership-admin");
+      return NextResponse.rewrite(url);
+    }
+
+    // API routes pass through as-is
+    if (pathname.startsWith("/api/")) {
+      return NextResponse.next();
+    }
+
+    // Everything else: rewrite to /dealership-demo equivalent
+    // / → /dealership-demo
+    // /inventory → /dealership-demo/inventory
+    // /inventory/slug → /dealership-demo/inventory/slug
+    // /financing → /dealership-demo/financing
+    // /sell-your-car → /dealership-demo/sell-your-car
+    url.pathname = pathname === "/" ? "/dealership-demo" : `/dealership-demo${pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
+  // ── Protect /gh600 ──────────────────────────────────────────────────────────
   if (
     pathname.startsWith("/gh600") &&
     !pathname.startsWith("/gh600/login") &&
@@ -18,7 +47,7 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // Protect /docs
+  // ── Protect /docs ───────────────────────────────────────────────────────────
   if (
     pathname.startsWith("/docs") &&
     !pathname.startsWith("/docs/login") &&
@@ -33,7 +62,7 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // Protect /dealership-admin
+  // ── Protect /dealership-admin ───────────────────────────────────────────────
   if (
     pathname.startsWith("/dealership-admin") &&
     !pathname.startsWith("/dealership-admin/login") &&
@@ -53,8 +82,7 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/gh600/:path*", "/api/gh600-auth",
-    "/docs", "/docs/:path*", "/api/docs-auth",
-    "/dealership-admin", "/dealership-admin/:path*", "/api/dealership-admin-auth",
+    // Match all paths for domain-based routing
+    "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
