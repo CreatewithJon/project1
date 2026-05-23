@@ -16,6 +16,11 @@ export function middleware(req: NextRequest) {
       return NextResponse.next();
     }
 
+    // Static public assets (videos, images, fonts, etc.) — pass through
+    if (/\.[a-zA-Z0-9]+$/.test(pathname)) {
+      return NextResponse.next();
+    }
+
     // /admin → dealership admin (password protected below)
     if (pathname === "/admin" || pathname.startsWith("/admin/")) {
       url.pathname = pathname.replace(/^\/admin/, "/dealership-admin");
