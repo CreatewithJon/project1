@@ -60,34 +60,8 @@ export default async function DealershipDemoPage() {
   return (
     <div className="bg-[#080808] text-white font-sans min-h-screen">
 
-      {/* ── Demo Banner ──────────────────────────────────────────────────── */}
-      <div
-        className="fixed top-0 left-0 right-0 z-[60] py-2 px-4 text-center text-[11px] font-semibold"
-        style={{
-          background: "linear-gradient(90deg, rgba(201,168,76,0.12), rgba(201,168,76,0.06), rgba(201,168,76,0.12))",
-          borderBottom: "1px solid rgba(201,168,76,0.2)",
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <span className="text-white/40">Demo Site · </span>
-        <span className="text-[#C9A84C]/90">Built by </span>
-        <Link
-          href="/"
-          className="text-[#C9A84C] font-bold hover:text-[#FDBA74] transition-colors"
-        >
-          Digital Wealth Transfer
-        </Link>
-        <span className="text-white/30"> · </span>
-        <Link
-          href="/ai-systems"
-          className="text-white/45 hover:text-white/70 transition-colors"
-        >
-          Get one for your business →
-        </Link>
-      </div>
-
       {/* ── Nav ──────────────────────────────────────────────────────────── */}
-      <nav className="fixed top-8 left-0 right-0 z-50 bg-[#080808]/95 backdrop-blur-md border-b border-white/[0.05]">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#080808]/95 backdrop-blur-md border-b border-white/[0.05]">
         <div className="max-w-7xl mx-auto px-5 sm:px-10 h-16 flex items-center justify-between">
           <div>
             <p className="text-white font-black text-lg tracking-tight leading-none">
@@ -112,7 +86,7 @@ export default async function DealershipDemoPage() {
       </nav>
 
       {/* ── Scroll Video Hero ────────────────────────────────────────────── */}
-      <div className="mt-8">
+      <div className="mt-0">
         <ScrollVideoHero />
       </div>
 
@@ -377,7 +351,7 @@ export default async function DealershipDemoPage() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-white/20 text-xs">© 2026 Shafik N Sons · Oxnard, CA · All rights reserved</p>
             <p className="text-white/15 text-xs italic text-center">
-              Demo concept — customized with your real inventory, photos, branding, and Instagram content.
+              © 2026 Shafik N Sons · All rights reserved
             </p>
           </div>
         </div>

@@ -212,12 +212,7 @@ export default async function VehicleDetailPage(
             <p className="text-white font-black text-base tracking-tight">SHAFIK N SONS</p>
             <p className="text-[#C9A84C] text-[10px] font-semibold tracking-[0.25em] uppercase">Oxnard, California</p>
           </div>
-          <p className="text-white/20 text-xs text-center">
-            Demo concept. Not a real dealership. Built by{" "}
-            <Link href="/" className="text-[#C9A84C]/60 hover:text-[#C9A84C] transition-colors">
-              Digital Wealth Transfer
-            </Link>
-          </p>
+          <p className="text-white/20 text-xs text-center">© 2026 Shafik N Sons · Oxnard, CA</p>
           <div className="flex gap-6 text-xs text-white/30">
             <Link href="/dealership-demo/inventory" className="hover:text-white/60 transition-colors">Inventory</Link>
             <Link href="/dealership-demo/financing" className="hover:text-white/60 transition-colors">Financing</Link>
