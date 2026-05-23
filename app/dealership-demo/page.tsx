@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { formatPrice, vehicles as staticVehicles, getFeaturedVehicles } from "@/lib/data/vehicles";
+import { formatPrice } from "@/lib/data/vehicles";
 import type { Vehicle } from "@/lib/data/vehicles";
 import { getSupabase, dbToVehicle } from "@/lib/db/vehicles";
 import VehicleCard from "@/components/dealership/VehicleCard";
@@ -25,10 +25,10 @@ async function getInventory(): Promise<Vehicle[]> {
       .select("*")
       .eq("sold", false)
       .order("created_at", { ascending: false });
-    if (error || !data || data.length === 0) return staticVehicles;
+    if (error || !data) return [];
     return data.map(dbToVehicle);
   } catch {
-    return staticVehicles;
+    return [];
   }
 }
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatPrice, formatMileage, getVehicleBySlug } from "@/lib/data/vehicles";
+import { formatPrice, formatMileage } from "@/lib/data/vehicles";
 import { getSupabase, dbToVehicle } from "@/lib/db/vehicles";
 import LeadForm from "@/components/dealership/LeadForm";
 import AIChatWidget from "@/components/dealership/AIChatWidget";
@@ -17,12 +17,10 @@ async function getVehicle(slug: string) {
       .select("*")
       .eq("slug", slug)
       .single();
-    if (data) return dbToVehicle(data);
+    return data ? dbToVehicle(data) : null;
   } catch {
-    // fall through to static
+    return null;
   }
-  // Fall back to static data so existing vehicle pages always work
-  return getVehicleBySlug(slug) ?? null;
 }
 
 export async function generateMetadata(

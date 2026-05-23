@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabase } from "@/lib/db/vehicles";
-import { vehicles as staticVehicles } from "@/lib/data/vehicles";
 
 function slugify(year: number, make: string, model: string): string {
   const base = `${year}-${make}-${model}`
@@ -20,13 +19,10 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await query;
 
-  // If Supabase errors or returns nothing, fall back to static vehicle data
-  if (error || !data || data.length === 0) {
-    const fallback = available === "1" ? staticVehicles : staticVehicles;
-    return NextResponse.json({ vehicles: fallback, source: "static" });
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
-
-  return NextResponse.json({ vehicles: data, source: "db" });
+  return NextResponse.json({ vehicles: data ?? [] });
 }
 
 export async function POST(req: NextRequest) {
