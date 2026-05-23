@@ -11,6 +11,8 @@ import LeadForm from "@/components/dealership/LeadForm";
 import AIChatWidget from "@/components/dealership/AIChatWidget";
 import ScrollVideoHero from "@/components/dealership/ScrollVideoHero";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Shafik N Sons — Family Owned. Premium Vehicles. Oxnard, CA.",
   description:
