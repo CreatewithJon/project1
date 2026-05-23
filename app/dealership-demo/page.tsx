@@ -307,7 +307,7 @@ export default async function DealershipDemoPage() {
           <div>
             <SectionHeader
               eyebrow="Sell or Trade"
-              heading="We buy cars.\nExotics. Trucks. Customs."
+              heading={"We buy cars.\nExotics. Trucks. Customs."}
               sub="Get a fair market offer in 24 hours. No games, no lowballs. We'll apply your trade value directly to your new purchase or simply write you a check."
             />
             <Link
