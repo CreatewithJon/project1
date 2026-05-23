@@ -11,6 +11,11 @@ export function middleware(req: NextRequest) {
   if (DEALERSHIP_HOSTS.includes(host)) {
     const url = req.nextUrl.clone();
 
+    // Already-rewritten internal paths — pass through as-is
+    if (pathname.startsWith("/dealership-demo") || pathname.startsWith("/dealership-admin")) {
+      return NextResponse.next();
+    }
+
     // /admin → dealership admin (password protected below)
     if (pathname === "/admin" || pathname.startsWith("/admin/")) {
       url.pathname = pathname.replace(/^\/admin/, "/dealership-admin");
