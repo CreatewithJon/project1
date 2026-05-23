@@ -44,6 +44,25 @@ async function insertLead(lead: DealershipLead) {
   return data;
 }
 
+export async function GET() {
+  try {
+    const { createClient } = await import("@supabase/supabase-js");
+    const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const supabase = createClient(url!, key!);
+
+    const { data, error } = await supabase
+      .from("dealership_leads")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) throw new Error(error.message);
+    return Response.json({ leads: data ?? [] });
+  } catch (err) {
+    return Response.json({ error: err instanceof Error ? err.message : "Failed to fetch leads" }, { status: 500 });
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body: DealershipLead = await request.json();

@@ -4,6 +4,37 @@ import { useState, useEffect, useRef, useCallback, DragEvent, ChangeEvent } from
 import Image from "next/image";
 import type { DbVehicle } from "@/lib/db/vehicles";
 
+interface DealershipLead {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  lead_type?: string;
+  vehicle_interested_in?: string;
+  vehicle_slug?: string;
+  budget?: string;
+  message?: string;
+  source_page?: string;
+  created_at: string;
+}
+
+const LEAD_TYPE_LABELS: Record<string, { label: string; color: string }> = {
+  inventory_inquiry: { label: "Vehicle Inquiry", color: "#C9A84C" },
+  general_inquiry:   { label: "General",         color: "#60a5fa" },
+  financing:         { label: "Financing",        color: "#34d399" },
+  sell_trade:        { label: "Sell / Trade",     color: "#f97316" },
+};
+
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
+}
+
 const CATEGORIES = ["lowrider", "exotic", "luxury-suv", "mercedes", "truck", "sedan", "other"];
 
 const emptyForm = {
@@ -28,6 +59,32 @@ function formatMiles(n: number) {
 }
 
 export default function DealershipAdminPage() {
+  const [tab, setTab] = useState<"leads" | "inventory">("leads");
+
+  // ── Leads ───────────────────────────────────────────────────────────────────
+  const [leads, setLeads] = useState<DealershipLead[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(true);
+  const [leadsError, setLeadsError] = useState<string | null>(null);
+  const [expandedLead, setExpandedLead] = useState<string | null>(null);
+
+  const fetchLeads = useCallback(async () => {
+    setLeadsLoading(true);
+    setLeadsError(null);
+    try {
+      const res = await fetch("/api/dealership-leads");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Failed to load leads");
+      setLeads(data.leads ?? []);
+    } catch (err) {
+      setLeadsError(err instanceof Error ? err.message : "Failed to load leads");
+    } finally {
+      setLeadsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchLeads(); }, [fetchLeads]);
+
+  // ── Inventory ───────────────────────────────────────────────────────────────
   const [vehicles, setVehicles] = useState<DbVehicle[]>([]);
   const [loading, setLoading] = useState(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
@@ -278,40 +335,199 @@ export default function DealershipAdminPage() {
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
+  const todayLeads = leads.filter((l) => {
+    const d = new Date(l.created_at);
+    const now = new Date();
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
+  });
+
   return (
     <div className="min-h-screen" style={{ background: "#080808", color: "white", fontFamily: "sans-serif" }}>
 
       {/* Header */}
       <div style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(10,10,10,0.95)", backdropFilter: "blur(12px)" }}
-        className="sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
+        className="sticky top-0 z-40 px-6 py-3 flex items-center justify-between gap-4">
         <div>
           <p className="font-black text-lg tracking-tight">SHAFIK N SONS</p>
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#C9A84C" }}>Inventory Admin</p>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase" style={{ color: "#C9A84C" }}>Business Dashboard</p>
+        </div>
+        {/* Tabs */}
+        <div className="flex gap-1 rounded-xl p-1" style={{ background: "rgba(255,255,255,0.05)" }}>
+          {([
+            { key: "leads",     label: "Leads",     count: leads.length },
+            { key: "inventory", label: "Inventory", count: stats.total },
+          ] as const).map((t) => (
+            <button key={t.key} onClick={() => setTab(t.key)}
+              className="flex items-center gap-2 text-sm font-bold px-5 py-2 rounded-lg transition-all"
+              style={{
+                background: tab === t.key ? "rgba(201,168,76,0.15)" : "transparent",
+                color: tab === t.key ? "#C9A84C" : "rgba(255,255,255,0.4)",
+              }}>
+              {t.label}
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                style={{ background: tab === t.key ? "rgba(201,168,76,0.25)" : "rgba(255,255,255,0.08)" }}>
+                {t.count}
+              </span>
+            </button>
+          ))}
         </div>
         <a href="/dealership-demo" target="_blank"
-          className="text-xs px-4 py-2 rounded-full transition-colors"
+          className="text-xs px-4 py-2 rounded-full transition-colors hidden sm:block"
           style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
           View Site →
         </a>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-10 space-y-10">
+      <div className="max-w-6xl mx-auto px-6 py-8 space-y-8">
 
         {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {[
-            { label: "Total Vehicles", value: stats.total },
-            { label: "Available", value: stats.available },
-            { label: "Sold", value: stats.sold },
+        {(() => {
+          const items = tab === "leads" ? [
+            { label: "Total Leads",  value: leads.length },
+            { label: "New Today",    value: todayLeads.length },
+            { label: "Inquiries",    value: leads.filter(l => l.lead_type === "inventory_inquiry").length },
+            { label: "Financing",    value: leads.filter(l => l.lead_type === "financing").length },
+          ] : [
+            { label: "Total Vehicles",  value: stats.total },
+            { label: "Available",       value: stats.available },
+            { label: "Sold",            value: stats.sold },
             { label: "Inventory Value", value: formatPrice(stats.value) },
-          ].map((s) => (
-            <div key={s.label} className="rounded-2xl p-5"
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <p className="text-2xl font-black" style={{ color: "#C9A84C" }}>{s.value}</p>
-              <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</p>
+          ];
+          return (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {items.map((s) => (
+                <div key={s.label} className="rounded-2xl p-5"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <p className="text-2xl font-black" style={{ color: "#C9A84C" }}>{s.value}</p>
+                  <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.4)" }}>{s.label}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          );
+        })()}
+
+        {/* ── LEADS TAB ──────────────────────────────────────────────────────── */}
+        {tab === "leads" && (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: "rgba(255,255,255,0.35)" }}>
+                Submitted Leads
+              </p>
+              <button onClick={fetchLeads} className="text-xs px-3 py-1.5 rounded-lg"
+                style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.4)" }}>
+                Refresh
+              </button>
+            </div>
+
+            {leadsLoading && (
+              <div className="text-center py-16 text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>Loading leads...</div>
+            )}
+
+            {leadsError && (
+              <div className="rounded-2xl p-6 text-center" style={{ background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.2)" }}>
+                <p className="text-sm font-semibold mb-1" style={{ color: "#f87171" }}>Could not load leads</p>
+                <p className="text-xs mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>{leadsError}</p>
+                <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+                  Make sure the <code className="px-1 rounded" style={{ background: "rgba(255,255,255,0.07)" }}>dealership_leads</code> table exists in Supabase (see setup below).
+                </p>
+              </div>
+            )}
+
+            {!leadsLoading && !leadsError && leads.length === 0 && (
+              <div className="text-center py-16 rounded-2xl"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
+                <p className="text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>No leads yet. They'll appear here when customers submit the inquiry form.</p>
+              </div>
+            )}
+
+            {leads.map((lead) => {
+              const type = LEAD_TYPE_LABELS[lead.lead_type ?? ""] ?? { label: lead.lead_type ?? "Lead", color: "rgba(255,255,255,0.4)" };
+              const isExpanded = expandedLead === lead.id;
+              return (
+                <div key={lead.id} className="rounded-2xl overflow-hidden transition-all"
+                  style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                  {/* Row */}
+                  <button className="w-full text-left px-5 py-4 flex items-start gap-4"
+                    onClick={() => setExpandedLead(isExpanded ? null : lead.id)}>
+                    {/* Type badge */}
+                    <span className="shrink-0 text-[10px] font-bold uppercase tracking-[0.12em] px-2.5 py-1 rounded-full mt-0.5"
+                      style={{ background: type.color + "18", color: type.color, border: `1px solid ${type.color}30` }}>
+                      {type.label}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3 flex-wrap">
+                        <p className="font-bold text-sm">{lead.name}</p>
+                        <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{lead.email}</p>
+                        {lead.phone && <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>{lead.phone}</p>}
+                      </div>
+                      {lead.vehicle_interested_in && (
+                        <p className="text-xs mt-1" style={{ color: "#C9A84C" }}>
+                          Interested in: {lead.vehicle_interested_in}
+                        </p>
+                      )}
+                      {lead.message && !isExpanded && (
+                        <p className="text-xs mt-1 truncate" style={{ color: "rgba(255,255,255,0.35)" }}>
+                          {lead.message}
+                        </p>
+                      )}
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>{timeAgo(lead.created_at)}</p>
+                      <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.2)" }}>
+                        {isExpanded ? "▲" : "▼"}
+                      </p>
+                    </div>
+                  </button>
+
+                  {/* Expanded details */}
+                  {isExpanded && (
+                    <div className="px-5 pb-5 pt-1 grid sm:grid-cols-2 gap-3 border-t"
+                      style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                      {[
+                        { label: "Email",    value: lead.email },
+                        { label: "Phone",    value: lead.phone },
+                        { label: "Vehicle",  value: lead.vehicle_interested_in },
+                        { label: "Budget",   value: lead.budget },
+                        { label: "Source",   value: lead.source_page },
+                        { label: "Date",     value: new Date(lead.created_at).toLocaleString() },
+                      ].filter(f => f.value).map((f) => (
+                        <div key={f.label}>
+                          <p className="text-[10px] uppercase tracking-[0.12em] font-semibold mb-0.5"
+                            style={{ color: "rgba(255,255,255,0.25)" }}>{f.label}</p>
+                          <p className="text-sm" style={{ color: "rgba(255,255,255,0.7)" }}>{f.value}</p>
+                        </div>
+                      ))}
+                      {lead.message && (
+                        <div className="sm:col-span-2">
+                          <p className="text-[10px] uppercase tracking-[0.12em] font-semibold mb-0.5"
+                            style={{ color: "rgba(255,255,255,0.25)" }}>Message</p>
+                          <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>{lead.message}</p>
+                        </div>
+                      )}
+                      <div className="sm:col-span-2 flex gap-2 pt-1">
+                        <a href={`mailto:${lead.email}`}
+                          className="text-xs font-bold px-4 py-2 rounded-lg transition-all"
+                          style={{ background: "rgba(201,168,76,0.12)", color: "#C9A84C", border: "1px solid rgba(201,168,76,0.2)" }}>
+                          Email {lead.name.split(" ")[0]} →
+                        </a>
+                        {lead.phone && (
+                          <a href={`tel:${lead.phone}`}
+                            className="text-xs font-bold px-4 py-2 rounded-lg"
+                            style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.5)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                            Call →
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* ── INVENTORY TAB ──────────────────────────────────────────────────── */}
+        {tab === "inventory" && (<>
 
         {/* Import existing inventory */}
         {vehicles.length === 0 && !loading && !fetchError && (
@@ -528,9 +744,27 @@ create policy "public_read" on vehicles for select using (true);
 create policy "anon_insert" on vehicles for insert with check (true);
 create policy "anon_update" on vehicles for update using (true);
 create policy "anon_delete" on vehicles for delete using (true);`}</pre>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Then in Storage → Create bucket <code style={{ background: "rgba(255,255,255,0.08)", padding: "0 4px", borderRadius: 4 }}>vehicle-images</code> → Public bucket → Add insert policy for anon role.</p>
+            <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>Then in Storage → Create bucket <code style={{ background: "rgba(255,255,255,0.08)", padding: "0 4px", borderRadius: 4 }}>Vehicle-images</code> → Public bucket → add anon INSERT policy. Also run this SQL for leads:</p>
+            <pre className="text-xs rounded-xl p-4 overflow-x-auto mt-2" style={{ background: "rgba(0,0,0,0.4)", color: "rgba(255,255,255,0.6)", lineHeight: "1.6" }}>{`create table dealership_leads (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text not null,
+  phone text,
+  lead_type text,
+  vehicle_slug text,
+  vehicle_interested_in text,
+  budget text,
+  message text,
+  source_page text,
+  created_at timestamptz not null default now()
+);
+alter table dealership_leads enable row level security;
+create policy "anon_insert" on dealership_leads for insert with check (true);
+create policy "anon_select" on dealership_leads for select using (true);`}</pre>
           </div>
         </details>
+
+        </>) /* end inventory tab */}
 
       </div>
     </div>
