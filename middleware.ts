@@ -72,6 +72,21 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  // ── Protect /leads-admin ───────────────────────────────────────────────────
+  if (
+    pathname.startsWith("/leads-admin") &&
+    !pathname.startsWith("/leads-admin/login") &&
+    pathname !== "/api/leads-admin-auth"
+  ) {
+    const auth = req.cookies.get("leads-admin-auth")?.value;
+    if (auth !== process.env.LEADS_ADMIN_PASSWORD) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/leads-admin/login";
+      url.searchParams.set("from", pathname);
+      return NextResponse.redirect(url);
+    }
+  }
+
   // ── Protect /dealership-admin ───────────────────────────────────────────────
   if (
     pathname.startsWith("/dealership-admin") &&
