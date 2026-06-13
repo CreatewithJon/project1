@@ -1,7 +1,7 @@
 # PORTFOLIO_ARCHITECTURE.md
 > Master index for the Jonathan Cardona project ecosystem.
 > Every Claude session should read this file first to orient correctly before touching any code or document.
-> Last updated: 2026-06-12.
+> Last updated: 2026-06-12 (rev 2 — GH-600 dual-category clarification, Crypto Mondays LV moved under Agentic Systems).
 
 ---
 
@@ -32,7 +32,8 @@ Jonathan Cardona
 │   ├── Repo: my-sample-proj
 │   ├── Domain: digitalwealthtransfer.com
 │   ├── Multi-tenant: shafiknsons.com (client work, co-deployed)
-│   └── Internal tools: Lead Engine, GH-600, Leads Admin, Docs
+│   └── Internal tools: Lead Engine, Leads Admin, Docs
+│       Note: /gh600 route also lives here — see GH-600 note below
 │
 ├── Sovereign OS  ─────────────────────────────── FUTURE PRODUCT
 │   ├── Personal intelligence operating system
@@ -40,17 +41,22 @@ Jonathan Cardona
 │   ├── Currently: no separate repo
 │   └── Prototype: /dashboard in my-sample-proj
 │
-├── Aigentic Systems  ─────────────────────────── SEPARATE COMPANY
-│   ├── AI implementation and automation services
-│   ├── NOT in the DWT repo
-│   ├── NOT in DWT's navigation or content
+├── Agentic Systems  ──────────────────────────── SEPARATE COMPANY
+│   ├── AI implementation, automation, and education services
+│   ├── Big Money Realty — client project + GH-600/UNLV case study
+│   ├── GH-600 / UNLV Course Initiative — curriculum & workforce dev
+│   ├── Crypto Mondays Las Vegas — chapter operated by Agentic Systems
+│   ├── Other client projects
+│   ├── NOT in the DWT repo (except Category B assets in gh600-lab/)
 │   └── Separate domain, separate brand
 │
-└── Crypto Mondays  ────────────────────────────── SEPARATE GLOBAL BRAND
-    ├── Community chapter brand
-    ├── NOT in the DWT repo
-    ├── Lead ownership: chapter operator (not DWT)
-    └── Separate domain, separate brand
+└── GH-600 Ecosystem (dual-category — read carefully)
+    ├── Category A: Personal certification prep
+    │   ├── Owner: Jonathan Cardona (personal)
+    │   └── Purpose: Passing the GH-600 exam
+    └── Category B: Educational & workforce development
+        ├── Owner: Agentic Systems
+        └── Purpose: UNLV course proof-of-concept, curriculum IP
 ```
 
 ---
@@ -63,7 +69,7 @@ Jonathan Cardona
 | `DWT_PROJECT_STATE.md` | Digital Wealth Transfer | Full technical + strategic state of the DWT repo |
 | `SOVEREIGN_OS_PROJECT_STATE.md` | Sovereign OS | Product vision, current state, what exists |
 | `AGENTIC_SYSTEMS_PROJECT_STATE.md` | Aigentic Systems | Scope boundary — what it is and what not to import into DWT |
-| `GH600_PROJECT_STATE.md` | GH-600 Study System | Internal cert prep tool living inside the DWT repo |
+| `GH600_PROJECT_STATE.md` | GH-600 Ecosystem | Dual-category: Category A = personal cert prep (Jonathan); Category B = Agentic Systems curriculum IP |
 | `PROJECT_STATE.md` | DWT (legacy) | Superseded — contains pre-pivot state. Do not use as source of truth. |
 | `STRATEGIC_PIVOT.md` | DWT | Audit of the marketplace-to-media pivot. One-time reference document. |
 
@@ -73,16 +79,25 @@ Jonathan Cardona
 
 These rules exist because Jonathan runs multiple distinct businesses. Conflating them creates brand, legal, and strategic problems.
 
-### Aigentic Systems content NEVER appears on DWT
-- No service offer pages on DWT ("I'll build you an AI system for $750")
+### Agentic Systems content NEVER appears on DWT as a service offering
+- No service offer pages ("I'll build you an AI system for $750")
 - No pricing, no lead forms for AI implementation services
-- No "Done for you" service language on DWT
+- No "Done for you" service language
 - DWT may *editorially discuss* AI systems as a topic — it may not *sell* them
+- DWT may reference Agentic Systems projects as portfolio examples **with attribution only**
 
-### Crypto Mondays content NEVER appears on DWT
-- No chapter listings, no event promotion, no lead capture for CM
-- DWT may reference Bitcoin/crypto as a topic — it may not act as a CM platform
-- Lead ownership for any CM-adjacent activity belongs to the chapter operator
+### Agentic Systems projects require attribution when referenced on DWT
+Standard language: *"[Project] is an Agentic Systems project, referenced here as a portfolio example. Digital Wealth Transfer is not the owner, operator, sponsor, or creator of this project."*
+
+### GH-600 Category B materials are Agentic Systems IP — not DWT content
+- DWT may reference Jonathan's certification in editorial content
+- DWT may not republish curriculum materials as DWT educational content without attribution
+- Big Money Realty is "an Agentic Systems client project and educational case study used within the GH-600 / UNLV initiative" — use this exact language
+
+### Crypto Mondays Las Vegas is an Agentic Systems chapter — not a DWT initiative
+- No chapter listings, event promotion, or lead capture on DWT
+- DWT may reference Bitcoin/crypto as editorial topics — not as CM promotion
+- Lead ownership for any CM LV activity belongs to Agentic Systems as chapter operator
 
 ### Sovereign OS is a separate product, not a DWT feature
 - `/dashboard` in the DWT repo is a prototype/preview — not a shipped product
@@ -101,10 +116,9 @@ These rules exist because Jonathan runs multiple distinct businesses. Conflating
 
 | Repo / Path | Project | Active? |
 |---|---|---|
-| `~/my-sample-proj` | Digital Wealth Transfer + GH-600 + client demos | Yes |
+| `~/my-sample-proj` | Digital Wealth Transfer + GH-600 (both categories) + client demos | Yes |
 | `~/signal-dashboard` | Sovereign OS prototype | Yes (separate repo) |
-| _(not yet created)_ | Aigentic Systems | No repo in this ecosystem |
-| _(not yet created)_ | Crypto Mondays | No repo in this ecosystem |
+| _(not yet created)_ | Agentic Systems | No repo in this ecosystem yet |
 
 ---
 
@@ -125,8 +139,8 @@ These rules exist because Jonathan runs multiple distinct businesses. Conflating
 |---|---|---|---|
 | DWT | Editorial, educational, curious | Regular people navigating AI transition | Approachable, intelligent, non-corporate |
 | Sovereign OS | Product, precision, sovereignty | Builders, self-directed people | Minimal, intentional, premium |
-| Aigentic Systems | Service, results-oriented | Local businesses, SMBs | Direct, confident, implementation-focused |
-| Crypto Mondays | Community, education | Bitcoin curious, chapter members | Welcoming, educational, decentralized |
+| Agentic Systems | Service + education, results-oriented | Local businesses, institutions, workforce programs | Direct, confident, implementation-focused |
+| Crypto Mondays LV | Community, education (chapter under Agentic Systems) | Bitcoin curious, chapter members | Welcoming, educational, decentralized |
 
 ---
 

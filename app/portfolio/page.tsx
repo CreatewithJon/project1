@@ -82,10 +82,10 @@ const PROJECTS = [
   {
     title: "Big Money Realty AI Platform",
     description:
-      "A real-world AI workflow project for real estate professionals focused on lead capture, qualification, AI-assisted response generation, CRM workflows, and human approval loops.",
+      "An Agentic Systems client project and educational case study used within the GH-600 / UNLV initiative. An AI workflow platform for real estate professionals covering lead capture, qualification, AI-assisted response generation, CRM workflows, and human approval loops.",
     concepts: ["Context Engineering", "Lead Automation", "Human-in-the-Loop", "CRM Automation", "Evaluation Loops"],
     url: "#",
-    urlLabel: "In Development",
+    urlLabel: "Agentic Systems — In Development",
     accent: "#34D399",
   },
   {
@@ -561,10 +561,11 @@ export default function PortfolioPage() {
         <div className="max-w-6xl mx-auto">
           <SectionLabel>Education</SectionLabel>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-            Potential Course &amp; Workshop Offerings
+            Course &amp; Workshop Offerings
           </h2>
           <p className="text-[#A1A1AA] text-sm mb-10 max-w-xl">
-            Curriculum designed for real implementation — not passive theory.
+            Curriculum developed through Agentic Systems for professional development,
+            workforce readiness, and institutional partnerships — including the GH-600 / UNLV proof-of-concept.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -609,7 +610,7 @@ export default function PortfolioPage() {
                 <br />Workforce Development
               </h2>
               <p className="text-[#A1A1AA] leading-relaxed text-sm sm:text-base mb-6">
-                My educational approach is based on teaching AI through real projects. Instead of
+                The Agentic Systems approach to AI education is grounded in real projects. Instead of
                 only explaining theory, students learn by studying and building applied systems
                 that connect AI concepts to business outcomes, workforce skills, and practical
                 implementation.
@@ -756,7 +757,7 @@ export default function PortfolioPage() {
       <footer className="px-4 sm:px-6 lg:px-8 py-8 border-t border-white/[0.05]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-[#A1A1AA]/50">
-            © {new Date().getFullYear()} Jonathan Cardona · Digital Wealth Transfer
+            © {new Date().getFullYear()} Jonathan Cardona
           </p>
           <p className="text-xs text-[#A1A1AA]/30">
             AI Systems Portfolio

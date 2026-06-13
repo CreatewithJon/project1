@@ -1,167 +1,159 @@
-# GH600_PROJECT_STATE.md — GH-600 Agentic AI Developer Certification Study System
-> Current state of the GH-600 study tool.
-> This is an internal tool that lives inside the DWT repo — it is not a DWT product.
+# GH600_PROJECT_STATE.md — GH-600 Ecosystem
+> The GH-600 ecosystem contains two distinct categories of assets with different owners and purposes.
+> Do not treat the entire ecosystem as personal OR as entirely Agentic Systems.
 > Last updated: 2026-06-12.
 
 ---
 
-## Purpose
+## Critical Distinction — Two Categories
 
-The GH-600 system is a **personal certification study environment** for Jonathan Cardona's preparation for the GH-600 Agentic AI Developer certification exam.
+The GH-600 ecosystem is not a single project. It is two separate categories of work that happen to share infrastructure.
 
-It is:
-- An internal tool
-- Password-protected
-- Not marketed, not linked from the public DWT site
-- Not a product — it is a personal learning environment
+```
+GH-600 Ecosystem
+│
+├── CATEGORY A — Personal Certification Materials
+│   ├── Owner: Jonathan Cardona (personal)
+│   ├── Purpose: Exam preparation for the GH-600 Agentic AI Developer certification
+│   └── Not an Agentic Systems asset. Not a DWT asset.
+│
+└── CATEGORY B — Educational & Workforce Development Materials
+    ├── Owner: Agentic Systems
+    ├── Purpose: Curriculum development, UNLV course proof-of-concept, workforce development
+    └── Not a DWT asset. DWT may reference only as portfolio example with attribution.
+```
 
-It lives inside `my-sample-proj` because it was convenient to co-deploy with the existing infrastructure. It has no relationship to DWT's media mission.
-
----
-
-## Ownership
-
-**Owner:** Jonathan Cardona (sole user)
-**Purpose:** Exam preparation
-**Audience:** Jonathan only — no public users, no sharing intended
-
----
-
-## Audience
-
-**One person: Jonathan Cardona.**
-
-There is no reader, subscriber, customer, or user for this tool beyond its creator. Treat it as a private notebook with a UI.
+**Neither category belongs to Digital Wealth Transfer.**
 
 ---
 
-## Current Status
+## CATEGORY A — Personal Certification Materials
 
-**Phase:** Active study environment — committed but untracked changes pending.
+**Owner:** Jonathan Cardona
+**Purpose:** Personal preparation for the GH-600 Agentic AI Developer certification exam
+**Audience:** Jonathan Cardona only
 
-**Access:** Password-protected at `/gh600` via middleware cookie guard. Password: `GH600_PASSWORD=gh600dwt` (stored in `.env.local`).
+### What's Included
 
-**Exam domains covered (6 total):**
-1. Prepare Agent Architecture & SDLC (15–20%)
-2. Implement Tool Use & Environment (20–25%)
-3. Manage Memory, State & Execution (10–15%)
-4. Evaluation, Error Analysis & Tuning (15–20%)
-5. Orchestrate Multi-Agent Coordination (15–20%)
-6. Implement Guardrails & Accountability (10–15%)
-
----
-
-## Included Assets
-
-### Routes
-| Route | Purpose |
+| Asset | Description |
 |---|---|
-| `/gh600` | Main study dashboard — `GH600Dashboard` component |
-| `/gh600/login` | Password entry — sets auth cookie |
+| `app/gh600/` | Study dashboard and login — personal exam prep UI |
+| `app/gh600/GH600Dashboard.tsx` | Interactive study dashboard |
+| `app/gh600/login/` | Password entry for the dashboard |
+| `app/api/gh600-auth/` | Auth API — cookie-based access control |
+| `gh600-lab/domains/` | Deep-dive study guides per exam domain |
+| `gh600-lab/flashcards/` | Quick-review flashcards |
+| `gh600-lab/practice-exams/` | 30-question practice exam |
+| `gh600-lab/notes/` | Personal study notes |
+| `gh600-lab/diagrams/` | Architecture diagrams for exam concepts |
 
-### Components
-| File | Purpose |
+### What This Is Not
+
+- Not an Agentic Systems deliverable
+- Not a DWT product or feature
+- Not shareable curriculum — it is personal exam prep
+- Not intended for any audience beyond Jonathan
+
+### Access
+
+Password-protected at `/gh600` via middleware cookie guard.
+Password: `GH600_PASSWORD=gh600dwt` (stored in `.env.local`).
+
+### Open Issues
+
+| Issue | Priority |
 |---|---|
-| `app/gh600/page.tsx` | Page wrapper — imports `GH600Dashboard` |
-| `app/gh600/GH600Dashboard.tsx` | Full interactive dashboard — **currently untracked, needs commit** |
-
-### Lab Directory
-`gh600-lab/` — 18 subdirectories of study materials (currently untracked)
-
-| Subdirectory | Content |
-|---|---|
-| `domains/` | Deep-dive study guides per exam domain |
-| `examples/` | Real artifact files (agent YAML, hooks, Actions) |
-| `agents/` | Agent definition examples |
-| `mcp/` | MCP configuration patterns |
-| `actions/` | GitHub Actions workflow examples |
-| `multi-agent/` | Orchestration patterns |
-| `security/` | Guardrails and security patterns |
-| `evaluation/` | Eval loops and observability patterns |
-| `memory-systems/` | All 4 memory types implemented |
-| `practice-exams/` | 30-question practice exam |
-| `flashcards/` | Quick-review flashcards |
-| `diagrams/` | ASCII/Mermaid architecture diagrams |
-| `notes/` | Personal study notes |
-| `projects/` | Maps exam topics to live DWT project code |
-| `copilot/` | GitHub Copilot patterns |
-| `security/` | Security and accountability patterns |
-
-### API
-| Route | Purpose |
-|---|---|
-| `app/api/gh600-auth/route.ts` | Validates password, sets cookie, redirects to `/gh600` |
+| `app/gh600/GH600Dashboard.tsx` is untracked — breaks fresh clone | High |
+| `gh600-lab/` directory is untracked | High |
 
 ---
 
-## Excluded Assets
+## CATEGORY B — Educational & Workforce Development Materials
 
-The GH-600 system has no relationship to:
-- DWT's media content or editorial mission
-- Sovereign OS product development
-- Aigentic Systems services
-- Crypto Mondays
-- Any public-facing DWT page or navigation
+**Owner:** Agentic Systems
+**Purpose:** Curriculum development for the GH-600 / UNLV course proof-of-concept and workforce development programs
+**Audience:** Eventual course participants; instructors; institutional partners (UNLV and others)
 
----
+These are **Agentic Systems intellectual property**. They are developed in Jonathan's working environment but belong to Agentic Systems as a business deliverable.
 
-## Open Issues
+### What's Included
 
-| Issue | Priority | Status |
-|---|---|---|
-| `app/gh600/GH600Dashboard.tsx` is untracked | High | Needs commit — breaks fresh clone |
-| `gh600-lab/` directory is untracked | High | Needs commit |
-
----
-
-## Known Bugs
-
-| Bug | Notes |
+| Asset | Description |
 |---|---|
-| Untracked `GH600Dashboard.tsx` | Page imports the component — works locally but breaks on fresh clone or new machine |
+| `gh600-lab/projects/` | Maps certification concepts to real-world case studies |
+| `gh600-lab/examples/` | Real artifact files usable as course teaching materials |
+| `gh600-lab/agents/` | Agent definition examples for student instruction |
+| `gh600-lab/mcp/` | MCP configuration patterns for course exercises |
+| `gh600-lab/actions/` | GitHub Actions workflow examples for student labs |
+| `gh600-lab/multi-agent/` | Orchestration patterns for advanced curriculum |
+| `gh600-lab/security/` | Guardrails and accountability content for course delivery |
+| `gh600-lab/evaluation/` | Eval loop patterns for student exercises |
+| `gh600-lab/memory-systems/` | Memory type implementations for curriculum reference |
+| `gh600-lab/copilot/` | GitHub Copilot patterns for course tooling |
+| Big Money Realty case study | Agentic Systems client project used as an educational case study within this curriculum |
+
+### Big Money Realty Classification
+
+Big Money Realty is:
+- An **Agentic Systems client project** — built and delivered through Agentic Systems
+- An **educational case study** used within the GH-600 / UNLV curriculum
+- **Not** a Jonathan Cardona personal project
+- **Not** a DWT project
+- DWT may reference it only as a portfolio example with full Agentic Systems attribution
+
+Correct classification when referenced anywhere:
+> *"An Agentic Systems client project and educational case study used within the GH-600 / UNLV initiative."*
+
+### UNLV Course Proof-of-Concept
+
+The UNLV course initiative is an Agentic Systems project to develop and potentially deliver a formal AI curriculum in partnership with institutional education. The Category B materials in `gh600-lab/` are the working drafts of that curriculum.
+
+Contributors: Jonathan Cardona (Chief AI Officer), Alberto (CEO), Dr. Kenneth A. Cottrell (CBO).
+
+When referencing the UNLV initiative or course curriculum, use:
+> *"Developed by the Agentic Systems team as part of the GH-600 / UNLV course proof-of-concept."*
+
+Do not attribute curriculum to Jonathan alone if the team contributed.
 
 ---
 
-## Completed
+## What DWT May and May Not Do
 
-- [x] Password-protected route via middleware cookie guard
-- [x] Login page at `/gh600/login`
-- [x] Auth API at `/api/gh600-auth`
-- [x] 7-domain study dashboard UI (component refactored to `GH600Dashboard.tsx`)
-- [x] Full `gh600-lab/` study environment created (18 subdirectories)
-- [x] Practice exam, flashcards, domain guides
-
----
-
-## Related Projects
-
-| Project | Relationship |
+| Action | Permitted? |
 |---|---|
-| Digital Wealth Transfer | Co-deployed in the DWT repo — no content relationship |
-| `gh600-lab/projects/` | Maps exam topics to actual DWT code for contextual learning |
+| Reference Jonathan's GH-600 certification in editorial content | Yes — with attribution to Agentic Systems context |
+| Publish articles about agentic AI concepts drawn from study | Yes — as original editorial content |
+| Link to or display the `/gh600` dashboard as a DWT feature | No |
+| Reference Big Money Realty in DWT articles | Yes — as "an Agentic Systems client project and educational case study" |
+| Claim ownership of Category B curriculum | No |
+| Use Category B materials as DWT educational content without attribution | No |
+
+---
+
+## Infrastructure Note
+
+Both categories live inside `my-sample-proj` for development convenience. Co-location does not imply shared ownership. The repo host (DWT) is not the owner of either category's content.
+
+The `/gh600` route on `digitalwealthtransfer.com` is password-protected and not linked from any public DWT page. It should remain invisible to DWT readers.
 
 ---
 
 ## Future Direction
 
-Once the GH-600 exam is completed:
-- The `/gh600` route and `gh600-lab/` directory can be archived or removed
-- The study materials have no long-term purpose in the DWT repo
-- If any GH-600 content becomes useful as DWT educational articles, extract it — don't link to the internal tool
+### Category A (Personal)
+Once the GH-600 certification is complete, the personal study materials can be archived or removed from the repo. They have no long-term purpose here.
 
-**The GH-600 system is time-bounded.** It exists for one purpose: pass the exam. After that, it is overhead.
+### Category B (Agentic Systems)
+Category B materials should eventually be migrated to Agentic Systems infrastructure when that repo and deployment exist. Until then, they are maintained here. They are **not disposable** — they are curriculum IP with potential institutional delivery value.
 
 ---
 
 ## Session Note for Claude
 
-If a session is opened in `my-sample-proj` and the task involves `/gh600` or `gh600-lab/`:
-- This is a personal study tool, not a DWT product
-- Do not add it to DWT's navigation or public content
-- Do not style it to match DWT's media platform aesthetic (it's internal — it just needs to work)
-- The only user is Jonathan — optimize for his study needs, not for any audience
+When a session involves `/gh600` or `gh600-lab/`:
 
----
-
-*This tool lives in the DWT repo by convenience, not by design.*
-*It should not be treated as a DWT feature, a product, or a public-facing asset.*
+1. **Determine which category the task involves** — personal cert prep (Category A) or curriculum/educational materials (Category B)
+2. **Do not add either category to DWT's navigation or public content**
+3. **Do not attribute Category B work to Jonathan alone** — it is an Agentic Systems team deliverable
+4. **Do not treat Category B as disposable** — it is Agentic Systems IP
+5. **If unsure which category a file belongs to** — ask before making changes
