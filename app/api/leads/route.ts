@@ -121,17 +121,5 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET() {
-  const supabase = getSupabase();
-
-  const { data, error } = await supabase
-    .from("leads")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("[leads] Supabase fetch error:", error);
-    return Response.json({ error: "Failed to fetch leads" }, { status: 500 });
-  }
-
-  return Response.json({ count: data.length, leads: data });
+  return Response.json({ error: "Not found" }, { status: 404 });
 }
