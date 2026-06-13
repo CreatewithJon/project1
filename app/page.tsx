@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import ArticleCard from "@/components/ArticleCard";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import { getFeaturedArticles, articles } from "@/lib/data/articles";
 import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
 
@@ -258,30 +259,3 @@ export default function HomePage() {
   );
 }
 
-// Inline dark-mode newsletter form — avoids light-mode styling in NewsletterForm.tsx
-function NewsletterSignup() {
-  "use client";
-  // Note: Server component wrapper — the form posts to /api/leads with lead_type "newsletter"
-  return (
-    <form
-      action="/api/leads"
-      method="POST"
-      className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-    >
-      <input type="hidden" name="lead_type" value="newsletter" />
-      <input
-        type="email"
-        name="email"
-        required
-        placeholder="your@email.com"
-        className="flex-1 bg-[#151B2D] border border-white/[0.12] rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-blue-500/50 transition-colors"
-      />
-      <button
-        type="submit"
-        className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl text-sm font-bold transition-colors whitespace-nowrap shadow-[0_0_20px_rgba(59,130,246,0.25)]"
-      >
-        Subscribe
-      </button>
-    </form>
-  );
-}

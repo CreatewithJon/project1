@@ -1,10 +1,63 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   return createClient(url!, key!);
+}
+
+async function sendNotification(fields: {
+  name: string;
+  email: string;
+  lead_type: string | null;
+  source: string;
+  details: string | null;
+}) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const toEmail = process.env.RESEND_TO_EMAIL;
+  if (!apiKey || !toEmail) return;
+
+  const resend = new Resend(apiKey);
+  const from = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
+  const label = fields.lead_type ?? "lead";
+  const subject = `New ${label} — ${fields.name || fields.email}`;
+
+  const rows = [
+    ["Type", label],
+    ["Name", fields.name || "(not provided)"],
+    ["Email", fields.email],
+    ["Source", fields.source],
+    ...(fields.details ? [["Details", fields.details] as [string, string]] : []),
+    ["Time", new Date().toISOString()],
+  ];
+
+  const tableRows = rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:6px 12px;color:#9ca3af;font-size:13px;white-space:nowrap;">${k}</td><td style="padding:6px 12px;color:#f9fafb;font-size:13px;">${v}</td></tr>`
+    )
+    .join("");
+
+  const html = `
+    <div style="background:#0b0f1a;min-height:100vh;padding:40px 20px;font-family:sans-serif;">
+      <div style="max-width:520px;margin:0 auto;background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
+        <div style="background:#1d4ed8;padding:20px 24px;">
+          <p style="margin:0;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Digital Wealth Transfer</p>
+          <p style="margin:4px 0 0;color:#bfdbfe;font-size:18px;font-weight:700;">New ${label}</p>
+        </div>
+        <table style="width:100%;border-collapse:collapse;">
+          ${tableRows}
+        </table>
+        <div style="padding:16px 24px;border-top:1px solid rgba(255,255,255,0.06);">
+          <p style="margin:0;color:#6b7280;font-size:11px;">Sent by DWT lead system · digitalwealthtransfer.com</p>
+        </div>
+      </div>
+    </div>
+  `;
+
+  await resend.emails.send({ from, to: toEmail, subject, html });
 }
 
 export async function POST(request: NextRequest) {
@@ -23,7 +76,6 @@ export async function POST(request: NextRequest) {
       service,
       companySlug,
       lead_type,
-      // Extended fields — optional, packed into service text
       businessName,
       website,
       budgetRange,
@@ -33,12 +85,13 @@ export async function POST(request: NextRequest) {
       message,
     } = body;
 
-    if (!name || !email || !companySlug) {
-      return Response.json(
-        { error: "name, email, and companySlug are required" },
-        { status: 422 }
-      );
+    // Only email is required — name and companySlug are optional (newsletter has neither)
+    if (!email) {
+      return Response.json({ error: "email is required" }, { status: 422 });
     }
+
+    const resolvedName = name?.trim() || "";
+    const resolvedSlug = companySlug?.trim() || lead_type || "dwt";
 
     // Build enriched service string from any extra fields passed
     const extras: string[] = [];
@@ -52,12 +105,11 @@ export async function POST(request: NextRequest) {
     if (message) extras.push(`Notes: ${message}`);
     const enrichedService = extras.join(" | ") || null;
 
-    // Log every submission so you can monitor without checking the DB manually
     console.log("[leads] New submission:", {
       lead_type: lead_type ?? "unknown",
-      name: name.trim(),
+      name: resolvedName,
       email: email.trim().toLowerCase(),
-      companySlug,
+      companySlug: resolvedSlug,
       service: enrichedService?.slice(0, 200),
       timestamp: new Date().toISOString(),
     });
@@ -68,10 +120,10 @@ export async function POST(request: NextRequest) {
       .from("leads")
       .insert([
         {
-          name: name.trim(),
+          name: resolvedName,
           email: email.trim().toLowerCase(),
           service: enrichedService,
-          company_slug: companySlug,
+          company_slug: resolvedSlug,
           lead_type: lead_type ?? null,
         },
       ])
@@ -79,17 +131,17 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (error) {
-      // If lead_type column doesn't exist yet, retry without it so existing submissions still work
+      // If lead_type column doesn't exist yet, retry without it
       if (error.message.includes("lead_type")) {
-        console.warn("[leads] lead_type column missing — retrying without it. Add the column to fix this.");
+        console.warn("[leads] lead_type column missing — retrying without it.");
         const { data: fallbackData, error: fallbackError } = await supabase
           .from("leads")
           .insert([
             {
-              name: name.trim(),
+              name: resolvedName,
               email: email.trim().toLowerCase(),
               service: enrichedService,
-              company_slug: companySlug,
+              company_slug: resolvedSlug,
             },
           ])
           .select()
@@ -100,6 +152,15 @@ export async function POST(request: NextRequest) {
           return Response.json({ error: fallbackError.message }, { status: 500 });
         }
 
+        // Send notification (non-blocking)
+        sendNotification({
+          name: resolvedName,
+          email: email.trim().toLowerCase(),
+          lead_type: lead_type ?? null,
+          source: resolvedSlug,
+          details: enrichedService,
+        }).catch((e) => console.error("[leads] Resend notification failed:", e));
+
         return Response.json({ success: true, leadId: fallbackData.id }, { status: 201 });
       }
 
@@ -107,8 +168,14 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: error.message }, { status: 500 });
     }
 
-    // TODO: Add email notification here (e.g. Resend, SendGrid, or Supabase webhook)
-    // so you receive an alert every time a lead is submitted.
+    // Send notification (non-blocking — lead is already saved, email failure is not fatal)
+    sendNotification({
+      name: resolvedName,
+      email: email.trim().toLowerCase(),
+      lead_type: lead_type ?? null,
+      source: resolvedSlug,
+      details: enrichedService,
+    }).catch((e) => console.error("[leads] Resend notification failed:", e));
 
     return Response.json({ success: true, leadId: data.id }, { status: 201 });
   } catch (err) {

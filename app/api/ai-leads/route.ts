@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -81,6 +82,47 @@ export async function POST(request: NextRequest) {
     if (leadsError) {
       // Non-fatal — ai_leads already saved, just log the sync failure
       console.error("[ai-leads] Failed to mirror to leads table:", leadsError);
+    }
+
+    // Send notification (non-blocking)
+    const apiKey = process.env.RESEND_API_KEY;
+    const toEmail = process.env.RESEND_TO_EMAIL;
+    if (apiKey && toEmail) {
+      const resend = new Resend(apiKey);
+      const from = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
+      const rows = [
+        ["Name", name.trim()],
+        ["Email", email.trim().toLowerCase()],
+        ["Business", business_name ?? "(not provided)"],
+        ["Website", website ?? "(not provided)"],
+        ["Industry", industry ?? "(not provided)"],
+        ["Need", service_need ?? "(not provided)"],
+        ["Budget", budget ?? "(not provided)"],
+        ...(message ? [["Notes", message] as [string, string]] : []),
+        ["Time", new Date().toISOString()],
+      ];
+      const tableRows = rows
+        .map(
+          ([k, v]) =>
+            `<tr><td style="padding:6px 12px;color:#9ca3af;font-size:13px;white-space:nowrap;">${k}</td><td style="padding:6px 12px;color:#f9fafb;font-size:13px;">${v}</td></tr>`
+        )
+        .join("");
+      const html = `
+        <div style="background:#0b0f1a;min-height:100vh;padding:40px 20px;font-family:sans-serif;">
+          <div style="max-width:520px;margin:0 auto;background:#111827;border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;">
+            <div style="background:#1d4ed8;padding:20px 24px;">
+              <p style="margin:0;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;">Digital Wealth Transfer</p>
+              <p style="margin:4px 0 0;color:#bfdbfe;font-size:18px;font-weight:700;">New AI Systems Inquiry</p>
+            </div>
+            <table style="width:100%;border-collapse:collapse;">${tableRows}</table>
+            <div style="padding:16px 24px;border-top:1px solid rgba(255,255,255,0.06);">
+              <p style="margin:0;color:#6b7280;font-size:11px;">Sent by DWT lead system · digitalwealthtransfer.com</p>
+            </div>
+          </div>
+        </div>`;
+      resend.emails
+        .send({ from, to: toEmail, subject: `New AI Systems Inquiry — ${name.trim()} (${email.trim().toLowerCase()})`, html })
+        .catch((e: unknown) => console.error("[ai-leads] Resend notification failed:", e));
     }
 
     return Response.json({ success: true, leadId: data.id }, { status: 201 });
