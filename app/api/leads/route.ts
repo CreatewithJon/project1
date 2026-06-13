@@ -17,7 +17,17 @@ async function sendNotification(fields: {
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const toEmail = process.env.RESEND_TO_EMAIL;
-  if (!apiKey || !toEmail) return;
+
+  console.log("[leads] sendNotification called:", {
+    RESEND_API_KEY_exists: Boolean(apiKey),
+    RESEND_TO_EMAIL_exists: Boolean(toEmail),
+    lead_type: fields.lead_type,
+  });
+
+  if (!apiKey || !toEmail) {
+    console.warn("[leads] sendNotification aborted: missing env vars.");
+    return;
+  }
 
   const resend = new Resend(apiKey);
   const from = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
@@ -57,7 +67,13 @@ async function sendNotification(fields: {
     </div>
   `;
 
-  await resend.emails.send({ from, to: toEmail, subject, html });
+  try {
+    const result = await resend.emails.send({ from, to: toEmail, subject, html });
+    console.log("[leads] Resend success:", { id: result.data?.id ?? "(no id returned)" });
+  } catch (e) {
+    console.error("[leads] Resend send failed:", e instanceof Error ? e.message : e);
+    throw e;
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -107,11 +123,12 @@ export async function POST(request: NextRequest) {
 
     console.log("[leads] New submission:", {
       lead_type: lead_type ?? "unknown",
-      name: resolvedName,
-      email: email.trim().toLowerCase(),
-      companySlug: resolvedSlug,
-      service: enrichedService?.slice(0, 200),
       timestamp: new Date().toISOString(),
+    });
+
+    console.log("[leads] Resend env check:", {
+      RESEND_API_KEY_exists: Boolean(process.env.RESEND_API_KEY),
+      RESEND_TO_EMAIL_exists: Boolean(process.env.RESEND_TO_EMAIL),
     });
 
     const supabase = getSupabase();
