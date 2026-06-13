@@ -34,10 +34,10 @@ export default function CategoryPage({ category, articles }: CategoryPageProps) 
             ))}
           </nav>
           <Link
-            href="/directory"
+            href="/blog"
             className="text-sm font-medium border border-zinc-300 text-zinc-700 px-4 py-1.5 rounded-md hover:bg-zinc-50 transition-colors"
           >
-            Directory
+            All Articles →
           </Link>
         </div>
       </header>

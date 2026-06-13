@@ -80,13 +80,13 @@ export default function BlogIndexPage() {
       <div className="border-t border-white/[0.06] bg-[#111827] py-12 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm text-[#A1A1AA] mb-3">
-            Want an AI system built for your business?
+            Stay in the signal. Weekly dispatch on AI, Bitcoin, and the digital economy.
           </p>
           <Link
-            href="/ai-systems"
+            href="/#newsletter"
             className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
           >
-            Get a Free System Audit →
+            Subscribe to the Newsletter →
           </Link>
         </div>
       </div>

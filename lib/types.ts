@@ -30,38 +30,3 @@ export interface Article {
   content: ContentBlock[];
 }
 
-// --- Directory types ---
-
-export type Category =
-  | "AI Services"
-  | "Enterprise AI Solutions"
-  | "AI Wealth Advisors"
-  | "Blockchain Infrastructure"
-  | "Digital Asset Custody"
-  | "Fintech Platforms"
-  | "Estate Tech";
-
-export type LasVegasArea =
-  | "Summerlin"
-  | "Henderson"
-  | "Downtown Las Vegas"
-  | "North Las Vegas"
-  | "Spring Valley"
-  | "Enterprise"
-  | "Las Vegas";
-
-export interface Company {
-  id: string;
-  slug: string;
-  name: string;
-  categories: Category[];
-  description: string;
-  website: string;
-  location: LasVegasArea;
-  tags: string[];
-  email?: string;
-  phone?: string;
-  isPremium?: boolean;
-  isFeatured?: boolean;
-  isClaimed?: boolean;
-}

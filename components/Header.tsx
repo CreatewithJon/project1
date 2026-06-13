@@ -8,18 +8,18 @@ export default function Header() {
         <Link href="/">
           <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={180} height={37} priority unoptimized style={{ height: "auto" }} />
         </Link>
-        <nav className="flex items-center gap-4 text-sm text-[#A1A1AA]">
-          <Link href="/ai-strategy" className="hidden sm:block hover:text-white transition-colors">
-            AI Strategy
+        <nav className="flex items-center gap-1 sm:gap-2 text-sm text-[#A1A1AA]">
+          <Link href="/blog" className="hidden sm:block hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
+            Read
           </Link>
-          <Link href="/directory" className="hover:text-white transition-colors">
-            Directory
+          <Link href="/#about" className="hidden sm:block hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/[0.06] transition-colors">
+            About
           </Link>
           <Link
-            href="/ai-strategy"
-            className="bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-500 transition-colors font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)]"
+            href="/#newsletter"
+            className="ml-2 bg-white/[0.07] border border-white/[0.12] text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-white/[0.12] transition-colors"
           >
-            Get Free Strategy
+            Subscribe
           </Link>
         </nav>
       </div>
