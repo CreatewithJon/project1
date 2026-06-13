@@ -205,7 +205,7 @@ const PARTNERSHIPS = [
   { label: "Co-created courses", icon: "🤝" },
   { label: "Guest workshops", icon: "🎤" },
   { label: "AI curriculum development", icon: "📐" },
-  { label: "Business AI implementation", icon: "⚙️" },
+  { label: "Applied AI research", icon: "🔬" },
   { label: "Educational case studies", icon: "📋" },
   { label: "Author / educator AI knowledge systems", icon: "🧠" },
 ];
@@ -663,7 +663,7 @@ export default function PortfolioPage() {
             Ways to Collaborate
           </h2>
           <p className="text-[#A1A1AA] text-sm mb-10 max-w-xl">
-            Open to educational partnerships, curriculum development, and applied AI implementation.
+            Areas of collaboration across Jonathan&apos;s work in AI education, curriculum development, and research.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -693,11 +693,11 @@ export default function PortfolioPage() {
         <div className="max-w-6xl mx-auto text-center">
           <SectionLabel>Contact</SectionLabel>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-            Let&rsquo;s Continue the Conversation
+            Follow the Work
           </h2>
           <p className="text-[#A1A1AA] text-sm mb-10 max-w-lg mx-auto">
-            If you&rsquo;re exploring AI education, workforce development, or curriculum
-            partnerships — reach out directly.
+            Jonathan writes about AI, Bitcoin, and the digital economy at Digital Wealth Transfer.
+            Connect on LinkedIn or follow the build on GitHub.
           </p>
 
           {/* Contact card */}

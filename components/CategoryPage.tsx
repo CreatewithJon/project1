@@ -51,7 +51,7 @@ export default function CategoryPage({ category, articles }: CategoryPageProps) 
           </p>
           <h1 className="text-3xl sm:text-4xl font-bold text-zinc-900 mb-3">{label}</h1>
           <p className="text-zinc-500 max-w-xl">
-            In-depth analysis and insights on {label.toLowerCase()} trends shaping the Las Vegas market.
+            Articles, research, and commentary on {label.toLowerCase()} — from Digital Wealth Transfer.
           </p>
         </div>
 

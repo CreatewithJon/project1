@@ -7,7 +7,7 @@ import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
 export const metadata: Metadata = {
   title: "Blog — Digital Wealth Transfer",
   description:
-    "Practical insights on AI, automation, Bitcoin, and building digital businesses — for entrepreneurs and local business owners.",
+    "Articles, research, and commentary on AI, Bitcoin, automation, and the digital economy — for people navigating what's happening.",
 };
 
 export default function BlogIndexPage() {
@@ -37,7 +37,7 @@ export default function BlogIndexPage() {
           </p>
           <h1 className="text-3xl font-bold text-white mb-3">Blog</h1>
           <p className="text-[#A1A1AA] text-sm leading-relaxed max-w-xl">
-            Practical insights on AI, automation, Bitcoin, and building digital businesses — for entrepreneurs and local business owners ready to leverage technology.
+            Articles, research, and commentary on AI, Bitcoin, automation, and the digital economy — for people navigating what&apos;s happening.
           </p>
         </div>
 
