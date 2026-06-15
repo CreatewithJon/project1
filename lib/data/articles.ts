@@ -1,363 +1,511 @@
 import type { Article, ArticleCategory } from "@/lib/types";
-import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
 
 export const articles: Article[] = [
-  // ─────────────────────────────────────────────────────────────────────────────
-  // FEATURED — anchors the homepage
-  // ─────────────────────────────────────────────────────────────────────────────
-  {
-    slug: "what-i-learned-building-ai-systems-for-local-businesses",
-    title: "What I Learned Building AI Systems for Local Businesses",
-    excerpt:
-      "The technology is rarely the hard part. Here's what actually breaks down when you try to bring AI into a real small business — and what that means for the people who own them.",
-    category: "ai-economy",
-    date: "2026-06-01",
-    readTime: 7,
-    featured: true,
-    content: [
-      {
-        type: "p",
-        text: "I spent the better part of the last year building AI systems for local businesses in Las Vegas. Lead capture tools, automated follow-up sequences, chatbots, appointment setters. The kind of stuff you see advertised everywhere now as the cure for every business problem.",
-      },
-      {
-        type: "p",
-        text: "I want to tell you what I actually learned — not the pitch version, but the honest one.",
-      },
-      {
-        type: "h2",
-        text: "The Technology Is Rarely the Problem",
-      },
-      {
-        type: "p",
-        text: "Every business owner I worked with had roughly the same assumption going in: that the hard part was the software. The AI. The integration. And every single one of them was wrong about that. The technology, in 2026, is shockingly capable and shockingly accessible. The hard part is the workflow that exists before and after the technology touches anything.",
-      },
-      {
-        type: "p",
-        text: "When a lead comes in at 11pm on a Tuesday and the AI sends an instant response — great. But if the business owner has no system for what happens when that lead responds at 7am Wednesday, the AI just generated a more efficient version of the same problem they already had. Speed without process is just faster chaos.",
-      },
-      {
-        type: "h2",
-        text: "What Most Business Owners Are Actually Missing",
-      },
-      {
-        type: "p",
-        text: "It's not automation. It's clarity about what they want automation to do. The businesses that got real results from AI implementation had one thing in common: they could describe the exact problem they wanted solved in a single sentence. The ones that struggled came in with vague ambitions — 'I want to grow' or 'I want better leads' — and couldn't define what a successful lead even looked like.",
-      },
-      {
-        type: "p",
-        text: "AI amplifies what's already there. A business with a clear offer, a defined customer, and a repeatable sales process gets dramatically better results from AI tools than a business that's still figuring out those fundamentals. This sounds obvious until you see how many businesses try to use AI to skip the fundamentals.",
-      },
-      {
-        type: "h2",
-        text: "The Opportunity That Most People Are Missing",
-      },
-      {
-        type: "p",
-        text: "Here's what surprised me most: the gap between businesses using AI and businesses not using it is widening faster than most people realize. I'm not talking about the Fortune 500. I'm talking about the med spa down the street and the roofing company and the insurance broker. The ones who figured out even basic AI-assisted follow-up in 2024 are converting at rates that feel almost unfair compared to the ones still doing everything manually.",
-      },
-      {
-        type: "p",
-        text: "The window to get ahead of this is not infinite. It never is with technology shifts. But it's also not closed — not yet, not for most local markets.",
-      },
-      {
-        type: "h2",
-        text: "What This Platform Is For",
-      },
-      {
-        type: "p",
-        text: "I built Digital Wealth Transfer because I kept having the same conversation over and over. Business owners, employees, regular people asking 'what's actually happening with AI? What do I actually need to know?' Not from a tech conference. Not from a vendor. From someone who's been inside the implementation and can tell them honestly what's working, what's overhyped, and what they need to pay attention to.",
-      },
-      {
-        type: "p",
-        text: "That's what I'm trying to do here. Every article on this platform comes from that same place: what I'm seeing, learning, and building — translated for people who aren't engineers but are smart enough to know that this transition is real.",
-      },
-    ],
-  },
 
-  // ─────────────────────────────────────────────────────────────────────────────
-  // DIGITAL ASSETS
-  // ─────────────────────────────────────────────────────────────────────────────
+  // ─── 1. FEATURED ──────────────────────────────────────────────────────────
   {
-    slug: "bitcoin-is-not-an-investment-its-a-decision",
-    title: "Bitcoin Is Not an Investment. It's a Decision.",
+    slug: "the-digital-shift-is-bigger-than-ai",
+    title: "The Digital Shift Is Bigger Than AI",
+    subtitle: "Why focusing only on artificial intelligence means missing the larger pattern.",
     excerpt:
-      "Every asset class asks you to trust a system. Bitcoin asks you to decide which system you trust — and why. That's a fundamentally different question.",
-    category: "digital-assets",
-    date: "2026-05-25",
-    readTime: 6,
-    content: [
-      {
-        type: "p",
-        text: "I've watched people buy Bitcoin as a speculative trade — trying to time the market, watching charts, looking for the right entry point. Some of them made money. Most of them didn't hold long enough to understand what they actually owned.",
-      },
-      {
-        type: "p",
-        text: "And I've watched people buy Bitcoin after understanding what it is — after really thinking through why it exists, what problem it solves, and what they believe about money. Those people hold differently. They're not checking the price every hour. They're thinking in years.",
-      },
-      {
-        type: "p",
-        text: "The difference isn't strategy. It's understanding.",
-      },
-      {
-        type: "h2",
-        text: "Every Asset Is a Bet on a System",
-      },
-      {
-        type: "p",
-        text: "When you hold dollars, you're betting that the U.S. government will manage monetary policy in a way that preserves your purchasing power. When you hold real estate, you're betting that land values will hold relative to inflation, that property rights will be enforced, and that the local economy will support demand. When you hold stocks, you're betting on corporate earnings growth and the stability of markets.",
-      },
-      {
-        type: "p",
-        text: "Every store of value is a vote of confidence in some system. Bitcoin is a bet that a system governed by math and physics — by fixed supply and distributed consensus — will hold value better than systems governed by committees and politics. That's it. That's the whole thesis.",
-      },
-      {
-        type: "h2",
-        text: "Why the Volatility Argument Misses the Point",
-      },
-      {
-        type: "p",
-        text: "The most common objection I hear is 'Bitcoin is too volatile to be money.' And it's true — the price swings are significant, especially over short time horizons. But the people making this argument are measuring Bitcoin against its current use case as a savings vehicle, not against the trajectory of its adoption.",
-      },
-      {
-        type: "p",
-        text: "Gold was volatile too, in its early days as a monetary instrument. Every technology that becomes infrastructure goes through a period where its price discovery looks chaotic from the outside. Bitcoin is 15 years old. The dollar has been the world's reserve currency for 80. These are different points on very different timelines.",
-      },
-      {
-        type: "h2",
-        text: "The Question Worth Sitting With",
-      },
-      {
-        type: "p",
-        text: "I'm not trying to sell you on Bitcoin. What I'm trying to do is describe the actual decision clearly, because I think most people who haven't looked into it haven't had it described clearly.",
-      },
-      {
-        type: "p",
-        text: "The question isn't 'is Bitcoin going up?' The question is: 'Do I trust a fixed-supply, mathematically governed, globally distributed monetary network more or less than I trust central banks to protect my purchasing power over the next 20 years?' Answer that honestly, based on your own read of history and your own financial situation, and you'll know what to do.",
-      },
-      {
-        type: "p",
-        text: "That's the decision. Not the price. The decision.",
-      },
-    ],
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────────
-  // FINANCIAL SHIFT — personal essay / founder origin
-  // ─────────────────────────────────────────────────────────────────────────────
-  {
-    slug: "why-i-built-digital-wealth-transfer",
-    title: "Why I Built Digital Wealth Transfer",
-    excerpt:
-      "I didn't grow up around money or technology. I grew up watching both of them work against people who didn't understand them. That's what this is about.",
+      "AI is real and it's changing everything. But if you only focus on AI, you're missing the larger transition — one that has been building for forty years and is now accelerating faster than most people can track.",
     category: "financial-shift",
-    date: "2026-05-18",
-    readTime: 5,
+    status: "published",
+    date: "2026-06-10",
+    author: { name: "Jonathan Cardona", title: "Founder, Digital Wealth Transfer" },
+    readTime: 8,
+    featured: true,
+    tags: ["AI", "digital-transition", "economy", "technology"],
+    relatedSlugs: ["the-next-workforce-revolution", "bitcoin-ownership-personal-sovereignty"],
     content: [
       {
         type: "p",
-        text: "I grew up in East LA. My family didn't have a financial advisor. We didn't have stock accounts. The closest thing to a wealth conversation I remember was my mom explaining why we couldn't afford something. Money was something you worried about, not something you thought about strategically.",
-      },
-      {
-        type: "p",
-        text: "I don't say that to make you feel something. I say it because it's the reason this platform exists.",
+        text: "We are in the middle of the most significant economic reorganization in a century. Most people can feel it. Few can articulate it. And the ones who are most focused on artificial intelligence — the tool everyone is talking about — are looking at the symptom, not the system.",
       },
       {
         type: "h2",
-        text: "The Jobs That Taught Me What I Actually Needed to Know",
+        text: "The Shift That Started Forty Years Ago",
       },
       {
         type: "p",
-        text: "I spent years in sales, banking, and customer support before I ever touched a line of code or understood what Bitcoin was. In banking, I watched people make decisions about their money based on whatever the person behind the counter told them — because they had no framework for evaluating it themselves. In customer support, I watched companies use complexity as a moat. Keep things confusing enough and people stop asking questions.",
+        text: "The digital transition didn't begin with ChatGPT. It didn't begin with smartphones. It began the moment information stopped being expensive to copy, and started being nearly free to distribute.",
       },
       {
         type: "p",
-        text: "At Tesla, I saw what happens when technology is communicated clearly, when the person selling it understands it deeply enough to translate it for someone who doesn't. It changes the quality of the decision the buyer makes. They're not just buying a car. They're making an informed choice about their energy, their technology, their future.",
+        text: "That shift — from atoms to bits, from physical constraints to digital abundance — has been dismantling and rebuilding industries for four decades. The music industry collapsed in the 2000s. Retail reorganized around logistics networks. Media fragmented into infinite channels. Finance started moving onto rails that don't require banks to clear.",
       },
       {
         type: "p",
-        text: "That's what was missing for AI and Bitcoin and everything else that's happening right now. Clear translation for people who aren't experts but deserve to understand.",
+        text: "Each of these waves felt like a separate event. They weren't. They were chapters of the same story.",
       },
       {
         type: "h2",
-        text: "Why This Moment Matters",
+        text: "AI Is Not the Shift. AI Is the Accelerant.",
       },
       {
         type: "p",
-        text: "We are in the middle of the most significant economic and technological transition of our lifetime. AI is restructuring what work looks like. Bitcoin and digital assets are challenging what money looks like. Automation is changing what a business can be with a small team. The tools are becoming available to regular people — but the understanding isn't spreading at the same rate.",
+        text: "Artificial intelligence is the most powerful tool to emerge from the digital age. But it's still a tool. And tools amplify the direction you're already moving.",
+      },
+      {
+        type: "pullquote",
+        text: "Every major shift in how value is created starts with a shift in how information moves. AI just made information move faster than any of us were ready for.",
       },
       {
         type: "p",
-        text: "That gap — between what's possible and what most people understand is possible — is where I want to work. Not by dumbing things down. By being honest, specific, and clear. By showing my work. By writing from inside the transition instead of observing it from a distance.",
+        text: "What AI has done is compress the timeline. Changes that would have taken twenty years are happening in five. Business models that seemed durable are becoming obsolete in months. The window between 'this is coming' and 'this already happened' has closed dramatically.",
+      },
+      {
+        type: "p",
+        text: "If you're waiting for things to stabilize before you adapt, you are adapting to a world that no longer exists.",
       },
       {
         type: "h2",
-        text: "What Digital Wealth Transfer Is",
+        text: "The Three Layers of the Transition",
       },
       {
         type: "p",
-        text: "This is a media and education platform. I write about AI, Bitcoin, automation, and digital business — for people who are figuring this out on their own, without institutional backing or a CS degree. Everything here comes from what I'm actually seeing, building, and learning.",
-      },
-      {
-        type: "p",
-        text: "There's no hidden agenda. I'm not a venture-backed startup trying to sell you a product. I'm a first-gen builder in Las Vegas trying to document something real while it's happening — and make it useful for people who look like where I came from.",
-      },
-    ],
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────────
-  // AI ECONOMY — Sovereign OS / personal intelligence
-  // ─────────────────────────────────────────────────────────────────────────────
-  {
-    slug: "im-building-a-personal-intelligence-operating-system",
-    title: "I'm Building a Personal Intelligence Operating System. Here's Why.",
-    excerpt:
-      "Every professional tool I use is optimized for someone else's business model. I'm done renting my own brain to subscription software. Here's what I'm building instead.",
-    category: "ai-economy",
-    date: "2026-06-08",
-    readTime: 6,
-    content: [
-      {
-        type: "p",
-        text: "I use about a dozen tools every day to run my work. A notes app. A task manager. A calendar. An AI assistant. A browser full of tabs I'm never going to close. A CRM I half-finished setting up. A dashboard I check sometimes.",
-      },
-      {
-        type: "p",
-        text: "None of them talk to each other. None of them are optimized for how I actually think. All of them are collecting data about my behavior to sell me more features or better ads or upsell me to an enterprise plan.",
-      },
-      {
-        type: "p",
-        text: "I decided to stop complaining about this and start building something different.",
-      },
-      {
-        type: "h2",
-        text: "The Idea: A System That Thinks Like You Do",
-      },
-      {
-        type: "p",
-        text: "The concept I've been working toward is what I'm calling Sovereign OS — a personal intelligence operating system built around one person's goals, thinking style, and information environment. Not a productivity suite. Not another note-taking app. A system that integrates AI assistance, planning infrastructure, financial signals, and content creation tools into one coherent interface — one that you own, one that runs for you instead of monetizing you.",
-      },
-      {
-        type: "p",
-        text: "The prototype I have running right now pulls in Bitcoin price data, runs a Pomodoro focus timer, tracks habits, lets me plan weekly and monthly at multiple time horizons, and has an AI assistant that has context on what I'm working on. It's not polished. But it works — and working inside it every day feels fundamentally different from the fragmented tool stack I used before.",
-      },
-      {
-        type: "h2",
-        text: "Why Sovereignty Matters Here",
-      },
-      {
-        type: "p",
-        text: "The word I keep coming back to is sovereignty. Your attention, your data, your decision-making process — these are the most valuable assets you have as a knowledge worker. And right now, almost every tool you use is designed to extract value from those assets rather than compound them.",
-      },
-      {
-        type: "p",
-        text: "A personal intelligence OS flips that relationship. Instead of your tools being optimized for their company's growth metrics, they're optimized for yours. That's a different design philosophy, and it produces a fundamentally different product.",
-      },
-      {
-        type: "h2",
-        text: "What I'm Building Toward",
-      },
-      {
-        type: "p",
-        text: "Sovereign OS will eventually be a standalone product — its own domain, its own deployment, its own identity. Right now it lives as a working prototype. I use it every day. I'm documenting the build here on DWT as I go.",
-      },
-      {
-        type: "p",
-        text: "If you want to follow the build — or you're thinking about the same kinds of questions about your own tooling and attention — subscribe to the newsletter. I'll be writing about every meaningful decision in the build process: what I tried, what broke, what actually worked.",
-      },
-    ],
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────────
-  // OPPORTUNITIES — digital empowerment / accessibility
-  // ─────────────────────────────────────────────────────────────────────────────
-  {
-    slug: "you-dont-need-a-cs-degree-to-build-with-ai",
-    title: "You Don't Need a CS Degree to Build With AI",
-    excerpt:
-      "The barrier to building with AI is lower than it has ever been — and it keeps dropping. What's actually stopping most people isn't technical. It's psychological.",
-    category: "opportunities",
-    date: "2026-05-10",
-    readTime: 5,
-    content: [
-      {
-        type: "p",
-        text: "I taught myself how to code in my 20s, after years in sales and banking. I didn't go to a bootcamp. I didn't have a CS degree. I used YouTube, documentation, and a willingness to build things that didn't work for a while.",
-      },
-      {
-        type: "p",
-        text: "That was hard. It required a particular kind of persistence that most people reasonably don't have time for.",
-      },
-      {
-        type: "p",
-        text: "What's happening with AI tools right now is different — and I don't think enough people have fully processed how different it is.",
-      },
-      {
-        type: "h2",
-        text: "The Shift That's Already Happened",
-      },
-      {
-        type: "p",
-        text: "A year ago, building an automated lead capture system for a small business meant understanding APIs, writing code, connecting services through tools like Zapier or Make, and debugging when things broke. You needed either technical skills or the money to hire someone who had them.",
-      },
-      {
-        type: "p",
-        text: "Today, I can describe what I want in plain English to an AI assistant, and it will write the code, explain what it does, tell me where to put it, and help me debug it when it breaks. The technical barrier hasn't just been lowered — it's been restructured. You don't need to know how to code anymore. You need to know what you want to build and why.",
-      },
-      {
-        type: "h2",
-        text: "What the Barrier Actually Is Now",
-      },
-      {
-        type: "p",
-        text: "The real barrier to building with AI in 2026 isn't technical literacy. It's problem clarity and willingness to experiment. You need to be able to describe a specific problem with enough precision that an AI tool can help you solve it. And you need to be willing to be wrong a few times before you get it right.",
-      },
-      {
-        type: "p",
-        text: "That's a learnable skill. It doesn't require a computer science background. It requires clear thinking, patience, and the willingness to try something that might not work on the first attempt.",
-      },
-      {
-        type: "h2",
-        text: "Who This Is Actually For",
+        text: "To understand where you are in this shift, it helps to think in three layers.",
       },
       {
         type: "ul",
         items: [
-          "The entrepreneur who has a process they do manually every week and knows there has to be a better way",
-          "The small business owner who keeps losing leads because they can't respond fast enough",
-          "The creative who spends more time on admin than on the work that actually matters",
-          "The employee who sees inefficiency everywhere but doesn't know how to start fixing it",
-          "Anyone who has ever thought 'there should be a tool for this' — because now you might be able to build it",
+          "Infrastructure: who controls the rails — the networks, the compute, the protocols — that everything else runs on",
+          "Intelligence: who controls the systems that make decisions, generate content, and drive automation",
+          "Ownership: who holds real assets — value stores, property, IP — in a world where digital scarcity becomes technically enforceable",
+        ],
+      },
+      {
+        type: "p",
+        text: "Most people have focused entirely on the infrastructure layer — who builds the chips, who trains the models, who wins the cloud wars. Those are important questions. But they're not the only questions.",
+      },
+      {
+        type: "h2",
+        text: "Where the Opportunity Lives",
+      },
+      {
+        type: "callout",
+        label: "The Pattern",
+        text: "The most accessible opportunity in this transition isn't building foundation models or winning the infrastructure race. It's understanding how to use these tools — and helping others do the same.",
+      },
+      {
+        type: "p",
+        text: "The people who will benefit most from this shift are not necessarily the ones who build the technology. They are the ones who understand it earliest and position themselves accordingly. That's what Digital Wealth Transfer is documenting.",
+      },
+      {
+        type: "h2",
+        text: "What to Do With This",
+      },
+      {
+        type: "p",
+        text: "You don't need to become an engineer. You don't need to raise venture capital. You need to understand the pattern you're living inside, identify which layer of the transition is most relevant to your current work or business, and begin building the skills, systems, or assets that belong to where things are going — not where they've been.",
+      },
+      {
+        type: "p",
+        text: "That's the work. And it's available to anyone willing to look at what's actually happening.",
+      },
+    ],
+  },
+
+  // ─── 2 ────────────────────────────────────────────────────────────────────
+  {
+    slug: "building-ai-without-a-cs-degree",
+    title: "What I Learned Building AI Systems Without a Computer Science Degree",
+    subtitle: "The barrier to entry is lower than you've been told.",
+    excerpt:
+      "I built functional AI systems, automation workflows, and software products. I have no computer science degree. Here's what I actually learned about who can build with AI — and what actually matters.",
+    category: "ai-economy",
+    status: "published",
+    date: "2026-06-05",
+    author: { name: "Jonathan Cardona", title: "Founder, Digital Wealth Transfer" },
+    readTime: 7,
+    featured: false,
+    tags: ["AI", "self-taught", "building", "education"],
+    relatedSlugs: ["the-digital-shift-is-bigger-than-ai", "building-sovereign-os"],
+    content: [
+      {
+        type: "p",
+        text: "I built functional AI systems. I created automation workflows that run businesses. I've shipped software that real people use. I have no computer science degree.",
+      },
+      {
+        type: "p",
+        text: "This is not a flex. It's a data point — about what the barrier to entry actually is, and what most people are getting wrong about who can build with AI.",
+      },
+      {
+        type: "h2",
+        text: "How I Started",
+      },
+      {
+        type: "p",
+        text: "My background is sales, banking, and customer support. I spent years in roles where the job was understanding what someone needed, figuring out the most direct path to deliver it, and communicating clearly. None of that felt like preparation for building software. Looking back, it was all I needed.",
+      },
+      {
+        type: "p",
+        text: "I got interested in AI not as a technology enthusiast, but as someone looking for leverage. I was running systems manually — following up with customers, organizing information, writing content — and I kept thinking: this should be automated. The question was whether I could be the one to automate it.",
+      },
+      {
+        type: "h2",
+        text: "What I Discovered When I Started Building",
+      },
+      {
+        type: "p",
+        text: "The first thing I discovered is that large language models are remarkably good at translating intent into action if you know how to describe what you want. That's not a technical skill. That's a communication skill.",
+      },
+      {
+        type: "pullquote",
+        text: "The most important skill for building with AI isn't coding. It's knowing exactly what you want and being able to describe it with precision.",
+      },
+      {
+        type: "p",
+        text: "The second thing I discovered is that most real business problems don't require custom-trained models or complex infrastructure. They require clear thinking about what the problem actually is, what a good solution looks like, and how to string together existing tools in a sensible sequence.",
+      },
+      {
+        type: "h2",
+        text: "The Real Barriers",
+      },
+      {
+        type: "p",
+        text: "The barriers I encountered had nothing to do with programming knowledge. They were:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Not knowing what was already possible — so I kept trying to build things that existed",
+          "Underestimating how much of software is just data management — inputs, transformations, outputs",
+          "Overcomplicating the first version — shipping nothing because I was designing for scale before I had a single user",
+          "Not having a specific problem to solve — exploring tools is useful, but nothing teaches you faster than needing to solve something real",
         ],
       },
       {
         type: "h2",
-        text: "The Honest Caveat",
+        text: "What Actually Matters",
       },
       {
         type: "p",
-        text: "I'm not saying this is trivial. There's still a learning curve. You'll still hit moments where you don't know why something isn't working. The difference is that you now have an extremely capable collaborator helping you figure it out, available at any hour, infinitely patient, and free or nearly free to access.",
+        text: "You need product sense more than technical knowledge. Product sense is the ability to look at a problem, define the simplest possible solution, and know when something is working well enough to ship.",
       },
       {
         type: "p",
-        text: "The people who figured this out early are already pulling ahead. The gap between those who are building with AI and those who aren't is real, and it's widening. I'd rather write about this now — while there's still time to catch up — than document the gap after it's permanent.",
+        text: "You need persistence through confusion. Building with AI tools is often uncomfortable. Things break unexpectedly. Documentation is sparse or outdated. You spend an hour solving what turns out to be a typo. Getting comfortable being confused is the skill.",
+      },
+      {
+        type: "callout",
+        label: "The honest truth",
+        text: "Stop waiting to feel ready. The best way to learn to build with AI is to have something you need to build. If you don't have a real problem, borrow one from someone who does.",
+      },
+      {
+        type: "h2",
+        text: "What This Means for Non-Technical People",
+      },
+      {
+        type: "p",
+        text: "The gap between people who build software and people who don't is closing faster than most of the software industry wants to acknowledge. That's uncomfortable for people who spent years acquiring technical credentials. It's very good news for everyone else.",
+      },
+      {
+        type: "p",
+        text: "AI tools are becoming interfaces that respond to intent, not just syntax. The person who knows what they want to build, and why, has never been more capable of actually building it.",
+      },
+      {
+        type: "p",
+        text: "I'm not saying credentials don't matter. I'm saying they matter less than they used to, in specific domains, and the trend is moving in one direction. Learn to use the tools. Build something real. Iterate. The technical barrier is lower than you think.",
+      },
+    ],
+  },
+
+  // ─── 3 ────────────────────────────────────────────────────────────────────
+  {
+    slug: "bitcoin-ownership-personal-sovereignty",
+    title: "Bitcoin, Ownership, and the Future of Personal Sovereignty",
+    subtitle: "This isn't about price. It's about what it means to actually own something.",
+    excerpt:
+      "Most Bitcoin writing either evangelizes or speculates. I'm interested in something else: the underlying question of what it means to own an asset in an increasingly digital world — and why that question matters more than most people realize.",
+    category: "digital-assets",
+    status: "published",
+    date: "2026-05-28",
+    author: { name: "Jonathan Cardona", title: "Founder, Digital Wealth Transfer" },
+    readTime: 9,
+    featured: false,
+    tags: ["Bitcoin", "ownership", "sovereignty", "wealth"],
+    relatedSlugs: ["the-digital-shift-is-bigger-than-ai", "the-next-workforce-revolution"],
+    content: [
+      {
+        type: "p",
+        text: "I want to be careful about how I write this, because most Bitcoin writing falls into one of two traps: technical evangelism that assumes everyone agrees Bitcoin is the only thing that matters, or investment advice that treats it like a speculative asset. Neither of those is what I'm interested in.",
+      },
+      {
+        type: "p",
+        text: "What I'm interested in is the underlying question: in an increasingly digital world, what does it mean to actually own something?",
+      },
+      {
+        type: "h2",
+        text: "The Ownership Problem",
+      },
+      {
+        type: "p",
+        text: "We have outsourced most of our financial life to institutions. Banks hold our money. Brokerages hold our investments. Payment networks intermediate every transaction. This feels normal because it has been normal for most of our lives.",
+      },
+      {
+        type: "p",
+        text: "But there is a meaningful difference between holding a claim on an asset and holding the asset. If you have money in a bank, you hold a claim. The bank holds the money. This distinction is usually invisible — until it isn't.",
+      },
+      {
+        type: "pullquote",
+        text: "The risk you don't see is still risk. It's just someone else's problem until it becomes yours.",
+      },
+      {
+        type: "p",
+        text: "History has a long record of institutions failing, governments inflating currencies, and custodians losing what they were supposed to protect. These aren't fringe events. They are periodic features of systems built on trust in intermediaries.",
+      },
+      {
+        type: "h2",
+        text: "What Bitcoin Actually Is",
+      },
+      {
+        type: "p",
+        text: "Bitcoin is a system for holding and transferring value without requiring a trusted intermediary. The technical innovation — the blockchain, the proof of work, the cryptographic keys — exists to solve one problem: how do you transfer something of value over a network, to someone you've never met, without needing a third party to verify it?",
+      },
+      {
+        type: "blockquote",
+        text: "Not your keys, not your coins.",
+        attribution: "Bitcoin community maxim",
+      },
+      {
+        type: "callout",
+        label: "Self-custody defined",
+        text: "Self-custody means you hold your own private keys. Not an exchange. Not a broker. You. This isn't a slogan — it's a technical description of how ownership works on this network. An exchange holding your Bitcoin is structurally identical to a bank holding your dollars.",
+      },
+      {
+        type: "h2",
+        text: "Sovereignty as a Practice",
+      },
+      {
+        type: "p",
+        text: "Holding Bitcoin in self-custody is not a political statement. It's a practical decision about who you trust and how much. It's the same decision you make when you choose whether to keep cash at home or deposit it with a bank — except the math is different and the counterparty risk is more explicit.",
+      },
+      {
+        type: "p",
+        text: "I think about Bitcoin the way I think about any sovereignty practice: you don't need to go to an extreme to benefit from the principle. The goal isn't to opt out of all institutions forever. The goal is to understand what you control and what you don't, and make deliberate choices about the tradeoff.",
+      },
+      {
+        type: "h2",
+        text: "Where This Goes",
+      },
+      {
+        type: "p",
+        text: "The broader question Bitcoin raises — how do we create enforceable digital scarcity and real ownership of digital assets — is one that the entire financial and technological world is working through. NFTs were a chaotic early experiment. Tokenized real-world assets are a more serious one. Central bank digital currencies are the government's answer to a question only some people were asking.",
+      },
+      {
+        type: "p",
+        text: "Whatever comes next, the underlying question of digital ownership is not going away. Bitcoin is the clearest current answer to that question — imperfect, early, but honest about what it is.",
+      },
+      {
+        type: "p",
+        text: "The people who understand this transition earliest will be the ones best positioned when it resolves. That's not investment advice. It's a pattern I see in every major technological shift.",
+      },
+    ],
+  },
+
+  // ─── 4 ────────────────────────────────────────────────────────────────────
+  {
+    slug: "building-sovereign-os",
+    title: "Building Sovereign OS: Why I Needed a Personal Intelligence System",
+    subtitle: "Most tools weren't built for the way I think. So I built my own.",
+    excerpt:
+      "I spend a significant part of every day using tools that were not designed for me. Sovereign OS came out of frustration with that — and a question I kept coming back to: if AI can do almost anything with the right context, why do I still operate like it's 2015?",
+    category: "ai-economy",
+    status: "published",
+    date: "2026-05-20",
+    author: { name: "Jonathan Cardona", title: "Founder, Digital Wealth Transfer" },
+    readTime: 8,
+    featured: false,
+    tags: ["Sovereign OS", "productivity", "AI", "tools", "building"],
+    relatedSlugs: ["building-ai-without-a-cs-degree", "the-digital-shift-is-bigger-than-ai"],
+    content: [
+      {
+        type: "p",
+        text: "I spend a significant part of every day using tools that were not designed for me. They were designed for a generic user — or for a specific enterprise customer — or for a venture capitalist's vision of what knowledge work should look like. Very few of them were built around my actual life.",
+      },
+      {
+        type: "p",
+        text: "Sovereign OS came out of frustration with that, and a question I kept coming back to: if AI can do almost anything with the right context, why do I still operate like it's 2015?",
+      },
+      {
+        type: "h2",
+        text: "The Problem I Was Trying to Solve",
+      },
+      {
+        type: "p",
+        text: "My workflow was fragmented across too many applications. Notes in one place, tasks in another, market data in a third, content ideas scattered across voice memos and text files. Every morning I spent time re-establishing context — what was I working on, what was the priority, what did I need to track?",
+      },
+      {
+        type: "p",
+        text: "That time is not nothing. And more importantly, the cognitive cost of holding too much in your head is real. Every system you have to manually check is a drain on the attention you could be using to think.",
+      },
+      {
+        type: "pullquote",
+        text: "The goal is not to build an app. It's to build a system that thinks with you instead of requiring you to think about it.",
+      },
+      {
+        type: "h2",
+        text: "What I Tried First",
+      },
+      {
+        type: "p",
+        text: "I tried the obvious things. Notion. Obsidian. Linear. Various AI writing tools. Productivity systems with elaborate tagging structures. Each one solved a piece of the problem and created new ones.",
+      },
+      {
+        type: "p",
+        text: "The issue wasn't any individual tool. The issue was that no tool was designed to be the connective layer between all of them — to hold context across domains, to surface what was relevant when it was relevant, and to help me think rather than just store.",
+      },
+      {
+        type: "h2",
+        text: "What I'm Building",
+      },
+      {
+        type: "p",
+        text: "Sovereign OS is a personal intelligence operating system. Currently it lives as a private web application. It has a Bitcoin price tracker, a Pomodoro timer, a habit tracker, an AI assistant with context about my work and goals, and a content analysis engine that helps me identify what's worth writing about.",
+      },
+      {
+        type: "callout",
+        label: "The philosophy",
+        text: "You should own your tools the way you own your home, not rent them the way you rent an apartment. Every subscription is a vote for someone else's priorities over yours.",
+      },
+      {
+        type: "p",
+        text: "None of these features are remarkable individually. What makes them useful together is that they're in one place, designed around my actual workflow, and don't require a subscription to a company I don't control.",
+      },
+      {
+        type: "h2",
+        text: "Why This Connects to DWT",
+      },
+      {
+        type: "p",
+        text: "Sovereign OS started as a personal project. It's becoming the infrastructure layer for Digital Wealth Transfer's content operation. The Content Engine module — which I'm actively building — will allow me to research, draft, review, and publish directly from within the system.",
+      },
+      {
+        type: "p",
+        text: "Eventually, content created in Sovereign OS will automatically flow to DWT. Research, drafts, editing — all inside a system I own. Publication — on a platform I control.",
+      },
+      {
+        type: "p",
+        text: "I'm documenting this build as part of the DWT narrative because I think the tools you use to think and create are as important as what you think and create. Sovereignty starts with your tools.",
+      },
+    ],
+  },
+
+  // ─── 5 ────────────────────────────────────────────────────────────────────
+  {
+    slug: "the-next-workforce-revolution",
+    title: "The Next Workforce Revolution Is Already Here",
+    subtitle: "It's not about more jobs or fewer jobs. It's about which side of the shift you're on.",
+    excerpt:
+      "The conversation about AI and work has settled into two predictable camps — both making the same error. The real question isn't how many jobs AI will eliminate. It's what kind of work survives, what kind emerges, and how fast the window to adapt is closing.",
+    category: "opportunities",
+    status: "published",
+    date: "2026-05-12",
+    author: { name: "Jonathan Cardona", title: "Founder, Digital Wealth Transfer" },
+    readTime: 8,
+    featured: false,
+    tags: ["workforce", "automation", "AI", "opportunity", "adaptation"],
+    relatedSlugs: ["the-digital-shift-is-bigger-than-ai", "building-ai-without-a-cs-degree"],
+    content: [
+      {
+        type: "p",
+        text: "The conversation about AI and work has settled into two predictable camps. One says AI will eliminate most jobs within a decade. The other says technology has always created more jobs than it destroyed, so relax.",
+      },
+      {
+        type: "p",
+        text: "Both camps are making the same error: they're treating this as a simple quantity question — more jobs or fewer jobs — when the real question is a quality question. What kind of work survives, what kind emerges, and what gets automated away?",
+      },
+      {
+        type: "h2",
+        text: "What's Actually Happening",
+      },
+      {
+        type: "p",
+        text: "Most of what I see happening isn't mass elimination. It's compression. Tasks that took two hours now take twenty minutes. Work that required a team of five can be done by a team of two with the right tools. The output per person is increasing — which means you need fewer people to produce the same result.",
+      },
+      {
+        type: "p",
+        text: "That's not automation replacing humans. That's automation amplifying some humans and making others redundant. The difference matters enormously for how you think about your own position.",
+      },
+      {
+        type: "pullquote",
+        text: "The question is not whether AI will take your job. The question is whether someone using AI will do your job better than you — and what you're doing about that.",
+      },
+      {
+        type: "h2",
+        text: "The Three Categories of Change",
+      },
+      {
+        type: "p",
+        text: "Based on what I'm observing across industries, work is splitting into three categories:",
+      },
+      {
+        type: "ul",
+        items: [
+          "Automated: routine cognitive work that follows clear patterns — data entry, standard documents, templated communications, basic analysis. This is going away fast.",
+          "Augmented: judgment-heavy work where AI dramatically increases the output of skilled humans — writing, design, analysis, strategy, sales, customer relationships. This is where most of the opportunity is.",
+          "Insulated: work that requires physical presence, human trust, or real-world context that AI can't currently replicate — caregiving, skilled trades, leadership, entrepreneurship. More durable than people expect.",
+        ],
+      },
+      {
+        type: "h2",
+        text: "What This Means for Where You Are Now",
+      },
+      {
+        type: "p",
+        text: "If your work falls in the first category, the timeline is short. Not years — months. The question is what skills you are building toward the second or third category.",
+      },
+      {
+        type: "p",
+        text: "If your work is in the second category, the opportunity is significant. Learning to use AI tools effectively in your domain is the highest-leverage investment you can make right now. The person who can produce what a team of five produced — and at higher quality — has an economic position that is very different from a year ago.",
+      },
+      {
+        type: "callout",
+        label: "The window",
+        text: "The window to be an early adopter in your field is closing. Early mover advantage in AI-augmented work is real and it's compressing fast. The people who adapted in 2024 and 2025 have a meaningful head start on the people who are still deciding whether this is real.",
+      },
+      {
+        type: "h2",
+        text: "What I'm Paying Attention To",
+      },
+      {
+        type: "p",
+        text: "The most interesting developments aren't in the foundation model space — it's in how AI gets applied to specific domains. Legal research. Medical documentation. Financial analysis. Content production. Customer communication. In each of these domains, a small number of early adopters are building a productivity advantage that will be very difficult to close.",
+      },
+      {
+        type: "h2",
+        text: "The Bottom Line",
+      },
+      {
+        type: "p",
+        text: "This is not a call to panic. It's a call to look clearly at what's happening and make deliberate choices about where you want to be positioned when this phase of the transition resolves.",
+      },
+      {
+        type: "p",
+        text: "The workforce revolution isn't coming. It's here. The only question is which side of it you're on.",
       },
     ],
   },
 ];
 
+// ─── Data access (called by lib/content.ts adapter) ──────────────────────────
+
 export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((a) => a.slug === slug);
-}
-
-export function getArticlesByCategory(category: ArticleCategory): Article[] {
-  return articles.filter((a) => a.category === category);
 }
 
 export function getFeaturedArticles(): Article[] {
   return articles.filter((a) => a.featured);
 }
 
-export { ARTICLE_CATEGORY_LABELS };
+export function getArticlesByCategory(category: ArticleCategory): Article[] {
+  return articles.filter((a) => a.category === category && a.status === "published");
+}
+
+// Re-exports for category pages and CategoryPage component
+export { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
+export type { ArticleCategory } from "@/lib/types";
 
 export const ALL_ARTICLE_CATEGORIES: ArticleCategory[] = [
   "ai-economy",

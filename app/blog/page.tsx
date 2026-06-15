@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { articles } from "@/lib/data/articles";
+import { getAllPublishedArticles } from "@/lib/content";
 import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
+import SiteNav from "@/components/dwt/SiteNav";
+import SignalLine from "@/components/dwt/SignalLine";
+import RevealOnScroll from "@/components/dwt/RevealOnScroll";
 
 export const metadata: Metadata = {
   title: "Blog — Digital Wealth Transfer",
@@ -10,90 +13,147 @@ export const metadata: Metadata = {
     "Articles, research, and commentary on AI, Bitcoin, automation, and the digital economy — for people navigating what's happening.",
 };
 
-export default function BlogIndexPage() {
-  const sorted = [...articles].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+export default async function BlogIndexPage() {
+  const articles = await getAllPublishedArticles();
 
   return (
-    <div className="min-h-screen bg-[#0B0F1A] font-sans text-[#F9FAFB]">
+    <div className="min-h-screen font-sans" style={{ background: "#080C14" }}>
+      <SiteNav />
+      <SignalLine />
 
-      {/* Nav */}
-      <header className="border-b border-white/[0.06] bg-[#0B0F1A]/90 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/">
-            <Image src="/brand/logo.svg" alt="Digital Wealth Transfer" width={160} height={33} priority unoptimized style={{ height: "auto" }} />
-          </Link>
-          <span className="text-sm text-[#A1A1AA]">Blog</span>
+      <main className="px-6 pt-36 pb-28">
+        <div className="max-w-3xl mx-auto">
+
+          {/* Header */}
+          <RevealOnScroll>
+            <span className="inline-block text-[10px] font-semibold uppercase tracking-[0.24em] mb-6" style={{ color: "rgba(255,255,255,0.2)" }}>
+              Digital Wealth Transfer · All articles
+            </span>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={80}>
+            <h1
+              className="font-bold text-white tracking-[-0.025em] leading-[1.06] mb-4"
+              style={{ fontSize: "clamp(34px, 5vw, 52px)" }}
+            >
+              The Signal
+            </h1>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={160}>
+            <p className="text-base leading-relaxed mb-16 max-w-lg" style={{ color: "rgba(240,244,255,0.38)" }}>
+              Articles, research, and commentary on AI, Bitcoin, automation, and
+              the digital economy — for people navigating what&apos;s happening.
+            </p>
+          </RevealOnScroll>
+
+          {/* Article list */}
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+            {articles.map((article, i) => (
+              <RevealOnScroll key={article.slug} delay={i * 50}>
+                <article
+                  className="py-10"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
+                >
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <Link
+                      href={`/${article.category}`}
+                      className="text-[10px] font-bold uppercase tracking-[0.18em] text-blue-400 hover:text-blue-300 transition-colors"
+                    >
+                      {ARTICLE_CATEGORY_LABELS[article.category]}
+                    </Link>
+                    <span style={{ color: "rgba(255,255,255,0.14)" }}>·</span>
+                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
+                      {new Date(article.date).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <span style={{ color: "rgba(255,255,255,0.14)" }}>·</span>
+                    <span className="text-xs" style={{ color: "rgba(255,255,255,0.28)" }}>
+                      {article.readTime} min read
+                    </span>
+                    {article.featured && (
+                      <>
+                        <span style={{ color: "rgba(255,255,255,0.14)" }}>·</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "rgba(139,92,246,0.7)" }}>
+                          Featured
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  <Link href={`/blog/${article.slug}`} className="group block mb-3">
+                    <h2
+                      className="font-bold text-white leading-snug tracking-[-0.02em] mb-2 group-hover:text-blue-400 transition-colors duration-200"
+                      style={{ fontSize: "clamp(18px, 2.5vw, 24px)" }}
+                    >
+                      {article.title}
+                    </h2>
+                    {article.subtitle && (
+                      <p className="text-sm mb-3" style={{ color: "rgba(240,244,255,0.35)" }}>
+                        {article.subtitle}
+                      </p>
+                    )}
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(240,244,255,0.42)" }}>
+                      {article.excerpt}
+                    </p>
+                  </Link>
+
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="text-xs font-semibold transition-colors duration-200 hover:text-blue-300"
+                    style={{ color: "rgba(59,130,246,0.7)" }}
+                  >
+                    Read article →
+                  </Link>
+                </article>
+              </RevealOnScroll>
+            ))}
+          </div>
+
         </div>
-      </header>
-
-      <main className="max-w-3xl mx-auto px-6 py-14">
-
-        {/* Page header */}
-        <div className="mb-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">
-            Digital Wealth Transfer · Media
-          </p>
-          <h1 className="text-3xl font-bold text-white mb-3">Blog</h1>
-          <p className="text-[#A1A1AA] text-sm leading-relaxed max-w-xl">
-            Articles, research, and commentary on AI, Bitcoin, automation, and the digital economy — for people navigating what&apos;s happening.
-          </p>
-        </div>
-
-        {/* Article list */}
-        <div className="flex flex-col divide-y divide-white/[0.06]">
-          {sorted.map((article) => (
-            <article key={article.slug} className="py-7">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">
-                  {ARTICLE_CATEGORY_LABELS[article.category]}
-                </span>
-                <span className="text-white/20">·</span>
-                <span className="text-xs text-[#A1A1AA]">
-                  {new Date(article.date).toLocaleDateString("en-US", {
-                    month: "long", day: "numeric", year: "numeric",
-                  })}
-                </span>
-                <span className="text-white/20">·</span>
-                <span className="text-xs text-[#A1A1AA]">{article.readTime} min read</span>
-              </div>
-              <Link href={`/blog/${article.slug}`} className="group">
-                <h2 className="text-lg font-semibold text-white mb-1.5 group-hover:text-blue-400 transition-colors leading-snug">
-                  {article.title}
-                </h2>
-              </Link>
-              <p className="text-sm text-[#A1A1AA] leading-relaxed mb-3">{article.excerpt}</p>
-              <Link
-                href={`/blog/${article.slug}`}
-                className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                Read article →
-              </Link>
-            </article>
-          ))}
-        </div>
-
       </main>
 
-      {/* Footer CTA */}
-      <div className="border-t border-white/[0.06] bg-[#111827] py-12 px-6">
+      {/* Newsletter footer CTA */}
+      <div
+        className="px-6 py-16"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.04)", background: "rgba(255,255,255,0.01)" }}
+      >
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-sm text-[#A1A1AA] mb-3">
+          <p className="text-sm mb-4" style={{ color: "rgba(240,244,255,0.35)" }}>
             Stay in the signal. Weekly dispatch on AI, Bitcoin, and the digital economy.
           </p>
           <Link
             href="/#newsletter"
-            className="inline-block bg-blue-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-blue-500 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.25)]"
+            className="inline-block text-sm font-semibold text-white px-6 py-2.5 rounded-xl transition-all duration-200"
+            style={{
+              background: "rgba(59,130,246,0.9)",
+              boxShadow: "0 0 20px rgba(59,130,246,0.2)",
+            }}
           >
             Subscribe to the Newsletter →
           </Link>
         </div>
       </div>
 
-      <footer className="border-t border-white/[0.06] py-6 px-6">
-        <div className="max-w-3xl mx-auto text-xs text-[#A1A1AA]/50 text-center">
-          © 2026 Jonathan Cardona · DigitalWealthTransfer.com
+      <footer
+        className="px-6 py-8"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}
+      >
+        <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <Image
+            src="/brand/logo.svg"
+            alt="Digital Wealth Transfer"
+            width={120}
+            height={25}
+            unoptimized
+            style={{ height: "auto", opacity: 0.4 }}
+          />
+          <span className="text-xs" style={{ color: "rgba(240,244,255,0.2)" }}>
+            © 2026 Jonathan Cardona
+          </span>
         </div>
       </footer>
     </div>

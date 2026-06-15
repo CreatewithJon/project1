@@ -1,7 +1,8 @@
 import Link from "next/link";
 import ArticleCard from "@/components/ArticleCard";
 import type { Article, ArticleCategory } from "@/lib/types";
-import { ARTICLE_CATEGORY_LABELS, ALL_ARTICLE_CATEGORIES } from "@/lib/data/articles";
+import { ARTICLE_CATEGORY_LABELS } from "@/lib/types";
+import { ALL_ARTICLE_CATEGORIES } from "@/lib/data/articles";
 
 interface CategoryPageProps {
   category: ArticleCategory;
