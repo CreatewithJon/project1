@@ -69,6 +69,9 @@ async function sendNotification(fields: {
 
   try {
     const result = await resend.emails.send({ from, to: toEmail, subject, html });
+    if (result.error) {
+      throw new Error(result.error.message);
+    }
     console.log("[leads] Resend success:", { id: result.data?.id ?? "(no id returned)" });
   } catch (e) {
     console.error("[leads] Resend send failed:", e instanceof Error ? e.message : e);
@@ -169,14 +172,18 @@ export async function POST(request: NextRequest) {
           return Response.json({ error: fallbackError.message }, { status: 500 });
         }
 
-        // Send notification (non-blocking)
-        sendNotification({
-          name: resolvedName,
-          email: email.trim().toLowerCase(),
-          lead_type: lead_type ?? null,
-          source: resolvedSlug,
-          details: enrichedService,
-        }).catch((e) => console.error("[leads] Resend notification failed:", e));
+        // Send notification (awaited — serverless requires resolution before response)
+        try {
+          await sendNotification({
+            name: resolvedName,
+            email: email.trim().toLowerCase(),
+            lead_type: lead_type ?? null,
+            source: resolvedSlug,
+            details: enrichedService,
+          });
+        } catch (e) {
+          console.error("[leads] Resend notification failed:", e instanceof Error ? e.message : e);
+        }
 
         return Response.json({ success: true, leadId: fallbackData.id }, { status: 201 });
       }
@@ -185,14 +192,18 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: error.message }, { status: 500 });
     }
 
-    // Send notification (non-blocking — lead is already saved, email failure is not fatal)
-    sendNotification({
-      name: resolvedName,
-      email: email.trim().toLowerCase(),
-      lead_type: lead_type ?? null,
-      source: resolvedSlug,
-      details: enrichedService,
-    }).catch((e) => console.error("[leads] Resend notification failed:", e));
+    // Send notification (awaited — serverless requires resolution before response)
+    try {
+      await sendNotification({
+        name: resolvedName,
+        email: email.trim().toLowerCase(),
+        lead_type: lead_type ?? null,
+        source: resolvedSlug,
+        details: enrichedService,
+      });
+    } catch (e) {
+      console.error("[leads] Resend notification failed:", e instanceof Error ? e.message : e);
+    }
 
     return Response.json({ success: true, leadId: data.id }, { status: 201 });
   } catch (err) {
